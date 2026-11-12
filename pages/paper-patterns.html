@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paper Pattern | Forsko</title>
+
+  <!-- Google Fonts: Inter & Exo 2 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="../css/paper-patterns.css">
+
+  <!-- Paid Sample Papers Custom Styles -->
+  <style>
+    /* ==========================================
+       FORSKO PAID SAMPLE PAPERS STYLING (GOLD VIP)
+       ========================================== */
+    .glass-card-paid {
+      position: relative;
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      border: 1.8px solid rgba(245, 158, 11, 0.55) !important;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(245, 158, 11, 0.15) !important;
+    }
+
+    .glass-card-paid:hover {
+      border-color: #f59e0b !important;
+      box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 158, 11, 0.35) !important;
+      transform: translateY(-4px);
+    }
+
+    .status-gold {
+      background: rgba(245, 158, 11, 0.15) !important;
+      color: #fbbf24 !important;
+      border: 1px solid rgba(245, 158, 11, 0.4) !important;
+    }
+
+    .btn-buy-gold {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+      color: #0b1120 !important;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4) !important;
+    }
+    .btn-buy-gold:hover {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.6) !important;
+      color: #000000 !important;
+    }
+
+    /* Badges & Pricing */
+    .status-badge {
+      font-weight: 800 !important;
+      font-size: 0.72rem !important;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .solved-pill {
+      display: inline-block;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+
+    .paid-features-text {
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin: 10px 0;
+      text-align: left;
+    }
+    .paid-features-text i {
+      color: #10b981;
+      font-size: 0.8rem;
+      margin-right: 4px;
+    }
+
+    .card-pricing-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0 14px 0;
+      background: rgba(11, 17, 32, 0.6);
+      padding: 6px 12px;
+      border-radius: 10px;
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+    }
+    .strike-price {
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+    .final-price {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #ffffff;
+    }
+    .save-tag {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    /* Actions & Stacked Buttons */
+    .glass-card-paid .card-actions {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 9px !important;
+      width: 100% !important;
+    }
+
+    .btn-preview {
+      width: 100% !important;
+      font-weight: 700 !important;
+      font-size: 0.88rem !important;
+      padding: 9px 14px !important;
+      border-radius: 10px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      text-decoration: none !important;
+      background: rgba(255, 255, 255, 0.04) !important;
+      backdrop-filter: blur(6px);
+      transition: all 0.25s ease !important;
+    }
+    .btn-preview-gold {
+      border: 1.2px solid rgba(245, 158, 11, 0.45) !important;
+      color: #fbbf24 !important;
+    }
+    .btn-preview-gold:hover {
+      background: rgba(245, 158, 11, 0.15) !important;
+      border-color: #f59e0b !important;
+      color: #fde68a !important;
+      transform: translateY(-2px);
+    }
+
+    .btn-unlock-full {
+      width: 100% !important;
+      font-weight: 800 !important;
+      font-size: 0.95rem !important;
+      padding: 12px 16px !important;
+      border-radius: 10px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      text-decoration: none !important;
+      transition: all 0.25s ease !important;
+    }
+    .btn-unlock-full:hover {
+      transform: translateY(-2px) !important;
+    }
+
+    .upi-note {
+      display: block;
+      font-size: 0.68rem;
+      color: #94a3b8;
+      margin-top: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo">
+        <img src="../images/FORSKO2.png" alt="Forsko" class="logo-image">
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="syllabus.html" class="nav-link">Syllabus</a>
+        <a href="notes.html" class="nav-link">Notes</a>
+        <a href="pyqs.html" class="nav-link">PYQs</a>
+        <a href="question-bank.html" class="nav-link">Question Banks</a>
+        <a href="paper-patterns.html" class="nav-link active">Sample Papers</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="page-hero">
+      <div class="hero-glow"></div>
+      <div class="hero-container">
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <span>Paper Pattern</span>
+        </div>
+        
+        <h1 class="hero-title">B.Sc. Computer Science <br><span class="title-gradient">Paper Pattern & Sample Papers</span></h1>
+        <p class="hero-subtitle">Access the official SGBAU examination paper pattern and semester-wise sample papers for the B.Sc. Computer Science programme.</p>
+
+        <div class="hero-institution">
+          <p class="inst-college">Shri Shivaji College of Arts, Commerce and Science, Akola</p>
+          <p class="inst-university">Sant Gadge Baba Amravati University (SGBAU)</p>
+        </div><br>
+        <p class="hero-instruction">View the common examination paper pattern or choose a semester to access its sample paper.</p>
+      </div>
+    </section>
+
+    <!-- Section 1: Official SGBAU Paper Pattern (FREE) -->
+    <section class="official-pattern-section">
+      <div class="section-container">
+        <div class="featured-card" data-card-id="paper-pattern-official">
+          <div class="card-glass-glow"></div>
+          <div class="featured-header">
+            <div class="featured-icon"><i class="fa-solid fa-file-contract"></i></div>
+            <span class="badge">Official Common Pattern</span>
+          </div>
+          <h2 class="featured-title">Official SGBAU Paper Pattern</h2>
+          <p class="featured-description">
+            This examination paper pattern is common for all semesters of the B.Sc. Computer Science programme under Sant Gadge Baba Amravati University.
+          </p>
+          <div class="card-actions">
+            <a href="../ps/official-paper-pattern.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <i class="fa-solid fa-eye"></i> View PDF
+            </a>
+            <a href="../ps/official-paper-pattern.pdf" download class="btn btn-secondary">
+              <i class="fa-solid fa-download"></i> Download PDF
+            </a>
+          </div>
+
+          <!-- Feedback for Official Pattern -->
+          <div class="card-feedback">
+            <div class="feedback-actions">
+              <button class="action-btn like-btn" title="Like">
+                <i class="fa-regular fa-heart"></i>
+                <span class="like-count">200</span>
+              </button>
+              <button class="action-btn dislike-btn" title="Dislike">
+                <i class="fa-solid fa-arrow-down"></i>
+              </button>
+              <button class="action-btn comment-toggle-btn" title="Comments">
+                <i class="fa-regular fa-comment-dots"></i>
+                <span class="comment-count-badge">0</span>
+              </button>
+              <button class="action-btn share-btn" title="Share on WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </button>
+            </div>
+
+            <div class="comments-dropdown">
+              <div class="comments-list"></div>
+              <form class="comment-form">
+                <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                <div class="input-with-btn">
+                  <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                  <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Semester-wise Sample Papers (ALL PAID CARDS) -->
+    <section class="sample-papers-section">
+      <div class="section-container">
+        <div class="section-header">
+          <h2 class="section-title">Semester-wise Sample Papers</h2>
+          <p class="section-subtitle">Select a semester to unlock its university-format verified model sample paper.</p>
+        </div>
+
+        <div class="sample-grid">
+
+          <!-- ================= Semester I Sample Paper (GOLD VIP PAID) ================= -->
+          <div class="glass-card glass-card-paid card-paid-gold" data-card-id="sample-paper-sem1">
+            <div class="card-glass-glow"></div>
+            <div class="card-header">
+              <div class="card-icon" style="color: #f59e0b;"><i class="fa-solid fa-computer"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Sem 1 • Locked
+              </span>
+            </div>
+            
+            <h3 class="card-title">Semester I <span class="solved-pill">SAMPLE PAPER</span></h3>
+            
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> SGBAU Exam Format Model Sample Paper<br>
+              <i class="fa-solid fa-circle-check"></i> Standard Unit-wise Weightage & Marking Scheme<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
+
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹79</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹29</span>
+              <span class="save-tag">SAVE 63%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+            
+              <!-- 🔴 Yahan Sem 1 Sample Paper ka Razorpay Link Dalein -->
+              <a href="https://rzp.io/rzp/sem1-sp" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹29 & Download Paper</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">240</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Semester II Sample Paper (GOLD VIP PAID) ================= -->
+          <div class="glass-card glass-card-paid card-paid-gold" data-card-id="sample-paper-sem2">
+            <div class="card-glass-glow"></div>
+            <div class="card-header">
+              <div class="card-icon" style="color: #f59e0b;"><i class="fa-solid fa-c"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Sem 2 • Locked
+              </span>
+            </div>
+            
+            <h3 class="card-title">Semester II <span class="solved-pill">SAMPLE PAPER</span></h3>
+            
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> C Programming University Pattern Sample Paper<br>
+              <i class="fa-solid fa-circle-check"></i> Section-wise Questions & Complete Blueprint<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
+
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹79</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹29</span>
+              <span class="save-tag">SAVE 63%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+              
+
+              <!-- 🔴 Yahan Sem 2 Sample Paper ka Razorpay Link Dalein -->
+              <a href="../ps/sample-papers-semester2.pdf" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹29 & Download Paper</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">210</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Semester III Sample Paper (GOLD VIP PAID) ================= -->
+          <div class="glass-card glass-card-paid card-paid-gold" data-card-id="sample-paper-sem3">
+            <div class="card-glass-glow"></div>
+            <div class="card-header">
+              <div class="card-icon" style="color: #f59e0b;"><i class="fa-solid fa-database"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Sem 3 • Locked
+              </span>
+            </div>
+            
+            <h3 class="card-title">Semester III <span class="solved-pill">SAMPLE PAPER</span></h3>
+            
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> DS & RDBMS Core Format University Model Paper<br>
+              <i class="fa-solid fa-circle-check"></i> Standard Unit Weightage & Expected Pattern<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
+
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹79</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹29</span>
+              <span class="save-tag">SAVE 63%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+              
+
+              <!-- 🔴 Yahan Sem 3 Sample Paper ka Razorpay Link Dalein -->
+              <a href="https://rzp.io/rzp/sem3-sp" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹29 & Download Paper</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">235</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Semester IV Sample Paper (GOLD VIP PAID) ================= -->
+          <div class="glass-card glass-card-paid card-paid-gold" data-card-id="sample-paper-sem4">
+            <div class="card-glass-glow"></div>
+            <div class="card-header">
+              <div class="card-icon" style="color: #f59e0b;"><i class="fa-solid fa-network-wired"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Sem 4 • Locked
+              </span>
+            </div>
+            
+            <h3 class="card-title">Semester IV <span class="solved-pill">SAMPLE PAPER</span></h3>
+            
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> OOP C++, Python & Networks Model Question Paper<br>
+              <i class="fa-solid fa-circle-check"></i> Standard SGBAU Exam Marking Breakdown<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
+
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹79</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹29</span>
+              <span class="save-tag">SAVE 63%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+
+
+              <!-- 🔴 Yahan Sem 4 Sample Paper ka Razorpay Link Dalein -->
+              <a href="../ps/sample-papers-semester4.pdf" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹29 & Download Paper</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">220</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Semester V Sample Paper (GOLD VIP PAID) ================= -->
+          <div class="glass-card glass-card-paid card-paid-gold" data-card-id="sample-paper-sem5">
+            <div class="card-glass-glow"></div>
+            <div class="card-header">
+              <div class="card-icon" style="color: #f59e0b;"><i class="fa-solid fa-gears"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Sem 5 • Locked
+              </span>
+            </div>
+            
+            <h3 class="card-title">Semester V <span class="solved-pill">SAMPLE PAPER</span></h3>
+            
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> Core Java, SE & Adv Python Pattern Sample Paper<br>
+              <i class="fa-solid fa-circle-check"></i> Standard Unit Weightage & Expected Blueprint<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
+
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹79</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹29</span>
+              <span class="save-tag">SAVE 63%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+
+
+              <!-- 🔴 Yahan Sem 5 Sample Paper ka Razorpay Link Dalein -->
+              <a href="https://rzp.io/rzp/sem5-sp" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹29 & Download Paper</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">250</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Semester VI Sample Paper (GOLD VIP PAID) ================= -->
+          <div class="glass-card glass-card-paid card-paid-gold" data-card-id="sample-paper-sem6">
+            <div class="card-glass-glow"></div>
+            <div class="card-header">
+              <div class="card-icon" style="color: #f59e0b;"><i class="fa-solid fa-robot"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Sem 6 • Locked
+              </span>
+            </div>
+            
+            <h3 class="card-title">Semester VI <span class="solved-pill">SAMPLE PAPER</span></h3>
+            
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> Adv Java, AI, ML & DSM Final Year Sample Paper<br>
+              <i class="fa-solid fa-circle-check"></i> Complete SGBAU Final Degree Exam Pattern<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
+
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹79</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹29</span>
+              <span class="save-tag">SAVE 63%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+            
+
+              <!-- 🔴 Yahan Sem 6 Sample Paper ka Razorpay Link Dalein -->
+              <a href="../ps/sample-papers-semester6.pdf" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹29 & Download Paper</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">280</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer" id="contact">
+    <div class="footer-container">
+      <div class="footer-col brand-col">
+        <a href="../index.html" class="logo footer-logo">
+          <img src="../images/FORSKO2.png" alt="Forsko Logo" class="logo-image">
+          <span>Forsko</span>
+        </a>
+        <p>
+          The ultimate central hub for Computer Science academic study materials, practical code labs, and semester exam prep.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="syllabus.html">Syllabus</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="pyqs.html">PYQs</a></li>
+          <li><a href="question-bank.html">Question Bank</a></li>
+          <li><a href="paper-patterns.html">Paper Patterns</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <ul class="contact-list">
+          <li><i class="fa-solid fa-envelope"></i>forskodev@gmail.com</li>
+          <li><i class="fa-solid fa-location-dot"></i> Shri Shivaji College of Arts, Commerce and Science Akola </li>
+          <li><i class="fa-solid fa-globe"></i> www.forsko.in</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Social & Community</h3>
+        <a href="https://www.instagram.com/forsko_web/" target="_blank" rel="noopener" class="github-btn">
+          <i class="fa-brands fa-instagram"></i> Visit Instagram
+        </a>
+        <br><br>
+        <a href="https://whatsapp.com/channel/0029VbCy38i6GcGKKc4EAn0q" target="_blank" rel="noopener" class="github-btn">
+          <i class="fa-brands fa-whatsapp"></i> Visit Whatsapp
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Forsko. All rights reserved. Designed for Computer Science Students.</p>
+    </div>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script src="../js/paper-patterns.js"></script>
+</body>
+</html>

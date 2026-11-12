@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semester V | Forsko</title>
+
+  <!-- Google Fonts: Inter & Exo 2 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="../css/semester1.css">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo">
+        <img src="../images/FORSKO2.png" alt="Forsko" class="logo-image">
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="syllabus.html" class="nav-link active">Syllabus</a>
+        <a href="notes.html" class="nav-link">Notes</a>
+        <a href="pyqs.html" class="nav-link">PYQs</a>
+        <a href="question-bank.html" class="nav-link">Question Banks</a>
+        <a href="paper-patterns.html" class="nav-link">Sample Papers</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="page-hero">
+      <div class="hero-glow"></div>
+      <div class="hero-container">
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <a href="syllabus.html">Syllabus</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <a href="third-year.html">Third Year</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <span>Semester V</span>
+        </div>
+        
+        <h1 class="hero-title">B.Sc. Computer Science <br><span class="title-gradient">Semester V</span></h1>
+        
+        <div class="hero-institution">
+          <p class="inst-college">Shri Shivaji College of Arts, Commerce and Science, Akola</p>
+          <p class="inst-university">Sant Gadge Baba Amravati University (SGBAU)</p>
+        </div>
+
+        <p class="hero-instruction">Choose a subject to open its official syllabus PDF.</p>
+      </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section class="subjects-section">
+      <div class="subjects-container">
+        <div class="subjects-grid">
+
+          <!-- Card 0: Scheme -->
+          <div class="subject-card" data-card-id="sem5-scheme">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-table-list"></i></div>
+              <span class="subject-tag">Scheme - 112</span>
+            </div>
+            <h2 class="subject-title">Semester V : Scheme</h2>
+            <p class="subject-description">Credits, Workload, Examination, Evaluation and Assessment Scheme.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1tBNs_MnNtjajdA-SMHKNVXCeHomrP27c/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View Scheme</span>
+              </a>
+
+            </div>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 1: Core Java Programming -->
+          <div class="subject-card" data-card-id="sem5-core-java">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-mug-hot"></i></div>
+              <span class="subject-tag">Major Theory 1 - 112213</span>
+            </div>
+            <h2 class="subject-title">Core Java Programming</h2>
+            <p class="subject-description">Learn Core Java programming through object-oriented concepts, decision-making, loops, classes, objects, constructors, inheritance, polymorphism, and interfaces.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/16PjtJjp1MwnwIti2RZXURZs1J-xCLYUp/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Software Engineering -->
+          <div class="subject-card" data-card-id="sem5-software-engineering">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-gears"></i></div>
+              <span class="subject-tag">Major Theory 2 - 112214</span>
+            </div>
+            <h2 class="subject-title">Software Engineering</h2>
+            <p class="subject-description">Learn Software Engineering through software development life cycle, requirements engineering, risk management, software architecture, design, user interface design, testing, debugging, and quality assurance.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1FytqGgS9QFbbS_-gyeC5OQuh92-iUxl1/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Advanced Python Programming -->
+          <div class="subject-card" data-card-id="sem5-advanced-python">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-brands fa-python"></i></div>
+              <span class="subject-tag">Major Theory 3 - 112215</span>
+            </div>
+            <h2 class="subject-title">Advanced Python Programming</h2>
+            <p class="subject-description">Explore advanced Python concepts including modules, file handling, databases, GUI development, automation, and application programming.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1Ans4xUCIGxtox2fucKR2xCcs5fk2DY7H/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Major Lab -->
+          <div class="subject-card" data-card-id="sem5-core-java-advanced-python-lab">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-flask-vial"></i></div>
+              <span class="subject-tag">Major Lab - 112216</span>
+            </div>
+            <h2 class="subject-title">Laboratory on Core Java Programming and Advanced Python Programming</h2>
+            <p class="subject-description">Build practical applications using Java and Python through coding exercises, debugging, database connectivity, and real world projects.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1jFCI77vfSQQTj0XpqHHYX567bzolXohx/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Data Mining -->
+          <div class="subject-card" data-card-id="sem5-data-mining">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+              <span class="subject-tag">Major Elective 1 Theory - 112217</span>
+            </div>
+            <h2 class="subject-title">Data Mining</h2>
+            <p class="subject-description">Learn data mining techniques, pattern discovery, classification, clustering, association rules, and knowledge extraction from large datasets.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1tGaBm9ASLIdCmh0_QOv79hG6lI2xnrO1/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: Laboratory on Data Mining Tools -->
+          <div class="subject-card" data-card-id="sem5-data-mining-lab">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-flask"></i></div>
+              <span class="subject-tag">Major Elective 1 Lab - 112219</span>
+            </div>
+            <h2 class="subject-title">Laboratory on Data Mining Tools</h2>
+            <p class="subject-description">Practice data mining concepts using real datasets, analytical tools, pattern discovery, and predictive analysis techniques.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1L7v2s5G3VTUFbJSGhlNLyx_EXSuyLt8n/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 7: Data Science -->
+          <div class="subject-card" data-card-id="sem5-data-science">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-chart-line"></i></div>
+              <span class="subject-tag">Major Elective 1 Theory - 112218</span>
+            </div>
+            <h2 class="subject-title">Data Science</h2>
+            <p class="subject-description">Explore data analysis, visualization, statistics, machine learning fundamentals, and data driven decision making techniques.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1YbRuV830PwDfoR8hnBtRuIM2YnTQNA0K/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8: Laboratory on Data Science -->
+          <div class="subject-card" data-card-id="sem5-data-science-lab">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-flask"></i></div>
+              <span class="subject-tag">Major Elective 1 Lab - 112220</span>
+            </div>
+            <h2 class="subject-title">Laboratory on Data Science</h2>
+            <p class="subject-description">Develop practical data science skills through data analysis, visualization, preprocessing, and machine learning experiments.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1p5MmWfTOvTwz3qi5siuh6u7S4YTmJw1i/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 9: Minor Theory -->
+          <div class="subject-card" data-card-id="sem5-minor-cn-python">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-network-wired"></i></div>
+              <span class="subject-tag">Minor Theory - 112265</span>
+            </div>
+            <h2 class="subject-title">Minor - Computer Networks and Advanced Python Programming</h2>
+            <p class="subject-description">Understand networking concepts alongside advanced Python programming for automation, communication, and network based applications.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1ZLYIZA8jnx-Y_8j2ABBKB-qCLXTucMcy/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 10: Minor Lab -->
+          <div class="subject-card" data-card-id="sem5-minor-python-lab">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-flask-vial"></i></div>
+              <span class="subject-tag">Minor Lab - 112266</span>
+            </div>
+            <h2 class="subject-title">Minor - Laboratory on Advanced Python Programming</h2>
+            <p class="subject-description">Strengthen advanced Python skills through practical coding, automation, database programming, and application development.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1itukuqRu7Tt42W0vN7onch7XiSl_kUeo/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 11: Laboratory on PHP Programming -->
+          <div class="subject-card" data-card-id="sem5-php-lab">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-brands fa-php"></i></div>
+              <span class="subject-tag">VSC Lab - 112286</span>
+            </div>
+            <h2 class="subject-title">Laboratory on PHP Programming</h2>
+            <p class="subject-description">Develop dynamic web applications using PHP, forms, sessions, databases, and server side programming techniques.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1hff9a6QsKi3nDuGHMpxWFU497ypAUlMA/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 12: Laboratory on VB.NET -->
+          <div class="subject-card" data-card-id="sem5-vbnet-lab">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-window-maximize"></i></div>
+              <span class="subject-tag">SEC Lab - 112287</span>
+            </div>
+            <h2 class="subject-title">Laboratory on VB.NET</h2>
+            <p class="subject-description">Build desktop applications using VB.NET with forms, controls, event handling, and database integration.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1lgaNWP7D6mO6frtzThiRQgGd9C7k7G9K/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 13: Project in Computer Science -->
+          <div class="subject-card" data-card-id="sem5-project-cs">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-folder-open"></i></div>
+              <span class="subject-tag">FP/CES - 112293</span>
+            </div>
+            <h2 class="subject-title">Project in Computer Science</h2>
+            <p class="subject-description">Apply programming and problem solving skills by designing, developing, and presenting a real world computer science project.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1kftRQVHvYLcHk9nDqB5Q1OHLC72mm-0v/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+           <!-- Card 14: Foundation of Artificial Intelligence -->
+          <div class="subject-card" data-card-id="sem5-foundation-ai">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-brain"></i></div>
+              <span class="subject-tag">AI</span>
+            </div>
+            <h2 class="subject-title">Foundation of Artificial Intelligence</h2>
+            <p class="subject-description">Learn the fundamental concepts and techniques of artificial intelligence and their applications in real-world scenarios.</p>
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1pJ29W66cZqKnvkO3o2JrdkTCl0YeL6m8/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer" id="contact">
+    <div class="footer-container">
+      <div class="footer-col brand-col">
+        <a href="../index.html" class="logo footer-logo">
+          <img src="../images/forsko-logo.png" alt="Forsko Logo" class="logo-image">
+          <span>Forsko</span>
+        </a>
+        <p>
+          The ultimate central hub for Computer Science academic study materials, practical code labs, and semester exam prep.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="syllabus.html">Syllabus</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="pyqs.html">PYQs</a></li>
+          <li><a href="question-bank.html">Question Banks</a></li>
+          <li><a href="paper-patterns.html">Sample Papers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <ul class="contact-list">
+          <li><i class="fa-solid fa-envelope"></i>forskodev@gmail.com</li>
+          <li><i class="fa-solid fa-location-dot"></i> Shri Shivaji College of Arts, Commerce and Science Akola </li>
+          <li><i class="fa-solid fa-globe"></i> www.forsko.in</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Social & Community</h3>
+        <a href="https://www.instagram.com/forsko_web/" target="_blank" rel="noopener" class="github-btn">
+          <i class="fa-brands fa-instagram"></i> Visit Instagram
+        </a>
+        <br><br>
+        <a href="https://whatsapp.com/channel/0029VbCy38i6GcGKKc4EAn0q" target="_blank" rel="noopener" class="github-btn">
+          <i class="fa-brands fa-whatsapp"></i> Visit Whatsapp
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Forsko. All rights reserved. Designed for Computer Science Students.</p>
+    </div>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script src="../js/semester1.js"></script>
+</body>
+</html>

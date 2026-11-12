@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semester III Question Bank | Forsko</title>
+
+  <!-- Google Fonts: Inter & Exo 2 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="../css/qb-semester1.css">
+
+  <!-- Paid Cards Custom Styles -->
+  <style>
+    /* ==========================================
+       FORSKO DUAL PAID CARDS STYLING
+       ========================================== */
+    .paper-card-paid {
+      position: relative;
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+
+    /* Card 1: Cyan / Blue VIP (Unit-Wise) */
+    .card-paid-cyan {
+      border: 1.8px solid rgba(56, 189, 248, 0.55) !important;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(56, 189, 248, 0.15) !important;
+    }
+    .card-paid-cyan:hover {
+      border-color: #38bdf8 !important;
+      box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.8), 0 0 35px rgba(56, 189, 248, 0.35) !important;
+      transform: translateY(-4px);
+    }
+    .status-cyan {
+      background: rgba(56, 189, 248, 0.15) !important;
+      color: #38bdf8 !important;
+      border: 1px solid rgba(56, 189, 248, 0.4) !important;
+    }
+    .btn-buy-cyan {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4) !important;
+    }
+    .btn-buy-cyan:hover {
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%) !important;
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.6) !important;
+    }
+
+    /* Card 2: Amber / Gold VIP (MIQ) */
+    .card-paid-gold {
+      border: 1.8px solid rgba(245, 158, 11, 0.55) !important;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(245, 158, 11, 0.15) !important;
+    }
+    .card-paid-gold:hover {
+      border-color: #f59e0b !important;
+      box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 158, 11, 0.35) !important;
+      transform: translateY(-4px);
+    }
+    .status-gold {
+      background: rgba(245, 158, 11, 0.15) !important;
+      color: #fbbf24 !important;
+      border: 1px solid rgba(245, 158, 11, 0.4) !important;
+    }
+    .btn-buy-gold {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+      color: #0b1120 !important;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4) !important;
+    }
+    .btn-buy-gold:hover {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.6) !important;
+      color: #000000 !important;
+    }
+
+    /* Common Paid Styling */
+    .status-badge {
+      font-weight: 800 !important;
+      font-size: 0.72rem !important;
+      letter-spacing: 0.5px;
+    }
+    .lock-badge {
+      background: rgba(255, 255, 255, 0.08) !important;
+      color: #ffffff !important;
+    }
+    .solved-pill {
+      display: inline-block;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+    .paid-features-text {
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin: 10px 0;
+      text-align: left;
+    }
+    .paid-features-text i {
+      color: #10b981;
+      font-size: 0.8rem;
+      margin-right: 4px;
+    }
+    .card-pricing-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0 14px 0;
+      background: rgba(11, 17, 32, 0.6);
+      padding: 6px 12px;
+      border-radius: 10px;
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+    }
+    .strike-price {
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+    .final-price {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #ffffff;
+    }
+    .save-tag {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+    .btn-unlock-full {
+      width: 100% !important;
+      font-weight: 800 !important;
+      font-size: 0.95rem !important;
+      padding: 12px 16px !important;
+      border-radius: 10px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      text-decoration: none !important;
+      transition: all 0.25s ease !important;
+    }
+    .btn-unlock-full:hover {
+      transform: translateY(-2px) !important;
+    }
+    .upi-note {
+      display: block;
+      font-size: 0.68rem;
+      color: #94a3b8;
+      margin-top: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo">
+        <img src="../images/FORSKO2.png" alt="Forsko" class="logo-image">
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="syllabus.html" class="nav-link">Syllabus</a>
+        <a href="notes.html" class="nav-link">Notes</a>
+        <a href="pyqs.html" class="nav-link">PYQs</a>
+        <a href="question-bank.html" class="nav-link active">Question Banks</a>
+        <a href="paper-patterns.html" class="nav-link">Sample Papers</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="page-hero">
+      <div class="hero-glow"></div>
+      <div class="hero-container">
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <a href="question-bank.html">Question Bank</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <a href="qb-second-year.html">Second Year</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <span>Semester III</span>
+        </div>
+        
+        <h1 class="hero-title">B.Sc. Computer Science <br> Semester III - <span class="title-gradient">Question Bank</span></h1>
+
+        <div class="hero-subtitle">
+          <p class="inst-college">Shri Shivaji College of Arts, Commerce and Science, Akola</p>
+          <p class="inst-university">Sant Gadge Baba Amravati University</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+      <div class="search-container">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input 
+            type="text" 
+            id="subjectSearch" 
+            placeholder="Search subject..." 
+            autocomplete="off"
+            aria-label="Search subject for Question Bank"
+          >
+          <button type="button" class="search-clear-btn hidden" id="searchClearBtn" aria-label="Clear search">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Question Bank Accordion Section -->
+    <section class="pyq-section">
+      <div class="pyq-container">
+        <div class="subject-accordions-list" id="accordionsList">
+
+          <!-- ================= Subject Accordion 1: Data Structures ================= -->
+          <div class="subject-accordion-card" data-subject="data structures">
+            <div class="accordion-header">
+              <div class="subject-info">
+                <div class="subject-icon-box"><i class="fa-solid fa-network-wired"></i></div>
+                <div class="subject-text">
+                  <div class="subject-meta">
+                    <h2 class="subject-title">Data Structures</h2>
+                  </div>
+                  <p class="subject-description">Introduction to data structures, algorithms, and their applications.</p>
+                </div>
+              </div>
+              <button type="button" class="accordion-toggle-btn" aria-expanded="false">
+                <span class="btn-text">View Question Bank</span>
+                <i class="fa-solid fa-chevron-down toggle-icon"></i>
+              </button>
+            </div>
+
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <div class="papers-grid">
+                  
+                  <!-- DS Resource 1: Unit-wise Question Bank (PAID) -->
+                  <div class="paper-card paper-card-paid card-paid-cyan" data-card-id="qb-sem3-ds-unitwise">
+                    <div class="paper-header">
+                      <span class="year-badge lock-badge"><i class="fa-solid fa-lock"></i></span>
+                      <span class="status-badge status-cyan">
+                        <i class="fa-solid fa-book-bookmark"></i> Complete QB • Locked
+                      </span>
+                    </div>
+
+                    <h3 class="paper-title">
+                      Unit-wise Question Bank <span class="solved-pill">ALL UNITS</span>
+                    </h3>
+
+                    <p class="paid-features-text">
+                      <i class="fa-solid fa-circle-check"></i> Unit 1 to Unit 4 Complete DS Questions<br>
+                      <i class="fa-solid fa-circle-check"></i> 1 Marks, 3 Marks & 6 Marks Important Format Formats<br>
+                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    </p>
+
+                    <div class="card-pricing-row">
+                      <span class="strike-price"><del>₹69</del></span>
+                      <span class="final-price" style="color: #38bdf8;">₹29</span>
+                      <span class="save-tag">SAVE 58%</span>
+                    </div>
+
+                    <div class="paper-actions">
+                      <!-- 🔴 Yahan Sem 3 DS Unit-wise ka Razorpay Link Dalein -->
+                      <a href="https://rzp.io/rzp/sem3-qb-ds-uw" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-cyan">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <span>Pay ₹29 & Download QB</span>
+                      </a>
+                    </div>
+
+                    <span class="upi-note">
+                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+                    </span>
+
+                    <div class="card-feedback">
+                      <div class="feedback-actions">
+                        <button class="action-btn like-btn" title="Like">
+                          <i class="fa-regular fa-heart"></i>
+                          <span class="like-count">240</span>
+                        </button>
+                        <button class="action-btn dislike-btn" title="Dislike">
+                          <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                        <button class="action-btn comment-toggle-btn" title="Comments">
+                          <i class="fa-regular fa-comment-dots"></i>
+                          <span class="comment-count-badge">0</span>
+                        </button>
+                        <button class="action-btn share-btn" title="Share on WhatsApp">
+                          <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                      </div>
+
+                      <div class="comments-dropdown">
+                        <div class="comments-list"></div>
+                        <form class="comment-form">
+                          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                          <div class="input-with-btn">
+                            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- DS Resource 2: Most Important Questions (PAID) -->
+                  <div class="paper-card paper-card-paid card-paid-gold" data-card-id="qb-sem3-ds-imp">
+                    <div class="paper-header">
+                      <span class="year-badge lock-badge" style="color: #f59e0b;"><i class="fa-solid fa-lock"></i></span>
+                      <span class="status-badge status-gold">
+                        <i class="fa-solid fa-crown"></i> VIP MIQ • Locked
+                      </span>
+                    </div>
+
+                    <h3 class="paper-title">
+                      Most Important Questions <span class="solved-pill">PREMIUM PDF</span>
+                    </h3>
+                    
+                    <p class="paid-features-text">
+                      <i class="fa-solid fa-circle-check"></i> Top Most Important SGBAU DS Exam Questions<br>
+                      <i class="fa-solid fa-circle-check"></i> 1 Marks, 3 Marks & 6 Marks Important Format<br>
+                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    </p>
+
+                    <div class="card-pricing-row">
+                      <span class="strike-price"><del>₹79</del></span>
+                      <span class="final-price" style="color: #fbbf24;">₹39</span>
+                      <span class="save-tag">SAVE 50%</span>
+                    </div>
+
+                    <div class="paper-actions">
+                      <!-- 🔴 Yahan Sem 3 DS MIQ ka Razorpay Link Dalein -->
+                      <a href="https://rzp.io/rzp/sem3-qb-ds-miq" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <span>Pay ₹39 & Download MIQ</span>
+                      </a>
+                    </div>
+
+                    <span class="upi-note">
+                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+                    </span>
+
+                    <div class="card-feedback">
+                      <div class="feedback-actions">
+                        <button class="action-btn like-btn" title="Like">
+                          <i class="fa-regular fa-heart"></i>
+                          <span class="like-count">310</span>
+                        </button>
+                        <button class="action-btn dislike-btn" title="Dislike">
+                          <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                        <button class="action-btn comment-toggle-btn" title="Comments">
+                          <i class="fa-regular fa-comment-dots"></i>
+                          <span class="comment-count-badge">0</span>
+                        </button>
+                        <button class="action-btn share-btn" title="Share on WhatsApp">
+                          <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                      </div>
+
+                      <div class="comments-dropdown">
+                        <div class="comments-list"></div>
+                        <form class="comment-form">
+                          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                          <div class="input-with-btn">
+                            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Subject Accordion 2: RDBMS ================= -->
+          <div class="subject-accordion-card" data-subject="rdbms">
+            <div class="accordion-header">
+              <div class="subject-info">
+                <div class="subject-icon-box"><i class="fa-solid fa-database"></i></div>
+                <div class="subject-text">
+                  <div class="subject-meta">
+                    <h2 class="subject-title">Relational Database Management Systems</h2>
+                  </div>
+                  <p class="subject-description">Introduction to RDBMS, SQL, normalization, and database design.</p>
+                </div>
+              </div>
+              <button type="button" class="accordion-toggle-btn" aria-expanded="false">
+                <span class="btn-text">View Question Bank</span>
+                <i class="fa-solid fa-chevron-down toggle-icon"></i>
+              </button>
+            </div>
+
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <div class="papers-grid">
+                  
+                  <!-- RDBMS Resource 1: Unit-wise Question Bank (PAID) -->
+                  <div class="paper-card paper-card-paid card-paid-cyan" data-card-id="qb-sem3-rdbms-unitwise">
+                    <div class="paper-header">
+                      <span class="year-badge lock-badge"><i class="fa-solid fa-lock"></i></span>
+                      <span class="status-badge status-cyan">
+                        <i class="fa-solid fa-book-bookmark"></i> Complete QB • Locked
+                      </span>
+                    </div>
+
+                    <h3 class="paper-title">
+                      Unit-wise Question Bank <span class="solved-pill">ALL UNITS</span>
+                    </h3>
+
+                    <p class="paid-features-text">
+                      <i class="fa-solid fa-circle-check"></i> Unit 1 to Unit 4 Complete RDBMS Questions<br>
+                      <i class="fa-solid fa-circle-check"></i> 1 Marks, 3 Marks & 6 Marks Important Format<br>
+                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    </p>
+
+                    <div class="card-pricing-row">
+                      <span class="strike-price"><del>₹69</del></span>
+                      <span class="final-price" style="color: #38bdf8;">₹29</span>
+                      <span class="save-tag">SAVE 58%</span>
+                    </div>
+
+                    <div class="paper-actions">
+                      <!-- 🔴 Yahan Sem 3 RDBMS Unit-wise ka Razorpay Link Dalein -->
+                      <a href="https://rzp.io/rzp/sem3-qb-rdbms-uw" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-cyan">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <span>Pay ₹29 & Download QB</span>
+                      </a>
+                    </div>
+
+                    <span class="upi-note">
+                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+                    </span>
+
+                    <div class="card-feedback">
+                      <div class="feedback-actions">
+                        <button class="action-btn like-btn" title="Like">
+                          <i class="fa-regular fa-heart"></i>
+                          <span class="like-count">210</span>
+                        </button>
+                        <button class="action-btn dislike-btn" title="Dislike">
+                          <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                        <button class="action-btn comment-toggle-btn" title="Comments">
+                          <i class="fa-regular fa-comment-dots"></i>
+                          <span class="comment-count-badge">0</span>
+                        </button>
+                        <button class="action-btn share-btn" title="Share on WhatsApp">
+                          <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                      </div>
+
+                      <div class="comments-dropdown">
+                        <div class="comments-list"></div>
+                        <form class="comment-form">
+                          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                          <div class="input-with-btn">
+                            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- RDBMS Resource 2: Most Important Questions (PAID) -->
+                  <div class="paper-card paper-card-paid card-paid-gold" data-card-id="qb-sem3-rdbms-imp">
+                    <div class="paper-header">
+                      <span class="year-badge lock-badge" style="color: #f59e0b;"><i class="fa-solid fa-lock"></i></span>
+                      <span class="status-badge status-gold">
+                        <i class="fa-solid fa-crown"></i> VIP MIQ • Locked
+                      </span>
+                    </div>
+
+                    <h3 class="paper-title">
+                      Most Important Questions <span class="solved-pill">PREMIUM PDF</span>
+                    </h3>
+                    
+                    <p class="paid-features-text">
+                      <i class="fa-solid fa-circle-check"></i> Top Most Important SGBAU RDBMS Exam Questions<br>
+                      <i class="fa-solid fa-circle-check"></i> 1 Marks, 3 Marks & 6 Marks Important Format<br>
+                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    </p>
+
+                    <div class="card-pricing-row">
+                      <span class="strike-price"><del>₹79</del></span>
+                      <span class="final-price" style="color: #fbbf24;">₹39</span>
+                      <span class="save-tag">SAVE 51%</span>
+                    </div>
+
+                    <div class="paper-actions">
+                      <!-- 🔴 Yahan Sem 3 RDBMS MIQ ka Razorpay Link Dalein -->
+                      <a href="https://rzp.io/rzp/sem3-qb-rdbms-miq" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <span>Pay ₹39 & Download MIQ</span>
+                      </a>
+                    </div>
+
+                    <span class="upi-note">
+                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+                    </span>
+
+                    <div class="card-feedback">
+                      <div class="feedback-actions">
+                        <button class="action-btn like-btn" title="Like">
+                          <i class="fa-regular fa-heart"></i>
+                          <span class="like-count">290</span>
+                        </button>
+                        <button class="action-btn dislike-btn" title="Dislike">
+                          <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                        <button class="action-btn comment-toggle-btn" title="Comments">
+                          <i class="fa-regular fa-comment-dots"></i>
+                          <span class="comment-count-badge">0</span>
+                        </button>
+                        <button class="action-btn share-btn" title="Share on WhatsApp">
+                          <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                      </div>
+
+                      <div class="comments-dropdown">
+                        <div class="comments-list"></div>
+                        <form class="comment-form">
+                          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                          <div class="input-with-btn">
+                            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Subject Accordion 3: IKS ================= -->
+          <div class="subject-accordion-card" data-subject="iks">
+            <div class="accordion-header">
+              <div class="subject-info">
+                <div class="subject-icon-box"><i class="fa-solid fa-scroll"></i></div>
+                <div class="subject-text">
+                  <div class="subject-meta">
+                    <h2 class="subject-title">IKS in Computational Science</h2>
+                  </div>
+                  <p class="subject-description">Introduction to IKS and its applications in computational science.</p>
+                </div>
+              </div>
+              <button type="button" class="accordion-toggle-btn" aria-expanded="false">
+                <span class="btn-text">View Question Bank</span>
+                <i class="fa-solid fa-chevron-down toggle-icon"></i>
+              </button>
+            </div>
+
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <div class="papers-grid">
+                  
+                  <!-- IKS Resource 1: Unit-wise Question Bank (PAID) -->
+                  <div class="paper-card paper-card-paid card-paid-cyan" data-card-id="qb-sem3-iks-unitwise">
+                    <div class="paper-header">
+                      <span class="year-badge lock-badge"><i class="fa-solid fa-lock"></i></span>
+                      <span class="status-badge status-cyan">
+                        <i class="fa-solid fa-book-bookmark"></i> Complete QB • Locked
+                      </span>
+                    </div>
+
+                    <h3 class="paper-title">
+                      Unit-wise Question Bank <span class="solved-pill">ALL UNITS</span>
+                    </h3>
+
+                    <p class="paid-features-text">
+                      <i class="fa-solid fa-circle-check"></i> Complete Unit-wise Syllabus Questions<br>
+                      <i class="fa-solid fa-circle-check"></i> 1 Marks, 3 Marks & 6 Marks Important Format<br>
+                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    </p>
+
+                    <div class="card-pricing-row">
+                      <span class="strike-price"><del>₹69</del></span>
+                      <span class="final-price" style="color: #38bdf8;">₹29</span>
+                      <span class="save-tag">SAVE 58%</span>
+                    </div>
+
+                    <div class="paper-actions">
+                      <!-- 🔴 Yahan Sem 3 IKS Unit-wise ka Razorpay Link Dalein -->
+                      <a href="https://rzp.io/rzp/sem3-qb-iks-uw" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-cyan">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <span>Pay ₹29 & Download QB</span>
+                      </a>
+                    </div>
+
+                    <span class="upi-note">
+                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+                    </span>
+
+                    <div class="card-feedback">
+                      <div class="feedback-actions">
+                        <button class="action-btn like-btn" title="Like">
+                          <i class="fa-regular fa-heart"></i>
+                          <span class="like-count">220</span>
+                        </button>
+                        <button class="action-btn dislike-btn" title="Dislike">
+                          <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                        <button class="action-btn comment-toggle-btn" title="Comments">
+                          <i class="fa-regular fa-comment-dots"></i>
+                          <span class="comment-count-badge">0</span>
+                        </button>
+                        <button class="action-btn share-btn" title="Share on WhatsApp">
+                          <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                      </div>
+
+                      <div class="comments-dropdown">
+                        <div class="comments-list"></div>
+                        <form class="comment-form">
+                          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                          <div class="input-with-btn">
+                            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- IKS Resource 2: Most Important Questions (PAID) -->
+                  <div class="paper-card paper-card-paid card-paid-gold" data-card-id="qb-sem3-iks-imp">
+                    <div class="paper-header">
+                      <span class="year-badge lock-badge" style="color: #f59e0b;"><i class="fa-solid fa-lock"></i></span>
+                      <span class="status-badge status-gold">
+                        <i class="fa-solid fa-crown"></i> VIP MIQ • Locked
+                      </span>
+                    </div>
+
+                    <h3 class="paper-title">
+                      Most Important Questions <span class="solved-pill">PREMIUM PDF</span>
+                    </h3>
+                    
+                    <p class="paid-features-text">
+                      <i class="fa-solid fa-circle-check"></i> Most Important SGBAU IKS Exam Questions<br>
+                      <i class="fa-solid fa-circle-check"></i> 1 Marks, 3 Marks & 6 Marks Important Format<br>
+                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    </p>
+
+                    <div class="card-pricing-row">
+                      <span class="strike-price"><del>₹79</del></span>
+                      <span class="final-price" style="color: #fbbf24;">₹39</span>
+                      <span class="save-tag">SAVE 50%</span>
+                    </div>
+
+                    <div class="paper-actions">
+                      <!-- 🔴 Yahan Sem 3 IKS MIQ ka Razorpay Link Dalein -->
+                      <a href="https://rzp.io/rzp/sem3-qb-iks-miq" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <span>Pay ₹39 & Download MIQ</span>
+                      </a>
+                    </div>
+
+                    <span class="upi-note">
+                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+                    </span>
+
+                    <div class="card-feedback">
+                      <div class="feedback-actions">
+                        <button class="action-btn like-btn" title="Like">
+                          <i class="fa-regular fa-heart"></i>
+                          <span class="like-count">230</span>
+                        </button>
+                        <button class="action-btn dislike-btn" title="Dislike">
+                          <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                        <button class="action-btn comment-toggle-btn" title="Comments">
+                          <i class="fa-regular fa-comment-dots"></i>
+                          <span class="comment-count-badge">0</span>
+                        </button>
+                        <button class="action-btn share-btn" title="Share on WhatsApp">
+                          <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                      </div>
+
+                      <div class="comments-dropdown">
+                        <div class="comments-list"></div>
+                        <form class="comment-form">
+                          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                          <div class="input-with-btn">
+                            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Subject Accordion 4: Minor - Data Structures and RDBMS ================= -->
+          <div class="subject-accordion-card" data-subject="data structures and rdbms">
+            <div class="accordion-header">
+              <div class="subject-info">
+                <div class="subject-icon-box"><i class="fa-solid fa-code-branch"></i></div>
+                <div class="subject-text">
+                  <div class="subject-meta">
+                    <h2 class="subject-title">Minor - Data Structures and RDBMS</h2>
+                  </div>
+                  <p class="subject-description">Introduction to data structures and relational database management systems.</p>
+                </div>
+              </div>
+              <button type="button" class="accordion-toggle-btn" aria-expanded="false">
+                <span class="btn-text">View Question Bank</span>
+                <i class="fa-solid fa-chevron-down toggle-icon"></i>
+              </button>
+            </div>
+
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <div class="papers-grid">
+                  
+                  <!-- Minor Resource 1: Unit-wise Question Bank (PAID) -->
+                  <div class="paper-card paper-card-paid card-paid-cyan" data-card-id="qb-sem3-minor-ds-rdbms-unitwise">
+                    <div class="paper-header">
+                      <span class="year-badge lock-badge"><i class="fa-solid fa-lock"></i></span>
+                      <span class="status-badge status-cyan">
+                        <i class="fa-solid fa-book-bookmark"></i> Complete QB • Locked
+                      </span>
+                    </div>
+
+                    <h3 class="paper-title">
+                      Unit-wise Question Bank <span class="solved-pill">ALL UNITS</span>
+                    </h3>
+
+                    <p class="paid-features-text">
+                      <i class="fa-solid fa-circle-check"></i> Complete Unit-wise Minor Subject QB<br>
+                      <i class="fa-solid fa-circle-check"></i> 1 Marks, 3 Marks & 6 Marks Important Format<br>
+                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    </p>
+
+                    <div class="card-pricing-row">
+                      <span class="strike-price"><del>₹69</del></span>
+                      <span class="final-price" style="color: #38bdf8;">₹29</span>
+                      <span class="save-tag">SAVE 58%</span>
+                    </div>
+
+                    <div class="paper-actions">
+                      <!-- 🔴 Yahan Sem 3 Minor Unit-wise ka Razorpay Link Dalein -->
+                      <a href="https://rzp.io/rzp/sem3-mn-uw" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-cyan">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <span>Pay ₹29 & Download QB</span>
+                      </a>
+                    </div>
+
+                    <span class="upi-note">
+                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+                    </span>
+
+                    <div class="card-feedback">
+                      <div class="feedback-actions">
+                        <button class="action-btn like-btn" title="Like">
+                          <i class="fa-regular fa-heart"></i>
+                          <span class="like-count">180</span>
+                        </button>
+                        <button class="action-btn dislike-btn" title="Dislike">
+                          <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                        <button class="action-btn comment-toggle-btn" title="Comments">
+                          <i class="fa-regular fa-comment-dots"></i>
+                          <span class="comment-count-badge">0</span>
+                        </button>
+                        <button class="action-btn share-btn" title="Share on WhatsApp">
+                          <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                      </div>
+
+                      <div class="comments-dropdown">
+                        <div class="comments-list"></div>
+                        <form class="comment-form">
+                          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                          <div class="input-with-btn">
+                            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Minor Resource 2: Most Important Questions (PAID) -->
+                  <div class="paper-card paper-card-paid card-paid-gold" data-card-id="qb-sem3-minor-ds-rdbms-imp">
+                    <div class="paper-header">
+                      <span class="year-badge lock-badge" style="color: #f59e0b;"><i class="fa-solid fa-lock"></i></span>
+                      <span class="status-badge status-gold">
+                        <i class="fa-solid fa-crown"></i> VIP MIQ • Locked
+                      </span>
+                    </div>
+
+                    <h3 class="paper-title">
+                      Most Important Questions <span class="solved-pill">PREMIUM PDF</span>
+                    </h3>
+                    
+                    <p class="paid-features-text">
+                      <i class="fa-solid fa-circle-check"></i> Most Important SGBAU Minor Paper Questions<br>
+                      <i class="fa-solid fa-circle-check"></i> 1 Marks, 3 Marks & 6 Marks Important Format<br>
+                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    </p>
+
+                    <div class="card-pricing-row">
+                      <span class="strike-price"><del>₹79</del></span>
+                      <span class="final-price" style="color: #fbbf24;">₹39</span>
+                      <span class="save-tag">SAVE 51%</span>
+                    </div>
+
+                    <div class="paper-actions">
+                      <!-- 🔴 Yahan Sem 3 Minor MIQ ka Razorpay Link Dalein -->
+                      <a href="https://rzp.io/rzp/sem3-mn-miq" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <span>Pay ₹39 & Download MIQ</span>
+                      </a>
+                    </div>
+
+                    <span class="upi-note">
+                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+                    </span>
+
+                    <div class="card-feedback">
+                      <div class="feedback-actions">
+                        <button class="action-btn like-btn" title="Like">
+                          <i class="fa-regular fa-heart"></i>
+                          <span class="like-count">245</span>
+                        </button>
+                        <button class="action-btn dislike-btn" title="Dislike">
+                          <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                        <button class="action-btn comment-toggle-btn" title="Comments">
+                          <i class="fa-regular fa-comment-dots"></i>
+                          <span class="comment-count-badge">0</span>
+                        </button>
+                        <button class="action-btn share-btn" title="Share on WhatsApp">
+                          <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                      </div>
+
+                      <div class="comments-dropdown">
+                        <div class="comments-list"></div>
+                        <form class="comment-form">
+                          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                          <div class="input-with-btn">
+                            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Empty State for Search -->
+        <div class="no-results-state hidden" id="noResultsState">
+          <i class="fa-solid fa-magnifying-glass-slash"></i>
+          <h3>No Matching Subjects Found</h3>
+          <p>Try typing a different subject keyword like "Data", "RDBMS", "IKS" or "Minor".</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer" id="contact">
+    <div class="footer-container">
+      <div class="footer-col brand-col">
+        <a href="../index.html" class="logo footer-logo">
+          <img src="../images/forsko-logo.png" alt="Forsko Logo" class="logo-image">
+          <span>Forsko</span>
+        </a>
+        <p>
+          Forsko is a dedicated learning portal developed for B.Sc. Computer Science students of Shri Shivaji College of Arts, Commerce and Science, Akola under SGBAU.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="syllabus.html">Syllabus</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="pyqs.html">PYQs</a></li>
+          <li><a href="question-bank.html">Question Banks</a></li>
+          <li><a href="paper-patterns.html">Sample Papers</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <ul class="contact-list">
+          <li><i class="fa-solid fa-envelope"></i> forskodev@gmail.com</li>
+          <li><i class="fa-solid fa-location-dot"></i> Shri Shivaji College of Arts, Commerce and Science, Akola</li>
+          <li><i class="fa-solid fa-globe"></i> www.forsko.in</li>
+        </ul>
+      </div>
+
+      <!-- Social Links -->
+      <div class="footer-col">
+        <h3>Social & Community</h3>
+        <a href="https://www.instagram.com/forsko_web/" target="_blank" rel="noopener" class="github-btn">
+          <i class="fa-brands fa-instagram"></i> Visit Instagram
+        </a>
+        <br><br>
+        <a href="https://whatsapp.com/channel/0029VbCy38i6GcGKKc4EAn0q" target="_blank" rel="noopener" class="github-btn">
+          <i class="fa-brands fa-whatsapp"></i> Visit Whatsapp
+        </a>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+      <p>&copy; 2026 Forsko. All rights reserved. Designed for Computer Science Students.</p>
+    </div>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script src="../js/qb-semester1.js"></script>
+</body>
+</html>

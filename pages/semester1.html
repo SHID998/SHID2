@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semester I | Forsko</title>
+
+  <!-- Google Fonts: Exo 2 & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="../css/semester1.css">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo">
+        <img src="../images/FORSKO2.png" alt="Forsko" class="logo-image">
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="syllabus.html" class="nav-link active">Syllabus</a>
+        <a href="notes.html" class="nav-link">Notes</a>
+        <a href="pyqs.html" class="nav-link">PYQs</a>
+        <a href="question-bank.html" class="nav-link">Question Banks</a>
+        <a href="paper-patterns.html" class="nav-link">Sample Papers</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="page-hero">
+      <div class="hero-glow"></div>
+      <div class="hero-container">
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <a href="syllabus.html">Syllabus</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <a href="first-year.html">First Year</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <span>Semester I</span>
+        </div>
+        
+        <h1 class="hero-title">B.Sc. Computer Science <br><span class="title-gradient">Semester I</span></h1>
+        
+        <div class="hero-institution">
+          <p class="inst-college">Shri Shivaji College of Arts, Commerce and Science, Akola</p>
+          <p class="inst-university">Sant Gadge Baba Amravati University (SGBAU)</p>
+        </div>
+
+        <p class="hero-instruction">Choose a subject to open its official syllabus PDF.</p>
+      </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section class="subjects-section">
+      <div class="subjects-container">
+        <div class="subjects-grid">
+
+          <!-- Card 0: Scheme -->
+          <div class="subject-card" data-card-id="sem1-scheme">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-table-list"></i></div>
+              <span class="subject-tag">Scheme - 112</span>
+            </div>
+            <h2 class="subject-title">Semester I : Scheme</h2>
+            <p class="subject-description">Credits, Workload, Examination, Evaluation and Assessment Scheme.</p>
+            
+            <div class="card-actions">
+              <!-- Replace with your Scheme PDF URL -->
+              <a href="https://drive.google.com/file/d/1HpyYv-LctBH7gmWnpYdkV_AewaZSmnbQ/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View Scheme</span>
+              </a>
+              
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 1: Fundamentals of Computer -->
+          <div class="subject-card" data-card-id="sem1-foc">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-computer"></i></div>
+              <span class="subject-tag">Theory - 112201</span>
+            </div>
+            <h2 class="subject-title">Fundamentals of Computer</h2>
+            <p class="subject-description">Learn computer fundamentals, hardware, software, operating systems, memory, number systems and basic computer applications.</p>
+            
+            <div class="card-actions">
+              <!-- Replace with your Fundamentals of Computer PDF URL -->
+              <a href="https://drive.google.com/file/d/16lhOyWaXreMZYTek0ugxx3weMDLlnH1E/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Laboratory on Office Automation Tools -->
+          <div class="subject-card" data-card-id="sem1-office-automation">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-file-pen"></i></div>
+              <span class="subject-tag">Lab - 112202</span>
+            </div>
+            <h2 class="subject-title">Laboratory on Office Automation Tools</h2>
+            <p class="subject-description">Practice Microsoft Office tools including Word, Excel, PowerPoint, document creation, spreadsheets, and presentations.</p>
+            
+            <div class="card-actions">
+              <!-- Replace with your Office Automation Tools Lab PDF URL -->
+              <a href="https://drive.google.com/file/d/11wr3frzJKSBwbvgxe4f7TVF4Z1NnpCsv/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: SEC Lab ICT Tools -->
+          <div class="subject-card" data-card-id="sem1-ict-tools-lab">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-globe"></i></div>
+              <span class="subject-tag">SEC Lab - 110281</span>
+            </div>
+            <h2 class="subject-title">Laboratory on Information Communication Technology Tools</h2>
+            <p class="subject-description">Develop practical skills using communication technologies, internet tools, cloud services, and digital collaboration platforms.</p>
+            
+            <div class="card-actions">
+              <!-- Replace with your SEC ICT Tools Lab PDF URL -->
+              <a href="https://drive.google.com/file/d/1q519VV2dtM3LbY36b5QyC0-Vtpxu5Hrh/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: GOEC 1 ICT -->
+          <div class="subject-card" data-card-id="sem1-ict-theory">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-tower-cell"></i></div>
+              <span class="subject-tag">GOEC 1 - 112271</span>
+            </div>
+            <h2 class="subject-title">Information Communication Technology</h2>
+            <p class="subject-description">Explore ICT concepts, digital communication, networking basics, internet services, and modern information technologies.</p>
+            
+            <div class="card-actions">
+              <!-- Replace with your GOEC ICT Theory PDF URL -->
+              <a href="https://drive.google.com/file/d/1OkjnW_E1OOiKnANg7QufDmTLEz3cNptr/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Business Data Processing -->
+          <div class="subject-card" data-card-id="sem1-bdp">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-chart-line"></i></div>
+              <span class="subject-tag">GOEC 2 - 112272</span>
+            </div>
+            <h2 class="subject-title">Business Data Processing</h2>
+            <p class="subject-description">Understand business applications, data processing techniques, office systems, and computerized business operations.</p>
+            
+            <div class="card-actions">
+              <!-- Replace with your Business Data Processing PDF URL -->
+              <a href="https://drive.google.com/file/d/1hJoefCbiKME17aNXVxlpi6UkjcBLf5DQ/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+
+            </div>
+
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a comment..." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer" id="contact">
+    <div class="footer-container">
+      <div class="footer-col brand-col">
+        <a href="../index.html" class="logo footer-logo">
+          <img src="../images/forsko-logo.png" alt="Forsko Logo" class="logo-image">
+          <span>Forsko</span>
+        </a>
+        <p>
+          The ultimate central hub for Computer Science academic study materials, practical code labs, and semester exam prep.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="syllabus.html">Syllabus</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="pyqs.html">PYQs</a></li>
+          <li><a href="question-bank.html">Question Banks</a></li>
+          <li><a href="paper-patterns.html">Sample Papers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <ul class="contact-list">
+          <li><i class="fa-solid fa-envelope"></i> forskodev@gmail.com</li>
+          <li><i class="fa-solid fa-location-dot"></i> Shri Shivaji College of Arts, Commerce and Science Akola</li>
+          <li><i class="fa-solid fa-globe"></i> www.forsko.in</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Social & Community</h3>
+        <a href="https://www.instagram.com/forsko_web/" target="_blank" rel="noopener" class="github-btn">
+          <i class="fa-brands fa-instagram"></i> Visit Instagram
+        </a>
+        <br><br>
+        <a href="https://whatsapp.com/channel/0029VbCy38i6GcGKKc4EAn0q" target="_blank" rel="noopener" class="github-btn">
+          <i class="fa-brands fa-whatsapp"></i> Visit Whatsapp
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Forsko. All rights reserved. Designed for Computer Science Students.</p>
+    </div>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script src="../js/semester1.js"></script>
+</body>
+</html>

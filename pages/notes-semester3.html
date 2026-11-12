@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semester III Notes | Forsko</title>
+
+  <!-- Google Fonts: Inter & Exo 2 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="../css/notes-semester.css">
+
+  <!-- Paid Notes Custom Styles (Gold VIP Theme) -->
+  <style>
+    /* ==========================================
+       FORSKO PAID NOTES CARDS STYLING
+       ========================================== */
+    
+    /* View PDF Button ko Full-Width Bar banane ke liye */
+.card-actions {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.card-actions .pdf-btn {
+  width: 100% !important;               /* पूरा बार जैसा चौड़ा करेगा */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  padding: 12px 20px !important;       /* अच्छी पैडिंग */
+  border-radius: 10px !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  box-sizing: border-box !important;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4) !important;
+  transition: all 0.25s ease !important;
+  text-decoration: none !important;
+}
+
+/* Hover par thoda lift aur glow */
+.card-actions .pdf-btn:hover {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%) !important;
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.6) !important;
+  transform: translateY(-2px) !important;
+}
+    
+    
+    
+       .subject-card-paid {
+      position: relative;
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+
+    /* Gold VIP Card */
+    .card-paid-gold {
+      border: 1.8px solid rgba(245, 158, 11, 0.55) !important;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(245, 158, 11, 0.15) !important;
+    }
+    .card-paid-gold:hover {
+      border-color: #f59e0b !important;
+      box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 158, 11, 0.35) !important;
+      transform: translateY(-4px);
+    }
+    .status-gold {
+      background: rgba(245, 158, 11, 0.15) !important;
+      color: #fbbf24 !important;
+      border: 1px solid rgba(245, 158, 11, 0.4) !important;
+    }
+    .btn-buy-gold {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+      color: #0b1120 !important;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4) !important;
+    }
+    .btn-buy-gold:hover {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.6) !important;
+      color: #000000 !important;
+    }
+
+    /* Common Badges & Pricing */
+    .status-badge {
+      font-weight: 800 !important;
+      font-size: 0.72rem !important;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .solved-pill {
+      display: inline-block;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+    .paid-features-text {
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin: 10px 0;
+      text-align: left;
+    }
+    .paid-features-text i {
+      color: #10b981;
+      font-size: 0.8rem;
+      margin-right: 4px;
+    }
+    .card-pricing-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0 14px 0;
+      background: rgba(11, 17, 32, 0.6);
+      padding: 6px 12px;
+      border-radius: 10px;
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+    }
+    .strike-price {
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+    .final-price {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #ffffff;
+    }
+    .save-tag {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    /* Actions & Stacked Buttons */
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      width: 100%;
+    }
+
+    /* Gold Preview Button */
+    .btn-preview {
+      width: 100% !important;
+      font-weight: 700 !important;
+      font-size: 0.88rem !important;
+      padding: 9px 14px !important;
+      border-radius: 10px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      text-decoration: none !important;
+      background: rgba(255, 255, 255, 0.04) !important;
+      backdrop-filter: blur(6px);
+      transition: all 0.25s ease !important;
+    }
+    .btn-preview-gold {
+      border: 1.2px solid rgba(245, 158, 11, 0.45) !important;
+      color: #fbbf24 !important;
+    }
+    .btn-preview-gold:hover {
+      background: rgba(245, 158, 11, 0.15) !important;
+      border-color: #f59e0b !important;
+      color: #fde68a !important;
+      transform: translateY(-2px);
+    }
+
+    .btn-unlock-full {
+      width: 100% !important;
+      font-weight: 800 !important;
+      font-size: 0.95rem !important;
+      padding: 12px 16px !important;
+      border-radius: 10px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      text-decoration: none !important;
+      transition: all 0.25s ease !important;
+    }
+    .btn-unlock-full:hover {
+      transform: translateY(-2px) !important;
+    }
+    .upi-note {
+      display: block;
+      font-size: 0.68rem;
+      color: #94a3b8;
+      margin-top: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo">
+        <img src="../images/FORSKO2.png" alt="Forsko" class="logo-image">
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="syllabus.html" class="nav-link">Syllabus</a>
+        <a href="notes.html" class="nav-link active">Notes</a>
+        <a href="pyqs.html" class="nav-link">PYQs</a>
+        <a href="question-bank.html" class="nav-link">Question Banks</a>
+        <a href="paper-patterns.html" class="nav-link">Sample Papers</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="page-hero">
+      <div class="hero-glow"></div>
+      <div class="hero-container">
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <a href="notes.html">Notes</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <a href="notes-second-year.html">Second Year</a>
+          <i class="fa-solid fa-chevron-right separator"></i>
+          <span>Semester III</span>
+        </div>
+        
+        <h1 class="hero-title">B.Sc. Computer Science <br> Semester III - <span class="title-gradient">Notes</span></h1>
+        
+        <div class="hero-institution">
+          <p class="inst-college">Shri Shivaji College of Arts, Commerce and Science, Akola</p>
+          <p class="inst-university">Sant Gadge Baba Amravati University (SGBAU)</p>
+        </div>
+
+        <p class="hero-instruction">Choose a subject to open its notes, infographics and resources PDF.</p>
+      </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section class="subjects-section">
+      <div class="subjects-container">
+        <div class="subjects-grid">
+
+          <!-- ================= Card 1: Data Structures Hand Written Notes (GOLD VIP PAID CARD) ================= -->
+          <div class="subject-card subject-card-paid card-paid-gold" data-card-id="notes-sem3-ds-handwritten">
+            <div class="card-glass-glow"></div>
+            
+            <div class="subject-card-header">
+              <div class="subject-icon" style="color: #f59e0b;"><i class="fa-solid fa-network-wired"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Handwritten • Locked
+              </span>
+            </div>
+
+            <h2 class="subject-title">
+              Data Structures <span class="solved-pill">HANDWRITTEN</span>
+            </h2>
+
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> Complete Unit-wise DS Hand Written Notes<br>
+              <i class="fa-solid fa-circle-check"></i> Arrays, Stacks, Queues, Trees, Graphs & Algorithms<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
+
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹89</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹39</span>
+              <span class="save-tag">SAVE 56%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1oNsIK-dIQNHgZi6NGFnHGCyr6N3UlG3a/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn-preview btn-preview-gold">
+                <i class="fa-regular fa-eye"></i>
+                <span>Preview PDF (Sample)</span>
+              </a>
+
+              <!-- 🔴 Yahan Sem 3 DS Notes ka Razorpay Link Dalein -->
+              <a href="https://rzp.io/rzp/sem3-notes-ds" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹39 & Download Notes</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">240</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Card 2: Data Structures Infographics (FREE) ================= -->
+          <div class="subject-card" data-card-id="notes-sem3-ds-infographics">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-chart-column"></i></div>
+              <span class="subject-tag">Infographics</span>
+            </div>
+            <h2 class="subject-title">Data Structures Infographics</h2>
+            <p class="subject-description">Explore visual infographics covering key concepts, diagrams, flowcharts and quick revision topics for Data Structures.</p>
+            
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1XJtIjEbkvUVXKmYInAx5Zeu_-FzSOBn3/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">140</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Card 3: RDBMS Hand Written Notes (GOLD VIP PAID CARD) ================= -->
+          <div class="subject-card subject-card-paid card-paid-gold" data-card-id="notes-sem3-rdbms-handwritten">
+            <div class="card-glass-glow"></div>
+            
+            <div class="subject-card-header">
+              <div class="subject-icon" style="color: #f59e0b;"><i class="fa-solid fa-database"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Handwritten • Locked
+              </span>
+            </div>
+
+            <h2 class="subject-title">
+              Relational Database Management Systems <span class="solved-pill">HANDWRITTEN</span>
+            </h2>
+
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> Complete Unit-wise RDBMS Hand Written Notes<br>
+              <i class="fa-solid fa-circle-check"></i> Relational Algebra, SQL Queries, Normalization & ER Diagrams<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
+
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹79</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹29</span>
+              <span class="save-tag">SAVE 63%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1o-ZGfe1aNUlLA0CU9ibDwgGJLfs5BH26/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn-preview btn-preview-gold">
+                <i class="fa-regular fa-eye"></i>
+                <span>Preview PDF (Sample)</span>
+              </a>
+
+              <!-- 🔴 Yahan Sem 3 RDBMS Notes ka Razorpay Link Dalein -->
+              <a href="https://rzp.io/rzp/sem3-notes-rdbms" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹29 & Download Notes</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">210</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Card 4: RDBMS Infographics (FREE) ================= -->
+          <div class="subject-card" data-card-id="notes-sem3-rdbms-infographics">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-chart-column"></i></div>
+              <span class="subject-tag">Infographics</span>
+            </div>
+            <h2 class="subject-title">RDBMS Infographics</h2>
+            <p class="subject-description">Explore visual infographics covering key concepts, diagrams, flowcharts and quick revision topics for Relational Database Management Systems.</p>
+            
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1mdiQmhUyDVEOd_FN_Pm0_k--q1lNf7yK/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">130</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Card 5: IKS in Computational Science (GOLD VIP PAID CARD) ================= -->
+          <div class="subject-card subject-card-paid card-paid-gold" data-card-id="notes-sem3-iks">
+            <div class="card-glass-glow"></div>
+            
+            <div class="subject-card-header">
+              <div class="subject-icon" style="color: #f59e0b;"><i class="fa-solid fa-scroll"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP IKS • Locked
+              </span>
+            </div>
+
+            <h2 class="subject-title">
+              IKS in Computational Science <span class="solved-pill">HANDWRITTEN</span>
+            </h2>
+
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> Complete Unit-wise IKS Hand Written Notes<br>
+              <i class="fa-solid fa-circle-check"></i> Indian Mathematics, Binary Astronomy & Computing Systems<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
+
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹79</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹35</span>
+              <span class="save-tag">SAVE 56%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1vLt3JZ6d_OFqltJA2fvwV567FrZDwUV7/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn-preview btn-preview-gold">
+                <i class="fa-regular fa-eye"></i>
+                <span>Preview PDF (Sample)</span>
+              </a>
+
+              <!-- 🔴 Yahan Sem 3 IKS Notes ka Razorpay Link Dalein -->
+              <a href="https://rzp.io/rzp/sem3-notes-iks" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹35 & Download Notes</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">190</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+                    <!-- ================= Card 8: E Content Development (FREE) ================= -->
+          <div class="subject-card" data-card-id="notes-sem3-e-content-development">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-earth-americas"></i></div>
+              <span class="subject-tag">GOEC</span>
+            </div>
+            <h2 class="subject-title">E Content Development</h2>
+            <p class="subject-description">Easy-to-understand notes with key concepts, important topics and quick revision content.</p>
+            
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1qE9AjTHynQmGBP8nRx6A4r_FV6pJZBH7/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">125</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Card 6: Minor Data Structure and RDBMS (GOLD VIP PAID CARD) ================= -->
+          <div class="subject-card subject-card-paid card-paid-gold" data-card-id="notes-sem3-minor-ds-rdbms">
+            <div class="card-glass-glow"></div>
+            
+            <div class="subject-card-header">
+              <div class="subject-icon" style="color: #f59e0b;"><i class="fa-solid fa-code-branch"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Minor • Locked
+              </span>
+            </div>
+
+            <h2 class="subject-title">
+              Minor - Data Structure and RDBMS <span class="solved-pill">HANDWRITTEN</span>
+            </h2>
+
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> Complete Unit-wise Minor Subject Hand Written Notes<br>
+              <i class="fa-solid fa-circle-check"></i> Combined Core Data Structures & Database Management<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
+
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹89</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹39</span>
+              <span class="save-tag">SAVE 56%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1vR2iagdnS7dRE2AsoIMgKh6a90kK5fTF/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn-preview btn-preview-gold">
+                <i class="fa-regular fa-eye"></i>
+                <span>Preview PDF (Sample)</span>
+              </a>
+
+              <!-- 🔴 Yahan Sem 3 Minor Notes ka Razorpay Link Dalein -->
+              <a href="https://rzp.io/rzp/sem3-notes-mn" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹39 & Download Notes</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">175</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Card 7: Minor DS & RDBMS Infographics (FREE) ================= -->
+          <div class="subject-card" data-card-id="notes-sem3-minor-ds-rdbms-info">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-code-branch"></i></div>
+              <span class="subject-tag">Minor - Infographics</span>
+            </div>
+            <h2 class="subject-title">Minor - Data Structure and RDBMS Infographics</h2>
+            <p class="subject-description">Explore visual infographics covering key concepts, diagrams, flowcharts and quick revision topics for Minor Data Structure and RDBMS.</p>
+            
+            <div class="card-actions">
+              <a href="https://drive.google.com/file/d/1z8xLRN9KWfT-I8UEX1hLB6ParZwt0Oqn/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">110</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer" id="contact">
+    <div class="footer-container">
+      <div class="footer-col brand-col">
+        <a href="../index.html" class="logo footer-logo">
+          <img src="../images/FORSKO2.png" alt="Forsko Logo" class="logo-image">
+          <span>Forsko</span>
+        </a>
+        <p>
+          The ultimate central hub for Computer Science academic study materials, practical code labs, and semester exam prep.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="syllabus.html">Syllabus</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="pyqs.html">PYQs</a></li>
+          <li><a href="question-bank.html">Question Banks</a></li>
+          <li><a href="paper-patterns.html">Sample Papers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <ul class="contact-list">
+          <li><i class="fa-solid fa-envelope"></i>forskodev@gmail.com</li>
+          <li><i class="fa-solid fa-location-dot"></i> Shri Shivaji College of Arts, Commerce and Science Akola </li>
+          <li><i class="fa-solid fa-globe"></i> www.forsko.in</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Social & Community</h3>
+        <a href="https://www.instagram.com/forsko_web/" target="_blank" rel="noopener" class="github-btn">
+          <i class="fa-brands fa-instagram"></i> Visit Instagram
+        </a>
+        <br><br>
+        <a href="https://whatsapp.com/channel/0029VbCy38i6GcGKKc4EAn0q" target="_blank" rel="noopener" class="github-btn">
+          <i class="fa-brands fa-whatsapp"></i> Visit Whatsapp
+        </a>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+      <p>&copy; 2026 Forsko. All rights reserved. Designed for Computer Science Students.</p>
+    </div>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script src="../js/notes-semester1.js"></script>
+</body>
+</html>
