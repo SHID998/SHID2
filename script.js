@@ -790,3 +790,111 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+
+/* ==========================================================================
+   FORSKO ANNOUNCEMENT MODAL CONTROLLER (Fixed DOM Timing & Session Handler)
+   ========================================================================== */
+function initForskoPricingModal() {
+  const SESSION_KEY = 'forsko_pricing_popup_seen';
+  const overlay = document.getElementById('forskoPricingOverlay');
+  const closeBtn = document.getElementById('forskoPricingCloseBtn');
+  const actionBtn = document.getElementById('forskoPricingActionBtn');
+
+  // If the popup HTML is not on this page, exit gracefully
+  if (!overlay) return;
+
+  function markSessionSeen() {
+    try {
+      sessionStorage.setItem(SESSION_KEY, 'true');
+    } catch (e) {}
+  }
+
+  function isSessionSeen() {
+    try {
+      // Allows testing instantly by adding ?test_popup=1 to the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('test_popup') === '1') return false;
+
+      return sessionStorage.getItem(SESSION_KEY) === 'true';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function openPricingPopup() {
+    overlay.style.display = 'flex';
+    overlay.setAttribute('aria-hidden', 'false');
+
+    // Force layout reflow before triggering smooth opacity & scale transition
+    void overlay.offsetWidth;
+    overlay.classList.add('active');
+
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closePricingPopup() {
+    markSessionSeen();
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+
+    setTimeout(() => {
+      overlay.style.display = 'none';
+    }, 320);
+  }
+
+  // Event Listeners for Closing
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closePricingPopup();
+    });
+  }
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      closePricingPopup();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) {
+      closePricingPopup();
+    }
+  });
+
+  if (actionBtn) {
+    actionBtn.addEventListener('click', () => {
+      closePricingPopup();
+    });
+  }
+
+  // Trigger popup after page and splash screen finish loading
+  function schedulePopup() {
+    if (isSessionSeen()) return;
+
+    // Checks if the cinematic splash screen is running
+    const splash = document.getElementById('forskoSplashScreen');
+    const delayTime = splash ? 3500 : 800;
+
+    setTimeout(() => {
+      if (!isSessionSeen()) {
+        openPricingPopup();
+      }
+    }, delayTime);
+  }
+
+  // If the window has already loaded, trigger immediately; otherwise listen for 'load'
+  if (document.readyState === 'complete') {
+    schedulePopup();
+  } else {
+    window.addEventListener('load', schedulePopup);
+  }
+}
+
+// Ensure the HTML DOM elements are completely parsed before running
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initForskoPricingModal);
+} else {
+  initForskoPricingModal();
+}

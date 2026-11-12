@@ -25,6 +25,10 @@
   <!-- Forsko Splash Screen Stylesheet -->
 <link rel="stylesheet" href="splash-screen.css">
 <link rel="stylesheet" href="css/exam-countdown.css">
+
+
+
+
   <style>
     /* moved inline styles from HTML to CSS file scope */
     .sub-badge.center { display: block; text-align: center; }
@@ -4153,6 +4157,8 @@
   <!-- Forsko Splash Screen Script -->
 <script src="splash-screen.js"></script>
 
+
+
 <!-- Secret Shortcut: Shift + S -->
 <script>
   document.addEventListener('keydown', function(e) {
@@ -4266,5 +4272,166 @@
     });
   </script>
 
+
+<!-- =========================================================
+     FORSKO PREMIUM GLASSMORPHISM PRICING POPUP MODAL (COMPACT)
+     ========================================================= -->
+<div 
+  id="forskoPricingOverlay" 
+  class="forsko-pricing-overlay" 
+  role="dialog" 
+  aria-modal="true" 
+  aria-labelledby="forskoPricingHeading" 
+  aria-describedby="forskoPricingSubheading"
+  aria-hidden="true" 
+  style="display: none;"
+>
+  <div class="forsko-pricing-card">
+    
+    <!-- Ambient Internal Glow -->
+    <div class="forsko-pricing-glow" aria-hidden="true"></div>
+
+    <!-- Close Button -->
+    <button 
+      type="button" 
+      id="forskoPricingCloseBtn" 
+      class="forsko-pricing-close-btn" 
+      aria-label="Close Announcement Popup"
+    >
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <!-- Modal Header -->
+    <div class="forsko-pricing-header">
+      <!-- Modal Header with Logo -->
+    <div class="forsko-pricing-header">
+      
+      <!-- Blue Capsule ki jagah Forsko Logo -->
+      <div class="forsko-pricing-logo-wrap">
+        <img 
+          src="images/FORSKO2.png" 
+          alt="Forsko Logo" 
+          class="forsko-pricing-logo" 
+          onerror="this.src='images/forsko-logo.png'"
+        >
+      </div>
+
+      <h2 id="forskoPricingHeading" class="forsko-pricing-title">
+        Study Smarter. Score Better. <span class="forsko-pricing-gradient">🚀</span>
+      </h2>
+      <p id="forskoPricingSubheading" class="forsko-pricing-subtitle">
+        Everything you need for your academic journey, at student-friendly prices.
+      </p>
+    </div>
+
+    <!-- Materials & Pricing Grid (Combined & Compact) -->
+    <div class="forsko-pricing-list">
+      
+      <!-- 1. Handwritten Notes -->
+      <div class="forsko-pricing-item">
+        <div class="forsko-pricing-item-left">
+          <div class="forsko-pricing-icon-wrap icon-cyan">
+            <i class="fa-solid fa-pen-fancy"></i>
+          </div>
+          <span class="forsko-pricing-item-name">Handwritten Notes</span>
+        </div>
+        <div class="forsko-pricing-tag">
+          <span class="forsko-pricing-subtext">Starting from</span>
+          <strong class="forsko-pricing-amount">₹19</strong>
+        </div>
+      </div>
+
+      <!-- 2. Visual Infographics -->
+      <div class="forsko-pricing-item item-highlight-green">
+        <div class="forsko-pricing-item-left">
+          <div class="forsko-pricing-icon-wrap icon-green">
+            <i class="fa-solid fa-diagram-project"></i>
+          </div>
+          <span class="forsko-pricing-item-name">Infographics</span>
+        </div>
+        <div class="forsko-pricing-tag">
+          <span class="forsko-pricing-free-badge">FREE ACCESS</span>
+        </div>
+      </div>
+
+      <!-- 3. Combined Question Banks (Unit-wise + Most Imp.) -->
+      <div class="forsko-pricing-item">
+        <div class="forsko-pricing-item-left">
+          <div class="forsko-pricing-icon-wrap icon-blue">
+            <i class="fa-solid fa-clipboard-list"></i>
+          </div>
+          <span class="forsko-pricing-item-name">Question Banks <small style="color: #94a3b8; font-size: 0.75rem;">(Unit-wise & Imp.)</small></span>
+        </div>
+        <div class="forsko-pricing-tag">
+          <span class="forsko-pricing-subtext">Starting from</span>
+          <strong class="forsko-pricing-amount">₹19</strong>
+        </div>
+      </div>
+
+      <!-- 4. Sample Papers -->
+      <div class="forsko-pricing-item">
+        <div class="forsko-pricing-item-left">
+          <div class="forsko-pricing-icon-wrap icon-rose">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+          <span class="forsko-pricing-item-name">Sample Papers</span>
+        </div>
+        <div class="forsko-pricing-tag">
+          <span class="forsko-pricing-subtext">Starting from</span>
+          <strong class="forsko-pricing-amount">₹29</strong>
+        </div>
+      </div>
+
+      <!-- 5. Practical PDF -->
+      <div class="forsko-pricing-item">
+        <div class="forsko-pricing-item-left">
+          <div class="forsko-pricing-icon-wrap icon-purple">
+            <i class="fa-solid fa-file-pdf"></i>
+          </div>
+          <span class="forsko-pricing-item-name">Practical PDF</span>
+        </div>
+        <div class="forsko-pricing-tag">
+          <span class="forsko-pricing-subtext">Starting from</span>
+          <strong class="forsko-pricing-amount">₹49</strong>
+        </div>
+      </div>
+
+      <!-- 6. Practical Editable DOCX -->
+      <div class="forsko-pricing-item">
+        <div class="forsko-pricing-item-left">
+          <div class="forsko-pricing-icon-wrap icon-sky">
+            <i class="fa-solid fa-file-word"></i>
+          </div>
+          <span class="forsko-pricing-item-name">Practical Editable DOCX</span>
+        </div>
+        <div class="forsko-pricing-tag">
+          <span class="forsko-pricing-subtext">Starting from</span>
+          <strong class="forsko-pricing-amount">₹129</strong>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Availability Notice Callout -->
+    <div class="forsko-pricing-notice">
+      <i class="fa-solid fa-bolt-lightning"></i>
+      <span><b>Availability:</b> Sem 1 & Sem 2 Practical Materials are currently available.</span>
+    </div>
+
+    <!-- Pricing Disclaimer -->
+    <p class="forsko-pricing-disclaimer">
+      * Prices may vary depending on content and material depth.
+    </p>
+
+    <!-- Footer Action CTA -->
+    <div class="forsko-pricing-footer">
+      <a href="#bento-explore" id="forskoPricingActionBtn" class="forsko-pricing-btn-primary">
+        <span>Explore Study Materials</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>
