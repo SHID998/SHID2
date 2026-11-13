@@ -4159,26 +4159,54 @@
 
 
 
-<!-- Secret Shortcut: Shift + S -->
+<!-- Secret Admin Shortcuts: Shift + S (Desktop) & 5-Tap Footer (Mobile) -->
 <script>
+  // 1. Desktop Shortcut: Shift + S
   document.addEventListener('keydown', function(e) {
-    // 1. Agar user kisi search bar ya input box me likh raha ho, toh shortcut trigger na ho
     const activeTag = document.activeElement.tagName;
     if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || document.activeElement.isContentEditable) {
       return;
     }
 
-    // 2. Check karein agar Shift + S dabaya gaya hai (Ctrl/Alt ke bina)
     if (e.shiftKey && (e.key === 'S' || e.key === 's') && !e.ctrlKey && !e.altKey && !e.metaKey) {
       e.preventDefault();
-
-      // Naye tab (New Tab) me open karne ke liye:
       window.open('admin.html', '_blank');
-
-      // Agar usi same page par open karna ho toh ise use karein:
-      // window.location.href = 'admin.html';
     }
   });
+
+  // 2. Mobile Shortcut: Footer Copyright Text par 5 Fast Taps
+  (function() {
+    const footerTrigger = document.querySelector('.footer-bottom p');
+    if (!footerTrigger) return;
+
+    // Fast tapping par mobile text-select ya zoom na ho
+    footerTrigger.style.userSelect = 'none';
+    footerTrigger.style.webkitUserSelect = 'none';
+    footerTrigger.style.touchAction = 'manipulation';
+
+    let tapCount = 0;
+    let tapResetTimer = null;
+
+    footerTrigger.addEventListener('click', function() {
+      tapCount++;
+
+      clearTimeout(tapResetTimer);
+      tapResetTimer = setTimeout(function() {
+        tapCount = 0;
+      }, 1500); // 1.5 sec gap ke baad count reset hoga
+
+      if (tapCount >= 5) {
+        tapCount = 0;
+        clearTimeout(tapResetTimer);
+
+        // Mobile popup blocker se bachne ke liye fallback ke saath open karega
+        const win = window.open('admin.html', '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+          window.location.href = 'admin.html';
+        }
+      }
+    });
+  })();
 </script>
 
 <!-- 1. Firebase SDKs (index.html me ye hona zaroori hai) -->

@@ -105,6 +105,10 @@
       box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
       background: rgba(255, 255, 255, 0.07);
     }
+    select.login-input option {
+      background: #0f172a;
+      color: #fff;
+    }
 
     .login-btn {
       width: 100%; background: var(--accent-gradient); color: #fff;
@@ -749,23 +753,23 @@
       </div>
 
       <div class="table-container">
+       <div class="table-container">
         <table>
           <thead>
             <tr>
-              <th>Status</th>
               <th>Semester</th>
               <th>Subject</th>
               <th>Session / Year</th>
               <th>Student Name</th>
-              <th>Document</th>
               <th>Date & Time</th>
-              <th>Moderation Actions</th>
+              <th>PDF Actions</th>
             </tr>
           </thead>
           <tbody id="studentUploadsTableBody">
-            <tr><td colspan="8" class="empty-state">Loading student submissions...</td></tr>
+            <tr><td colspan="6" class="empty-state">Loading student submissions...</td></tr>
           </tbody>
         </table>
+      </div>
       </div>
 
       <!-- Section 3: Comments Moderation -->
@@ -776,6 +780,9 @@
           <span class="count-badge" id="commentsCountDisplay">0</span>
         </h2>
         <div class="header-actions">
+          <button class="btn-save-notice" id="openAddCommentHeaderBtn" type="button" style="padding: 8px 16px; font-size: 0.82rem;">
+            <i class="fa-solid fa-comment-medical"></i> Add Comment
+          </button>
           <button class="btn-danger-outline" id="deleteFlaggedCommentsBtn" title="Purge abusive comments">
             <i class="fa-solid fa-broom"></i> Clean Flagged
           </button>
@@ -840,6 +847,33 @@
       <div class="modal-actions">
         <button class="btn-modal-cancel" onclick="closeEditModal()">Cancel</button>
         <button class="btn-modal-confirm" id="modalSaveLikesBtn">Save Likes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add New Comment Modal -->
+  <div class="modal-overlay" id="addCommentModal">
+    <div class="modern-modal" style="max-width: 480px;">
+      <h3 class="modal-title"><i class="fa-solid fa-comment-medical" style="color: var(--accent-blue);"></i> Add New Comment</h3>
+      <div class="modal-subtitle">Post a custom comment directly to any tracked card</div>
+
+      <label style="font-size: 0.78rem; color: var(--text-muted); display:block; margin-bottom: 6px;">Target Card</label>
+      <select id="commentCardSelect" class="login-input" style="text-align: left; margin-bottom: 14px; font-size: 0.88rem;"></select>
+
+      <label style="font-size: 0.78rem; color: var(--text-muted); display:block; margin-bottom: 6px;">Author / Student Name</label>
+      <input type="text" id="commentNameInput" class="login-input" style="text-align: left; margin-bottom: 14px;" placeholder="e.g. Rohan Sharma or Forsko Official" value="Forsko Official">
+
+      <label style="font-size: 0.78rem; color: var(--text-muted); display:block; margin-bottom: 6px;">Comment Message</label>
+      <textarea id="commentTextInput" class="login-input" rows="3" style="text-align: left; margin-bottom: 14px; resize: vertical; font-family: inherit;" placeholder="Write your comment here..."></textarea>
+
+      <label style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-muted); cursor: pointer;">
+        <input type="checkbox" id="commentPinCheckbox" style="width: 16px; height: 16px; accent-color: var(--accent-amber);">
+        <span><i class="fa-solid fa-thumbtack" style="color: var(--accent-amber);"></i> Pin this comment to top</span>
+      </label>
+
+      <div class="modal-actions">
+        <button class="btn-modal-cancel" type="button" onclick="closeAddCommentModal()">Cancel</button>
+        <button class="btn-modal-confirm" type="button" id="modalSaveCommentBtn">Post Comment</button>
       </div>
     </div>
   </div>
@@ -1056,6 +1090,66 @@
       { id: 'sample-paper-sem6', title: 'Semester VI Sample Paper', cat: 'Sample Papers', sem: 'Sem 6' }
     ];
 
+    // State
+    let liveDbData = {};
+    let liveCardMeta = {};
+    let commentsByCard = {};
+    let commentUnsubscribers = {};
+    let allComments = [];
+    let studentUploadsList = [];
+    let lastCombinedUserLikes = 0;
+    let currentCategoryFilter = 'all';
+    let currentSemesterFilter = 'all';
+    let currentBlockedWords = ["bc", "mc", "chutiya", "gaali", "bkl", "bakwas"];
+    let renderScheduled = false;
+
+    // Auto-detect Category, Semester & Title from Firestore cardId
+    function parseCardFromId(id, firestoreData = {}) {
+      const lower = id.toLowerCase();
+
+      let cat = firestoreData.cat || 'Other';
+      if (!firestoreData.cat) {
+        if (lower.startsWith('notes-')) cat = 'Notes';
+        else if (lower.startsWith('pyq-')) cat = 'PYQs';
+        else if (lower.startsWith('qb-')) cat = 'Question Banks';
+        else if (lower.includes('sample-paper') || lower.includes('paper-pattern')) cat = 'Sample Papers';
+        else if (/^sem[1-6]-/.test(lower)) cat = 'Syllabus';
+      }
+
+      let sem = firestoreData.sem || 'All Sems';
+      if (!firestoreData.sem) {
+        const semMatch = lower.match(/sem([1-6])/);
+        if (semMatch) sem = `Sem ${semMatch[1]}`;
+      }
+
+      const title = firestoreData.title || id
+        .replace(/^(notes|pyq|qb)-/i, '')
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, ch => ch.toUpperCase());
+
+      return { id, title, cat, sem, autoDetected: true };
+    }
+
+    // Merge MASTER_CARDS + Auto-Detected Firestore Cards
+    function getTrackedCards() {
+      const knownIds = new Set(MASTER_CARDS.map(c => c.id));
+      const extraCards = Object.keys(liveDbData)
+        .filter(id => !knownIds.has(id))
+        .map(id => parseCardFromId(id, liveCardMeta[id] || {}));
+      return [...MASTER_CARDS, ...extraCards];
+    }
+
+    // Whole-word Profanity Checker (avoids flagging 'bca', 'mcq', 'rdbms', etc.)
+    function hasProfanity(text) {
+      if (!text) return false;
+      return currentBlockedWords.some(w => {
+        const clean = (w || '').trim();
+        if (!clean) return false;
+        const escaped = clean.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return new RegExp(`\\b${escaped}\\b`, 'i').test(text);
+      });
+    }
+
     // Auth & Navigation
     const loginScreen = document.getElementById('loginScreen');
     const dashboardScreen = document.getElementById('dashboardScreen');
@@ -1089,7 +1183,7 @@
     function showDashboard() {
       loginScreen.style.display = 'none';
       dashboardScreen.style.display = 'block';
-      document.getElementById('grandTotalCards').textContent = MASTER_CARDS.length;
+      document.getElementById('grandTotalCards').textContent = getTrackedCards().length;
       startLiveDashboardSync();
       syncStudentUploads();
       syncBadWords();
@@ -1097,84 +1191,100 @@
       startLiveClock();
     }
 
-    // Live Clock Utility
+    // Live Clock Utility (Immediate first tick)
     function startLiveClock() {
-      setInterval(() => {
+      const updateClock = () => {
         const now = new Date();
         document.getElementById('liveClock').textContent = now.toLocaleTimeString('en-US', { hour12: false }) + ' IST';
-      }, 1000);
+      };
+      updateClock();
+      setInterval(updateClock, 1000);
     }
 
-    let liveDbData = {};
-    let allComments = [];
-    let studentUploadsList = [];
-    let currentCategoryFilter = 'all';
-    let currentSemesterFilter = 'all';
+    function scheduleDashboardRender() {
+      if (renderScheduled) return;
+      renderScheduled = true;
+      setTimeout(() => {
+        renderScheduled = false;
+        allComments = Object.values(commentsByCard).flat();
+        updateStats(lastCombinedUserLikes);
+        renderCards();
+        renderComments();
+      }, 50);
+    }
 
-    // Real-Time Firebase Cards & Comments Sync
+    // Real-Time Firebase Cards & Per-Card Comments Sync
     function startLiveDashboardSync() {
       db.collection('cards_data').onSnapshot(snapshot => {
+        const activeIds = new Set();
         liveDbData = {};
-        allComments = [];
+        liveCardMeta = {};
         let combinedUserLikes = 0;
-        let pending = snapshot.size;
-
-        if (snapshot.empty) {
-          renderCards();
-          renderComments();
-          return;
-        }
 
         snapshot.forEach(docSnap => {
           const cardId = docSnap.id;
-          const data = docSnap.data();
+          const data = docSnap.data() || {};
           const userLikes = Math.max(0, data.likes || 0);
+
+          activeIds.add(cardId);
           combinedUserLikes += userLikes;
+          liveCardMeta[cardId] = data;
+          liveDbData[cardId] = {
+            likes: BASE_LIKES + userLikes,
+            commentsCount: (commentsByCard[cardId] || []).length
+          };
 
-          db.collection('cards_data').doc(cardId).collection('comments').get().then(cSnaps => {
-            liveDbData[cardId] = {
-              likes: BASE_LIKES + userLikes,
-              commentsCount: cSnaps.size
-            };
-
-            cSnaps.forEach(cDoc => {
-              const c = cDoc.data();
-              allComments.push({
-                cardId: cardId,
-                commentId: cDoc.id,
-                name: c.name || 'Anonymous',
-                text: c.text || '',
-                pinned: c.pinned || false,
-                createdAt: c.createdAt ? c.createdAt.toDate() : new Date()
+          // Attach real-time listener for this card's comments once
+          if (!commentUnsubscribers[cardId]) {
+            commentUnsubscribers[cardId] = db.collection('cards_data')
+              .doc(cardId)
+              .collection('comments')
+              .onSnapshot(cSnaps => {
+                commentsByCard[cardId] = cSnaps.docs.map(cDoc => {
+                  const c = cDoc.data() || {};
+                  return {
+                    cardId,
+                    commentId: cDoc.id,
+                    name: c.name || 'Anonymous',
+                    text: c.text || '',
+                    pinned: !!c.pinned,
+                    createdAt: c.createdAt && c.createdAt.toDate ? c.createdAt.toDate() : new Date()
+                  };
+                });
+                if (liveDbData[cardId]) {
+                  liveDbData[cardId].commentsCount = commentsByCard[cardId].length;
+                }
+                scheduleDashboardRender();
+              }, () => {
+                commentsByCard[cardId] = [];
+                scheduleDashboardRender();
               });
-            });
-
-            pending--;
-            if (pending === 0) {
-              updateStats(combinedUserLikes);
-              renderCards();
-              renderComments();
-            }
-          }).catch(() => {
-            pending--;
-            if (pending === 0) {
-              updateStats(combinedUserLikes);
-              renderCards();
-              renderComments();
-            }
-          });
+          }
         });
+
+        // Cleanup listeners for removed cards
+        Object.keys(commentUnsubscribers).forEach(cardId => {
+          if (!activeIds.has(cardId)) {
+            commentUnsubscribers[cardId]();
+            delete commentUnsubscribers[cardId];
+            delete commentsByCard[cardId];
+          }
+        });
+
+        lastCombinedUserLikes = combinedUserLikes;
+        scheduleDashboardRender();
       });
     }
 
     function updateStats(userLikes) {
-      document.getElementById('grandTotalLikes').textContent = ((MASTER_CARDS.length * BASE_LIKES) + userLikes).toLocaleString();
+      const trackedCards = getTrackedCards();
+      document.getElementById('grandTotalCards').textContent = trackedCards.length;
+      document.getElementById('grandTotalLikes').textContent = ((trackedCards.length * BASE_LIKES) + userLikes).toLocaleString();
       document.getElementById('grandTotalComments').textContent = allComments.length.toLocaleString();
 
-      // Spotlight Trending Card Calculation
       let topCard = null;
       let highestLikes = -1;
-      MASTER_CARDS.forEach(card => {
+      trackedCards.forEach(card => {
         const stats = liveDbData[card.id] || { likes: BASE_LIKES };
         if (stats.likes > highestLikes) {
           highestLikes = stats.likes;
@@ -1193,10 +1303,10 @@
       const searchQuery = document.getElementById('cardsSearchInput').value.toLowerCase().trim();
       container.innerHTML = '';
 
-      const filtered = MASTER_CARDS.filter(card => {
+      const filtered = getTrackedCards().filter(card => {
         const matchesCategory = (currentCategoryFilter === 'all') || (card.cat === currentCategoryFilter);
         const matchesSemester = (currentSemesterFilter === 'all') || (card.sem === currentSemesterFilter);
-        const matchesSearch = card.title.toLowerCase().includes(searchQuery) || 
+        const matchesSearch = card.title.toLowerCase().includes(searchQuery) ||
                               card.id.toLowerCase().includes(searchQuery) ||
                               card.sem.toLowerCase().includes(searchQuery);
         return matchesCategory && matchesSemester && matchesSearch;
@@ -1217,8 +1327,11 @@
         div.innerHTML = `
           <div>
             <div class="admin-card-header">
-              <span class="cat-badge">${card.cat}</span>
-              <span class="sem-badge">${card.sem}</span>
+              <span class="cat-badge">${escapeHTML(card.cat)}</span>
+              <div style="display:flex; gap:6px; align-items:center;">
+                ${card.autoDetected ? '<span class="sem-badge" style="color:#34d399; border:1px solid rgba(16,185,129,0.3);">AUTO</span>' : ''}
+                <span class="sem-badge">${escapeHTML(card.sem)}</span>
+              </div>
             </div>
             <h3 class="admin-card-title">${escapeHTML(card.title)}</h3>
             <span class="card-id-code">${escapeHTML(card.id)}</span>
@@ -1229,15 +1342,24 @@
               <span class="stat-like-badge" title="Total Likes">
                 <i class="fa-solid fa-heart"></i> ${cardStats.likes}
               </span>
-              <button class="btn-edit-like" onclick="openEditModal('${card.id}', ${cardStats.likes})">
+              <button class="btn-edit-like btn-edit-card-likes" type="button">
                 <i class="fa-solid fa-pen-to-square"></i> Edit
               </button>
             </div>
-            <span class="stat-comment-badge" onclick="filterCommentsByCard('${card.id}')" title="View card comments">
-              <i class="fa-solid fa-message"></i> ${cardStats.commentsCount}
-            </span>
+            <div class="like-actions-wrap">
+              <span class="stat-comment-badge" title="View card comments">
+                <i class="fa-solid fa-message"></i> ${cardStats.commentsCount}
+              </span>
+              <button class="btn-edit-like btn-add-card-comment" type="button" title="Add comment to this card">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
           </div>
         `;
+
+        div.querySelector('.btn-edit-card-likes').addEventListener('click', () => openEditModal(card.id, cardStats.likes));
+        div.querySelector('.stat-comment-badge').addEventListener('click', () => filterCommentsByCard(card.id));
+        div.querySelector('.btn-add-card-comment').addEventListener('click', () => openAddCommentModal(card.id));
         container.appendChild(div);
       });
     }
@@ -1262,19 +1384,20 @@
     };
 
     window.adjustModalLikes = function(amt) {
-      let val = parseInt(modalLikeInput.value) || 0;
+      let val = parseInt(modalLikeInput.value, 10) || 0;
       modalLikeInput.value = Math.max(0, val + amt);
     };
 
     modalSaveLikesBtn.addEventListener('click', async () => {
       if (!currentEditingCardId) return;
-      const newTotal = parseInt(modalLikeInput.value);
+      const newTotal = parseInt(modalLikeInput.value, 10);
       if (isNaN(newTotal) || newTotal < 0) {
         showToast("Please enter a valid count!", "danger");
         return;
       }
 
       const userAdded = Math.max(0, newTotal - BASE_LIKES);
+      modalSaveLikesBtn.disabled = true;
 
       try {
         await db.collection('cards_data').doc(currentEditingCardId).set({ likes: userAdded }, { merge: true });
@@ -1282,12 +1405,90 @@
         showToast(`Likes set to ${newTotal} successfully!`, "success");
       } catch (err) {
         showToast("Error updating likes!", "danger");
+      } finally {
+        modalSaveLikesBtn.disabled = false;
       }
     });
 
-    // -------------------------------------------------------------
-    // FEATURE: LIVE ANNOUNCEMENT / BROADCAST SYNC
-    // -------------------------------------------------------------
+    // Add Comment Modal Logic
+    const addCommentModal = document.getElementById('addCommentModal');
+    const commentCardSelect = document.getElementById('commentCardSelect');
+    const commentNameInput = document.getElementById('commentNameInput');
+    const commentTextInput = document.getElementById('commentTextInput');
+    const commentPinCheckbox = document.getElementById('commentPinCheckbox');
+    const modalSaveCommentBtn = document.getElementById('modalSaveCommentBtn');
+
+    window.openAddCommentModal = function(preselectedCardId = '') {
+      const cards = getTrackedCards();
+      commentCardSelect.innerHTML = '';
+
+      cards.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = `[${c.sem} - ${c.cat}] ${c.title}`;
+        commentCardSelect.appendChild(opt);
+      });
+
+      const activeFilterId = document.getElementById('commentsSearchInput').value.trim();
+      const targetId = preselectedCardId || (cards.some(c => c.id === activeFilterId) ? activeFilterId : '');
+      if (targetId && cards.some(c => c.id === targetId)) {
+        commentCardSelect.value = targetId;
+      }
+
+      commentTextInput.value = '';
+      commentPinCheckbox.checked = false;
+      addCommentModal.classList.add('active');
+      commentTextInput.focus();
+    };
+
+    window.closeAddCommentModal = function() {
+      addCommentModal.classList.remove('active');
+    };
+
+    document.getElementById('openAddCommentHeaderBtn').addEventListener('click', () => {
+      openAddCommentModal();
+    });
+
+    modalSaveCommentBtn.addEventListener('click', async () => {
+      const cardId = commentCardSelect.value;
+      const name = commentNameInput.value.trim() || 'Anonymous';
+      const text = commentTextInput.value.trim();
+      const pinned = commentPinCheckbox.checked;
+
+      if (!cardId) {
+        showToast("Please select a target card!", "danger");
+        return;
+      }
+      if (!text) {
+        showToast("Please write a comment message!", "danger");
+        return;
+      }
+
+      modalSaveCommentBtn.disabled = true;
+      try {
+        // Ensure parent doc exists in cards_data without overwriting existing likes
+        await db.collection('cards_data').doc(cardId).set({
+          likes: firebase.firestore.FieldValue.increment(0)
+        }, { merge: true });
+
+        await db.collection('cards_data').doc(cardId).collection('comments').add({
+          name,
+          text,
+          pinned,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        closeAddCommentModal();
+        showToast("Comment posted successfully!", "success");
+      } catch (err) {
+        console.error(err);
+        showToast("Failed to post comment!", "danger");
+      } finally {
+        modalSaveCommentBtn.disabled = false;
+      }
+    });
+
+    // Live Announcement / Broadcast Sync
     const noticeRef = db.collection('site_settings').doc('announcement');
     const noticeTextInput = document.getElementById('noticeTextInput');
     const noticeActiveToggle = document.getElementById('noticeActiveToggle');
@@ -1306,17 +1507,18 @@
     saveNoticeBtn.addEventListener('click', async () => {
       const text = noticeTextInput.value.trim();
       const active = noticeActiveToggle.checked;
+      saveNoticeBtn.disabled = true;
       try {
         await noticeRef.set({ text, active, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
         showToast("Broadcast announcement updated live!", "success");
       } catch (err) {
         showToast("Failed to save notice!", "danger");
+      } finally {
+        saveNoticeBtn.disabled = false;
       }
     });
 
-    // -------------------------------------------------------------
-    // STUDENT UPLOADED PAPERS SYNC & MODERATION
-    // -------------------------------------------------------------
+    // Student Uploaded Papers Sync (PDF Preview, Download & Delete)
     function syncStudentUploads() {
       db.collection('student_contributions').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
         const tbody = document.getElementById('studentUploadsTableBody');
@@ -1327,7 +1529,7 @@
         studentUploadsList = [];
 
         if (snapshot.empty) {
-          tbody.innerHTML = `<tr><td colspan="8" class="empty-state">No student uploads yet.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="6" class="empty-state">No student uploads yet.</td></tr>`;
           return;
         }
 
@@ -1337,78 +1539,180 @@
           const docId = docSnap.id;
           studentUploadsList.push({ id: docId, ...d });
 
-          const isApproved = d.approved === true;
-          const statusBadge = isApproved 
-            ? `<span class="status-pill status-approved"><i class="fa-solid fa-circle-check"></i> Approved</span>`
-            : `<span class="status-pill status-pending"><i class="fa-solid fa-clock"></i> Pending</span>`;
-
           const fileUrl = d.fileUrl || d.driveLink || '';
           const tr = document.createElement('tr');
-          const dateStr = d.createdAt && d.createdAt.toDate 
+          const dateStr = d.createdAt && d.createdAt.toDate
             ? d.createdAt.toDate().toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' +
               d.createdAt.toDate().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             : 'Just Now';
 
           tr.innerHTML = `
-            <td>${statusBadge}</td>
             <td><span class="cat-badge">${escapeHTML(d.semester || 'N/A')}</span></td>
             <td><strong style="color: #fff;">${escapeHTML(d.subject || 'N/A')}</strong></td>
             <td><span style="color: var(--text-muted); font-size: 0.85rem;">${escapeHTML(d.examYear || 'N/A')}</span></td>
             <td>
               <div class="user-avatar-tag">
                 <div class="avatar-initial" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3);">
-                  ${(d.name || 'S').trim().charAt(0).toUpperCase()}
+                  ${escapeHTML((d.name || 'S').trim().charAt(0).toUpperCase())}
                 </div>
                 <span>${escapeHTML(d.name || 'Anonymous Student')}</span>
               </div>
             </td>
-            <td>
-              ${fileUrl ? `
-                <button class="btn-preview-link" onclick="openDocPreview('${encodeURIComponent(fileUrl)}', '${escapeHTML(d.subject || 'File')}')">
-                  <i class="fa-solid fa-eye"></i> Preview
-                </button>
-              ` : '<span style="color: var(--text-dim);">No URL</span>'}
-            </td>
             <td style="font-size: 0.78rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">${dateStr}</td>
-            <td>
-              <button class="btn-approve" onclick="toggleApproveUpload('${docId}', ${isApproved})">
-                <i class="fa-solid ${isApproved ? 'fa-rotate-left' : 'fa-check'}"></i> ${isApproved ? 'Unverify' : 'Approve'}
-              </button>
-              <button class="btn-delete" onclick="promptDeleteUpload('${docId}')">
-                <i class="fa-solid fa-trash-can"></i> Delete
-              </button>
-            </td>
+            <td class="pdf-actions-cell" style="white-space: nowrap;"></td>
           `;
+
+          const actionsCell = tr.querySelector('.pdf-actions-cell');
+          if (fileUrl) {
+            const previewBtn = document.createElement('button');
+            previewBtn.type = 'button';
+            previewBtn.className = 'btn-preview-link';
+            previewBtn.style.marginRight = '6px';
+            previewBtn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> PDF Preview';
+            previewBtn.addEventListener('click', () => openDocPreview(fileUrl, d.subject || 'Document'));
+
+            const downloadBtn = document.createElement('button');
+            downloadBtn.type = 'button';
+            downloadBtn.className = 'btn-approve';
+            downloadBtn.style.marginRight = '6px';
+            downloadBtn.innerHTML = '<i class="fa-solid fa-download"></i> Download';
+            downloadBtn.addEventListener('click', () => downloadSubmissionFile(fileUrl, d.subject || 'forsko-material'));
+
+            actionsCell.appendChild(previewBtn);
+            actionsCell.appendChild(downloadBtn);
+          } else {
+            const noUrlSpan = document.createElement('span');
+            noUrlSpan.style.cssText = 'color: var(--text-dim); margin-right: 8px;';
+            noUrlSpan.textContent = 'No PDF URL';
+            actionsCell.appendChild(noUrlSpan);
+          }
+
+          const deleteBtn = document.createElement('button');
+          deleteBtn.type = 'button';
+          deleteBtn.className = 'btn-delete';
+          deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i> Delete';
+          deleteBtn.addEventListener('click', () => promptDeleteUpload(docId));
+          actionsCell.appendChild(deleteBtn);
+
           tbody.appendChild(tr);
         });
       });
     }
 
-    window.toggleApproveUpload = async function(docId, currentApproved) {
-      try {
-        await db.collection('student_contributions').doc(docId).update({
-          approved: !currentApproved
-        });
-        showToast(currentApproved ? "Submission marked Pending" : "Submission Approved & Verified!", "success");
-      } catch (err) {
-        showToast("Failed to update status!", "danger");
-      }
-    };
-
-    // Document In-App Preview Handlers
+    // Document In-App Preview & Direct Download Helpers
     const docPreviewModal = document.getElementById('docPreviewModal');
     const previewContainer = document.getElementById('previewContainer');
     const previewTitle = document.getElementById('previewTitle');
 
-    window.openDocPreview = function(encodedUrl, title) {
-      const url = decodeURIComponent(encodedUrl);
-      previewTitle.innerHTML = `<i class="fa-solid fa-file-lines"></i> ${escapeHTML(title)}`;
-      previewContainer.innerHTML = '';
+    function toSafePreviewUrls(rawUrl) {
+      try {
+        const parsed = new URL(rawUrl);
+        if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return null;
 
-      if (url.match(/\.(jpeg|jpg|gif|png|webp)($|\?)/i)) {
-        previewContainer.innerHTML = `<img src="${url}" alt="Submission Preview">`;
+        const drivePathMatch = rawUrl.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+        const driveIdParam = parsed.hostname.includes('drive.google.com') ? parsed.searchParams.get('id') : null;
+        const driveId = drivePathMatch ? drivePathMatch[1] : driveIdParam;
+
+        if (driveId) {
+          return {
+            isDrive: true,
+            safeUrl: parsed.href,
+            embedUrl: `https://drive.google.com/file/d/${driveId}/preview`,
+            downloadUrl: `https://drive.google.com/uc?export=download&id=${driveId}`
+          };
+        }
+        return {
+          isDrive: false,
+          safeUrl: parsed.href,
+          embedUrl: parsed.href,
+          downloadUrl: parsed.href
+        };
+      } catch {
+        return null;
+      }
+    }
+
+    window.downloadSubmissionFile = async function(rawUrl, subjectName) {
+      const urls = toSafePreviewUrls(rawUrl);
+      if (!urls) {
+        showToast("Invalid or unsafe download URL!", "danger");
+        return;
+      }
+
+      const cleanName = (subjectName || 'forsko-file')
+        .replace(/[^a-zA-Z0-9_\-\s]/g, '')
+        .trim()
+        .replace(/\s+/g, '_') || 'forsko-file';
+
+      // Google Drive direct download
+      if (urls.isDrive) {
+        const link = document.createElement('a');
+        link.href = urls.downloadUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast("Starting Google Drive download...", "success");
+        return;
+      }
+
+      // Direct PDF / Firebase Storage download via Blob (with fallback)
+      try {
+        const res = await fetch(urls.downloadUrl);
+        if (!res.ok) throw new Error('Fetch failed');
+        const blob = await res.blob();
+        const ext = blob.type.includes('pdf') ? '.pdf' : '';
+        const blobUrl = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = cleanName + ext;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+        showToast("File downloaded!", "success");
+      } catch {
+        const link = document.createElement('a');
+        link.href = urls.downloadUrl;
+        link.download = cleanName + '.pdf';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast("Opened file for download!", "success");
+      }
+    };
+
+    window.openDocPreview = function(rawUrl, title) {
+      const urls = toSafePreviewUrls(rawUrl);
+      if (!urls) {
+        showToast("Invalid or unsafe file URL!", "danger");
+        return;
+      }
+
+      previewTitle.innerHTML = `<i class="fa-solid fa-file-pdf"></i> ${escapeHTML(title)} `;
+      const extLink = document.createElement('a');
+      extLink.href = urls.safeUrl;
+      extLink.target = '_blank';
+      extLink.rel = 'noopener noreferrer';
+      extLink.style.cssText = 'font-size:0.78rem; color:var(--accent-blue); margin-left:10px; text-decoration:none;';
+      extLink.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square"></i> Open Tab';
+      previewTitle.appendChild(extLink);
+
+      previewContainer.innerHTML = '';
+      if (urls.safeUrl.match(/\.(jpeg|jpg|gif|png|webp)($|\?)/i)) {
+        const img = document.createElement('img');
+        img.src = urls.safeUrl;
+        img.alt = 'Submission Preview';
+        previewContainer.appendChild(img);
       } else {
-        previewContainer.innerHTML = `<iframe src="${url}" title="Preview Document"></iframe>`;
+        const iframe = document.createElement('iframe');
+        iframe.src = urls.embedUrl;
+        iframe.title = 'Preview Document';
+        iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
+        previewContainer.appendChild(iframe);
       }
       docPreviewModal.classList.add('active');
     };
@@ -1418,9 +1722,7 @@
       previewContainer.innerHTML = '';
     };
 
-    // -------------------------------------------------------------
-    // RENDER MODERATED COMMENTS (Auto-Flag Abusive Words)
-    // -------------------------------------------------------------
+    // Render Moderated Comments
     function renderComments() {
       const tbody = document.getElementById('commentsTableBody');
       const searchQuery = document.getElementById('commentsSearchInput').value.toLowerCase().trim();
@@ -1448,11 +1750,10 @@
         const tr = document.createElement('tr');
         if (c.pinned) tr.className = 'is-pinned';
 
-        const textLower = c.text.toLowerCase();
-        const hasBadWord = currentBlockedWords.some(w => w && textLower.includes(w));
+        const hasBadWord = hasProfanity(c.text);
         if (hasBadWord) tr.classList.add('is-flagged');
 
-        const initial = (c.name || 'A').trim().charAt(0).toUpperCase();
+        const initial = escapeHTML((c.name || 'A').trim().charAt(0).toUpperCase());
         const dateStr = c.createdAt.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' +
                         c.createdAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -1471,14 +1772,17 @@
           </td>
           <td style="font-size: 0.78rem; color: var(--text-dim); white-space: nowrap; font-family: 'JetBrains Mono', monospace;">${dateStr}</td>
           <td>
-            <button class="btn-pin ${c.pinned ? 'active' : ''}" onclick="togglePinComment('${c.cardId}', '${c.commentId}', ${c.pinned})">
+            <button class="btn-pin ${c.pinned ? 'active' : ''}" type="button">
               <i class="fa-solid fa-thumbtack"></i> ${c.pinned ? 'Unpin' : 'Pin'}
             </button>
-            <button class="btn-delete" onclick="promptDeleteComment('${c.cardId}', '${c.commentId}')">
+            <button class="btn-delete" type="button">
               <i class="fa-solid fa-trash-can"></i> Delete
             </button>
           </td>
         `;
+
+        tr.querySelector('.btn-pin').addEventListener('click', () => togglePinComment(c.cardId, c.commentId, c.pinned));
+        tr.querySelector('.btn-delete').addEventListener('click', () => promptDeleteComment(c.cardId, c.commentId));
         tbody.appendChild(tr);
       });
     }
@@ -1494,12 +1798,9 @@
       }
     };
 
-    // Clean Flagged Comments in Bulk
+    // Clean Flagged Comments in Bulk (Batched)
     document.getElementById('deleteFlaggedCommentsBtn').addEventListener('click', () => {
-      const flagged = allComments.filter(c => {
-        const t = c.text.toLowerCase();
-        return currentBlockedWords.some(w => w && t.includes(w));
-      });
+      const flagged = allComments.filter(c => hasProfanity(c.text));
 
       if (flagged.length === 0) {
         showToast("No abusive or flagged comments found!", "success");
@@ -1508,8 +1809,13 @@
 
       deleteModalSubtitle.textContent = `Are you sure you want to delete all ${flagged.length} flagged comments?`;
       pendingDeleteAction = async () => {
-        for (const item of flagged) {
-          await db.collection('cards_data').doc(item.cardId).collection('comments').doc(item.commentId).delete();
+        for (let i = 0; i < flagged.length; i += 450) {
+          const batch = db.batch();
+          flagged.slice(i, i + 450).forEach(item => {
+            const ref = db.collection('cards_data').doc(item.cardId).collection('comments').doc(item.commentId);
+            batch.delete(ref);
+          });
+          await batch.commit();
         }
         showToast(`Purged ${flagged.length} abusive comments!`, "success");
       };
@@ -1547,20 +1853,36 @@
 
     confirmDeleteBtn.addEventListener('click', async () => {
       if (!pendingDeleteAction) return;
+      confirmDeleteBtn.disabled = true;
       try {
         await pendingDeleteAction();
         closeDeleteModal();
       } catch (err) {
         showToast("Error executing action!", "danger");
+      } finally {
+        confirmDeleteBtn.disabled = false;
       }
     });
+
+    // Safe CSV cell formatter (escapes quotes, newlines & Excel formulas)
+    function csvCell(val) {
+      let str = String(val ?? '').replace(/\r?\n|\r/g, ' ');
+      if (/^[=+\-@]/.test(str)) str = "'" + str;
+      return `"${str.replace(/"/g, '""')}"`;
+    }
 
     // Dual CSV & JSON Full Backup Exports
     document.getElementById('exportCsvBtn').addEventListener('click', () => {
       if (!allComments.length) { showToast("No comments to export!", "danger"); return; }
       let csv = "Target Card ID,Student Name,Comment Text,Is Pinned,Date & Time\n";
       allComments.forEach(c => {
-        csv += `"${c.cardId}","${c.name.replace(/"/g, '""')}","${c.text.replace(/"/g, '""').replace(/\r?\n|\r/g, ' ')}","${c.pinned ? 'YES':'NO'}","${c.createdAt.toLocaleString()}"\n`;
+        csv += [
+          csvCell(c.cardId),
+          csvCell(c.name),
+          csvCell(c.text),
+          csvCell(c.pinned ? 'YES' : 'NO'),
+          csvCell(c.createdAt.toLocaleString())
+        ].join(',') + '\n';
       });
       downloadCsv(csv, `forsko_comments_${new Date().toISOString().slice(0,10)}.csv`);
     });
@@ -1569,7 +1891,16 @@
       if (!studentUploadsList.length) { showToast("No submissions to export!", "danger"); return; }
       let csv = "Status,Semester,Subject,Session,Student Name,File URL,Date & Time\n";
       studentUploadsList.forEach(d => {
-        csv += `"${d.approved ? 'Approved':'Pending'}","${d.semester || ''}","${d.subject || ''}","${d.examYear || ''}","${d.name || ''}","${d.fileUrl || d.driveLink || ''}","${d.createdAt && d.createdAt.toDate ? d.createdAt.toDate().toLocaleString() : ''}"\n`;
+        const dt = d.createdAt && d.createdAt.toDate ? d.createdAt.toDate().toLocaleString() : '';
+        csv += [
+          csvCell(d.approved ? 'Approved' : 'Pending'),
+          csvCell(d.semester || ''),
+          csvCell(d.subject || ''),
+          csvCell(d.examYear || ''),
+          csvCell(d.name || ''),
+          csvCell(d.fileUrl || d.driveLink || ''),
+          csvCell(dt)
+        ].join(',') + '\n';
       });
       downloadCsv(csv, `forsko_submissions_${new Date().toISOString().slice(0,10)}.csv`);
     });
@@ -1577,7 +1908,8 @@
     document.getElementById('exportAllBackupBtn').addEventListener('click', () => {
       const backupData = {
         exportedAt: new Date().toISOString(),
-        totalCards: MASTER_CARDS.length,
+        totalCards: getTrackedCards().length,
+        trackedCards: getTrackedCards(),
         comments: allComments,
         studentContributions: studentUploadsList,
         blockedWords: currentBlockedWords
@@ -1606,7 +1938,6 @@
     const badWordInput = document.getElementById('badWordInput');
     const addBadWordBtn = document.getElementById('addBadWordBtn');
     const profanityTagsContainer = document.getElementById('profanityTagsContainer');
-    let currentBlockedWords = ["bc", "mc", "chutiya", "gaali", "bkl", "bakwas"];
 
     function syncBadWords() {
       badWordsRef.onSnapshot(doc => {
@@ -1620,10 +1951,14 @@
 
     function renderBadWords() {
       profanityTagsContainer.innerHTML = '';
-      currentBlockedWords.forEach((word, idx) => {
+      currentBlockedWords.forEach(word => {
         const tag = document.createElement('span');
         tag.className = 'word-tag';
-        tag.innerHTML = `${escapeHTML(word)} <i class="fa-solid fa-xmark" onclick="removeBadWord(${idx})"></i>`;
+        tag.appendChild(document.createTextNode(word + ' '));
+        const icon = document.createElement('i');
+        icon.className = 'fa-solid fa-xmark';
+        icon.addEventListener('click', () => removeBadWord(word));
+        tag.appendChild(icon);
         profanityTagsContainer.appendChild(tag);
       });
     }
@@ -1644,10 +1979,10 @@
       showToast(`Added "${newWord}" to blocked list`, "success");
     }
 
-    window.removeBadWord = async function(idx) {
-      const removed = currentBlockedWords.splice(idx, 1);
+    window.removeBadWord = async function(wordToRemove) {
+      currentBlockedWords = currentBlockedWords.filter(w => w !== wordToRemove);
       await saveBadWords();
-      showToast(`Removed "${removed}" from list`, "success");
+      showToast(`Removed "${wordToRemove}" from list`, "success");
     };
 
     async function saveBadWords() {
@@ -1684,20 +2019,34 @@
     window.filterCommentsByCard = function(cardId) {
       document.getElementById('commentsSearchInput').value = cardId;
       renderComments();
-      window.scrollTo({
-        top: document.getElementById('commentsTableBody').offsetTop - 200,
-        behavior: 'smooth'
+      document.getElementById('commentsTableBody').closest('.table-container').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
       });
     };
 
+    // Close modals when clicking dark backdrop
+    [editLikesModal, addCommentModal, docPreviewModal, confirmDeleteModal].forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeEditModal();
+          closeAddCommentModal();
+          closeDeleteModal();
+          closePreviewModal();
+        }
+      });
+    });
+
     // Keyboard Shortcuts: '/' to search, 'Escape' to dismiss modals
     window.addEventListener('keydown', (e) => {
-      if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+      const tag = document.activeElement.tagName;
+      if (e.key === '/' && tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
         e.preventDefault();
         document.getElementById('cardsSearchInput').focus();
       }
       if (e.key === 'Escape') {
         closeEditModal();
+        closeAddCommentModal();
         closeDeleteModal();
         closePreviewModal();
       }
@@ -1708,8 +2057,8 @@
       const container = document.getElementById('toastContainer');
       const toast = document.createElement('div');
       toast.className = 'modern-toast';
-      const icon = type === 'success' 
-        ? '<i class="fa-solid fa-circle-check toast-icon-success"></i>' 
+      const icon = type === 'success'
+        ? '<i class="fa-solid fa-circle-check toast-icon-success"></i>'
         : '<i class="fa-solid fa-circle-exclamation toast-icon-danger"></i>';
       toast.innerHTML = `${icon} <span>${escapeHTML(message)}</span>`;
       container.appendChild(toast);
@@ -1722,8 +2071,8 @@
     }
 
     function escapeHTML(str) {
-      if (!str) return '';
-      return str.replace(/[&<>'"]/g, 
+      if (str === null || str === undefined) return '';
+      return String(str).replace(/[&<>'"]/g,
         tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
       );
     }
