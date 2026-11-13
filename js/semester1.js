@@ -1,6 +1,6 @@
 /**
  * Forsko - Live System
- * Navigation + Global Red Heart Likes (Base 200) & Live Comments
+ * Navigation + Global Red Heart Likes (Base 200) & Live Pinned Comments
  */
 
 const firebaseConfig = {
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderUserButtons() {
       const heartIcon = likeBtn.querySelector('i');
-      
+
       // Heart Icon Toggle (Solid Red Heart vs Outline Heart)
       if (userReaction === 'like') {
         likeBtn.classList.add('active');
@@ -125,15 +125,17 @@ document.addEventListener('DOMContentLoaded', () => {
         commentsArray.push({
           name: c.name || 'Anonymous',
           text: c.text || '',
-          pinned: c.pinned || false,
-          createdAt: c.createdAt ? c.createdAt.toDate() : new Date()
+          pinned: Boolean(c.pinned),
+          createdAt: c.createdAt && c.createdAt.toDate ? c.createdAt.toDate() : new Date()
         });
       });
 
-      // 🔥 SORTING: Pinned comment sabse pehle aayega, baaki date ke hisaab se
+      // SORTING: Pinned comment sabse pehle aayega, baaki newest first
       commentsArray.sort((a, b) => {
-        if (a.pinned === b.pinned) return a.createdAt - b.createdAt;
-        return a.pinned ? -1 : 1;
+        if (a.pinned !== b.pinned) {
+          return a.pinned ? -1 : 1;
+        }
+        return b.createdAt - a.createdAt;
       });
 
       commentsArray.forEach(c => {
@@ -143,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const item = document.createElement('div');
         // Agar pinned hai toh 'is-pinned' class jud jayegi
         item.className = `comment-item ${c.pinned ? 'is-pinned' : ''}`;
-        
+
         item.innerHTML = `
           <div class="comment-header">
             <div>
@@ -156,6 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         commentsList.appendChild(item);
       });
+
+      commentsList.scrollTop = 0;
     });
 
     // LIKE BUTTON CLICK (Heart toggle)
@@ -226,9 +230,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       sendBtn.disabled = true;
       try {
+        // Parent doc ensure karein taaki Admin dashboard me comment miss na ho
+        await cardDocRef.set({
+          likes: firebase.firestore.FieldValue.increment(0)
+        }, { merge: true });
+
         await cardDocRef.collection('comments').add({
           name: name,
           text: text,
+          pinned: false,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
 
@@ -245,8 +255,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Safe Text Helper (Security)
   function escapeHTML(str) {
-    if (!str) return '';
-    return str.replace(/[&<>'"]/g, 
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/[&<>'"]/g,
       tag => ({
         '&': '&amp;',
         '<': '&lt;',
@@ -259,16 +269,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
 // One-Click WhatsApp Share
-  document.querySelectorAll('.share-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const card = btn.closest('.subject-card, .paper-card, .glass-card, .subject-accordion-card');
-      const title = card ? (card.querySelector('.subject-title, .paper-title, .card-title, h2, h3')?.textContent.trim() || 'Study Material') : 'Study Material';
-      const pageUrl = window.location.href;
+document.querySelectorAll('.share-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const card = btn.closest('.subject-card, .paper-card, .glass-card, .subject-accordion-card');
+    const title = card ? (card.querySelector('.subject-title, .paper-title, .card-title, h2, h3')?.textContent.trim() || 'Study Material') : 'Study Material';
+    const pageUrl = window.location.href;
 
-      const message = encodeURIComponent(`📚 *${title}*\nB.Sc. Computer Science ka Syllabus Forsko par mil gaya!\nAbhi check karo:\n🔗 ${pageUrl}`);
-      window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
-    });
+    const message = encodeURIComponent(`📚 *${title}*\nB.Sc. Computer Science ka Syllabus Forsko par mil gaya!\nAbhi check karo:\n🔗 ${pageUrl}`);
+    window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
   });
+});

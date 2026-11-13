@@ -1,6 +1,6 @@
 /**
  * Forsko - Semester I Question Bank JavaScript
- * Controls: Navigation, Accordions, Live Search, and Firebase Likes & Comments per Resource
+ * Controls: Navigation, Accordions, Live Search, and Firebase Likes & Pinned Comments
  */
 
 const firebaseConfig = {
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------------------------------
-     5. Firebase Live Likes & Comments Per Resource Card
+     5. Firebase Live Likes & Comments Per Resource Card (With Pin Support)
      -------------------------------------------------------------------------- */
   const resourceCards = document.querySelectorAll('.paper-card[data-card-id]');
 
@@ -227,8 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // LIVE COMMENTS LISTENER
-    const commentsColRef = cardDocRef.collection('comments').orderBy('createdAt', 'asc');
+    // LIVE COMMENTS LISTENER (Pinned Comments Sabse Upar + Newest First)
+    const commentsColRef = cardDocRef.collection('comments');
     commentsColRef.onSnapshot(snapshot => {
       commentsList.innerHTML = '';
       commentCountBadge.textContent = snapshot.size;
@@ -238,8 +238,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      snapshot.forEach(docSnap => {
-        const c = docSnap.data();
+      const comments = snapshot.docs.map(docSnap => docSnap.data());
+
+      // Pinned comments always on top, then newest comments
+      comments.sort((a, b) => {
+        if (Boolean(a.pinned) !== Boolean(b.pinned)) {
+          return a.pinned ? -1 : 1;
+        }
+        const timeA = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
+        const timeB = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
+        return timeB - timeA;
+      });
+
+      comments.forEach(c => {
         let formattedTime = 'Abhi';
         if (c.createdAt && c.createdAt.toDate) {
           const date = c.createdAt.toDate();
@@ -247,11 +258,15 @@ document.addEventListener('DOMContentLoaded', () => {
                           date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         }
 
+        const isPinned = Boolean(c.pinned);
         const item = document.createElement('div');
-        item.className = 'comment-item';
+        item.className = isPinned ? 'comment-item is-pinned' : 'comment-item';
         item.innerHTML = `
           <div class="comment-header">
-            <span class="comment-author">${escapeHTML(c.name)}</span>
+            <span class="comment-author">
+              ${escapeHTML(c.name)}
+              ${isPinned ? '<span class="pin-badge"><i class="fa-solid fa-thumbtack"></i> PINNED</span>' : ''}
+            </span>
             <span class="comment-time">${formattedTime}</span>
           </div>
           <div class="comment-body">${escapeHTML(c.text)}</div>
@@ -259,7 +274,8 @@ document.addEventListener('DOMContentLoaded', () => {
         commentsList.appendChild(item);
       });
 
-      commentsList.scrollTop = commentsList.scrollHeight;
+      // Keep pinned & newest comments visible at the top
+      commentsList.scrollTop = 0;
     });
 
     // LIKE CLICK
@@ -332,9 +348,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       sendBtn.disabled = true;
       try {
+        // Ensure parent doc exists so Admin Command Center detects new cards automatically
+        await cardDocRef.set({
+          likes: firebase.firestore.FieldValue.increment(0)
+        }, { merge: true });
+
         await cardDocRef.collection('comments').add({
           name: name,
           text: text,
+          pinned: false,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
 
@@ -350,8 +372,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function escapeHTML(str) {
-    if (!str) return '';
-    return str.replace(/[&<>'"]/g, 
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/[&<>'"]/g,
       tag => ({
         '&': '&amp;',
         '<': '&lt;',
@@ -364,17 +386,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
-
 // One-Click WhatsApp Share
-  document.querySelectorAll('.share-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const card = btn.closest('.subject-card, .paper-card, .glass-card, .subject-accordion-card');
-      const title = card ? (card.querySelector('.subject-title, .paper-title, .card-title, h2, h3')?.textContent.trim() || 'Study Material') : 'Study Material';
-      const pageUrl = window.location.href;
+document.querySelectorAll('.share-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const card = btn.closest('.subject-card, .paper-card, .glass-card, .subject-accordion-card');
+    const title = card ? (card.querySelector('.subject-title, .paper-title, .card-title, h2, h3')?.textContent.trim() || 'Study Material') : 'Study Material';
+    const pageUrl = window.location.href;
 
-      const message = encodeURIComponent(`📚 *${title}*\nB.Sc. Computer Science ke Question Banks Forsko par mil gaye!\nAbhi check karo:\n🔗 ${pageUrl}`);
-      window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
-    });
+    const message = encodeURIComponent(`📚 *${title}*\nB.Sc. Computer Science ke Question Banks Forsko par mil gaye!\nAbhi check karo:\n🔗 ${pageUrl}`);
+    window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
   });
+});

@@ -988,3 +988,31 @@ ul {
   color: #25D366;
   box-shadow: 0 0 15px rgba(37, 211, 102, 0.25);
 }
+
+
+/* Universal Pinned Comment Highlight (Works on ALL Forsko Pages) */
+.comment-item.is-pinned {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(30, 41, 59, 0.75)) !important;
+  border: 1px solid rgba(245, 158, 11, 0.45) !important;
+  border-left: 3px solid #f59e0b !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.12);
+}
+
+.comment-item.is-pinned .comment-author {
+  color: #fbbf24 !important;
+}
+
+.pin-badge {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #000000;
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  letter-spacing: 0.4px;
+  vertical-align: middle;
+}
