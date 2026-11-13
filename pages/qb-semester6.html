@@ -16,10 +16,10 @@
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="../css/qb-semester6.css">
 
-  <!-- Paid Cards Custom Styles -->
+  <!-- Custom Styles -->
   <style>
     /* ==========================================
-       FORSKO DUAL PAID CARDS STYLING
+       FORSKO PAID & FREE CARDS STYLING
        ========================================== */
     .paper-card-paid {
       position: relative;
@@ -32,32 +32,7 @@
       transition: all 0.3s ease;
     }
 
-    /* Card 1: Cyan / Blue VIP (Unit-Wise) */
-    .card-paid-cyan {
-      border: 1.8px solid rgba(56, 189, 248, 0.55) !important;
-      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(56, 189, 248, 0.15) !important;
-    }
-    .card-paid-cyan:hover {
-      border-color: #38bdf8 !important;
-      box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.8), 0 0 35px rgba(56, 189, 248, 0.35) !important;
-      transform: translateY(-4px);
-    }
-    .status-cyan {
-      background: rgba(56, 189, 248, 0.15) !important;
-      color: #38bdf8 !important;
-      border: 1px solid rgba(56, 189, 248, 0.4) !important;
-    }
-    .btn-buy-cyan {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
-      color: #ffffff !important;
-      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4) !important;
-    }
-    .btn-buy-cyan:hover {
-      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%) !important;
-      box-shadow: 0 0 25px rgba(56, 189, 248, 0.6) !important;
-    }
-
-    /* Card 2: Amber / Gold VIP (MIQ) */
+    /* Gold VIP Cards (MIQ) */
     .card-paid-gold {
       border: 1.8px solid rgba(245, 158, 11, 0.55) !important;
       box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(245, 158, 11, 0.15) !important;
@@ -83,7 +58,50 @@
       color: #000000 !important;
     }
 
-    /* Common Paid Styling */
+    /* Direct Full-Width Free Button */
+    .btn-view-full {
+      width: 100% !important;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      font-size: 0.95rem !important;
+      padding: 12px 16px !important;
+      border-radius: 10px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      text-decoration: none !important;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4) !important;
+      transition: all 0.25s ease !important;
+    }
+    .btn-view-full:hover {
+      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%) !important;
+      box-shadow: 0 0 22px rgba(59, 130, 246, 0.6) !important;
+      transform: translateY(-2px) !important;
+    }
+
+    .free-pill {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+
+    .status-free {
+      background: rgba(16, 185, 129, 0.15) !important;
+      color: #34d399 !important;
+      border: 1px solid rgba(16, 185, 129, 0.35) !important;
+      font-weight: 800;
+    }
+
+    /* Common Card Badges & Pricing */
     .status-badge {
       font-weight: 800 !important;
       font-size: 0.72rem !important;
@@ -265,44 +283,34 @@
               <div class="accordion-inner">
                 <div class="papers-grid">
                   
-                  <!-- Adv Java Resource 1 (PAID) -->
-                  <div class="paper-card paper-card-paid card-paid-cyan" data-card-id="qb-sem6-adv-java-unitwise">
+                  <!-- Adv Java Resource 1: Unit-wise Question Bank (100% FREE CARD) -->
+                  <div class="paper-card" data-card-id="qb-sem6-adv-java-unitwise">
                     <div class="paper-header">
-                      <span class="year-badge lock-badge"><i class="fa-solid fa-lock"></i></span>
-                      <span class="status-badge status-cyan">
-                        <i class="fa-solid fa-book-bookmark"></i> Complete QB • Locked
+                      <span class="year-badge">📄</span>
+                      <span class="status-badge status-free">
+                        <i class="fa-solid fa-circle-check"></i> Available • Free
                       </span>
                     </div>
 
                     <h3 class="paper-title">
-                      Unit-wise Question Bank <span class="solved-pill">ALL UNITS</span>
+                      Unit-wise Question Bank <span class="free-pill">FREE ACCESS</span>
                     </h3>
 
-                    <p class="paid-features-text">
-                      <i class="fa-solid fa-circle-check"></i> Unit 1 to Unit 4 Complete Adv Java Questions<br>
-                      <i class="fa-solid fa-circle-check"></i> JDBC, Servlets, JSP, Beans & Networking<br>
-                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    <p class="paid-features-text" style="color: #cbd5e1; margin-bottom: 18px;">
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Unit 1 to Unit 4 Complete Adv Java Questions<br>
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 1 Marks, 3 Marks & 6 Marks Question Format<br>
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 100% Free Open Access for all Students
                     </p>
 
-                    <div class="card-pricing-row">
-                      <span class="strike-price"><del>₹69</del></span>
-                      <span class="final-price" style="color: #38bdf8;">₹29</span>
-                      <span class="save-tag">SAVE 58%</span>
-                    </div>
-
+                    <!-- Direct View PDF Button (Free) -->
                     <div class="paper-actions">
-                      <!-- 🔴 Yahan Sem 6 Adv Java Unit-wise ka Razorpay Link Dalein -->
-                      <a href="https://drive.google.com/file/d/1udnUnJTBQzV6Kedt3h1ekxy0Lk4O3U6l/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-cyan">
-                        <i class="fa-solid fa-lock-open"></i>
-                        <span>Pay ₹29 & Download QB</span>
+                      <a href="../qb/sem6/advanced-java-unit-wise-qb.pdf" target="_blank" rel="noopener noreferrer" class="paper-btn btn-view-full">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>View PDF</span>
                       </a>
                     </div>
 
-                    <span class="upi-note">
-                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
-                    </span>
-
-                    <div class="card-feedback">
+                    <div class="card-feedback" style="margin-top: 15px;">
                       <div class="feedback-actions">
                         <button class="action-btn like-btn" title="Like">
                           <i class="fa-regular fa-heart"></i>
@@ -333,7 +341,7 @@
                     </div>
                   </div>
 
-                  <!-- Adv Java Resource 2 (PAID) -->
+                  <!-- Adv Java Resource 2: Most Important Questions (PAID GOLD) -->
                   <div class="paper-card paper-card-paid card-paid-gold" data-card-id="qb-sem6-adv-java-imp">
                     <div class="paper-header">
                       <span class="year-badge lock-badge" style="color: #f59e0b;"><i class="fa-solid fa-lock"></i></span>
@@ -359,7 +367,7 @@
                     </div>
 
                     <div class="paper-actions">
-                      <!-- 🔴 Yahan Sem 6 Adv Java MIQ ka Razorpay Link Dalein -->
+                      <!-- 🔴 Adv Java MIQ Razorpay Link -->
                       <a href="https://rzp.io/rzp/sem6-qb-adjava-miq" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
                         <i class="fa-solid fa-lock-open"></i>
                         <span>Pay ₹39 & Download MIQ</span>
@@ -428,44 +436,34 @@
               <div class="accordion-inner">
                 <div class="papers-grid">
                   
-                  <!-- Computer Animation Resource 1 (PAID) -->
-                  <div class="paper-card paper-card-paid card-paid-cyan" data-card-id="qb-sem6-computer-animation-unitwise">
+                  <!-- Computer Animation Resource 1: Unit-wise Question Bank (100% FREE CARD) -->
+                  <div class="paper-card" data-card-id="qb-sem6-computer-animation-unitwise">
                     <div class="paper-header">
-                      <span class="year-badge lock-badge"><i class="fa-solid fa-lock"></i></span>
-                      <span class="status-badge status-cyan">
-                        <i class="fa-solid fa-book-bookmark"></i> Complete QB • Locked
+                      <span class="year-badge">📄</span>
+                      <span class="status-badge status-free">
+                        <i class="fa-solid fa-circle-check"></i> Available • Free
                       </span>
                     </div>
 
                     <h3 class="paper-title">
-                      Unit-wise Question Bank <span class="solved-pill">ALL UNITS</span>
+                      Unit-wise Question Bank <span class="free-pill">FREE ACCESS</span>
                     </h3>
 
-                    <p class="paid-features-text">
-                      <i class="fa-solid fa-circle-check"></i> Unit 1 to Unit 4 Complete Animation Questions<br>
-                      <i class="fa-solid fa-circle-check"></i> 1 Marks, 3 Marks & 6 Marks Important Format<br>
-                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    <p class="paid-features-text" style="color: #cbd5e1; margin-bottom: 18px;">
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Unit 1 to Unit 4 Complete Animation Questions<br>
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 1 Marks, 3 Marks & 6 Marks Question Format<br>
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 100% Free Open Access for all Students
                     </p>
 
-                    <div class="card-pricing-row">
-                      <span class="strike-price"><del>₹69</del></span>
-                      <span class="final-price" style="color: #38bdf8;">₹29</span>
-                      <span class="save-tag">SAVE 58%</span>
-                    </div>
-
+                    <!-- Direct View PDF Button (Free) -->
                     <div class="paper-actions">
-                      <!-- 🔴 Yahan Sem 6 Animation Unit-wise ka Razorpay Link Dalein -->
-                      <a href="https://drive.google.com/file/d/1a5qAqdYHevg09AZRBPR06Zu6GhZyEyAg/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-cyan">
-                        <i class="fa-solid fa-lock-open"></i>
-                        <span>Pay ₹29 & Download QB</span>
+                      <a href="../qb/sem6/computer-animation-unit-wise-qb.pdf" target="_blank" rel="noopener noreferrer" class="paper-btn btn-view-full">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>View PDF</span>
                       </a>
                     </div>
 
-                    <span class="upi-note">
-                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
-                    </span>
-
-                    <div class="card-feedback">
+                    <div class="card-feedback" style="margin-top: 15px;">
                       <div class="feedback-actions">
                         <button class="action-btn like-btn" title="Like">
                           <i class="fa-regular fa-heart"></i>
@@ -496,7 +494,7 @@
                     </div>
                   </div>
 
-                  <!-- Computer Animation Resource 2 (PAID) -->
+                  <!-- Computer Animation Resource 2: Most Important Questions (PAID GOLD) -->
                   <div class="paper-card paper-card-paid card-paid-gold" data-card-id="qb-sem6-computer-animation-imp">
                     <div class="paper-header">
                       <span class="year-badge lock-badge" style="color: #f59e0b;"><i class="fa-solid fa-lock"></i></span>
@@ -522,7 +520,7 @@
                     </div>
 
                     <div class="paper-actions">
-                      <!-- 🔴 Yahan Sem 6 Animation MIQ ka Razorpay Link Dalein -->
+                      <!-- 🔴 Animation MIQ Razorpay Link -->
                       <a href="https://rzp.io/rzp/sem6-qb-animation-miq" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
                         <i class="fa-solid fa-lock-open"></i>
                         <span>Pay ₹39 & Download MIQ</span>
@@ -591,44 +589,34 @@
               <div class="accordion-inner">
                 <div class="papers-grid">
                   
-                  <!-- DSM Resource 1 (PAID) -->
-                  <div class="paper-card paper-card-paid card-paid-cyan" data-card-id="qb-sem6-dsm-unitwise">
+                  <!-- DSM Resource 1: Unit-wise Question Bank (100% FREE CARD) -->
+                  <div class="paper-card" data-card-id="qb-sem6-dsm-unitwise">
                     <div class="paper-header">
-                      <span class="year-badge lock-badge"><i class="fa-solid fa-lock"></i></span>
-                      <span class="status-badge status-cyan">
-                        <i class="fa-solid fa-book-bookmark"></i> Complete QB • Locked
+                      <span class="year-badge">📄</span>
+                      <span class="status-badge status-free">
+                        <i class="fa-solid fa-circle-check"></i> Available • Free
                       </span>
                     </div>
 
                     <h3 class="paper-title">
-                      Unit-wise Question Bank <span class="solved-pill">ALL UNITS</span>
+                      Unit-wise Question Bank <span class="free-pill">FREE ACCESS</span>
                     </h3>
 
-                    <p class="paid-features-text">
-                      <i class="fa-solid fa-circle-check"></i> Unit 1 to Unit 4 Complete DSM Questions<br>
-                      <i class="fa-solid fa-circle-check"></i> Logic Gates, Combinational Circuits & 8085 Architecture<br>
-                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    <p class="paid-features-text" style="color: #cbd5e1; margin-bottom: 18px;">
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Unit 1 to Unit 4 Complete DSM Questions<br>
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 1 Marks, 3 Marks & 6 Marks Question Format<br>
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 100% Free Open Access for all Students
                     </p>
 
-                    <div class="card-pricing-row">
-                      <span class="strike-price"><del>₹69</del></span>
-                      <span class="final-price" style="color: #38bdf8;">₹29</span>
-                      <span class="save-tag">SAVE 58%</span>
-                    </div>
-
+                    <!-- Direct View PDF Button (Free) -->
                     <div class="paper-actions">
-                      <!-- 🔴 Yahan Sem 6 DSM Unit-wise ka Razorpay Link Dalein -->
-                      <a href="https://drive.google.com/file/d/1B-gzrWmCp606BMofzXcbKQGkIaDxO2UG/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-cyan">
-                        <i class="fa-solid fa-lock-open"></i>
-                        <span>Pay ₹29 & Download QB</span>
+                      <a href="../qb/sem6/digital-systems-and-microprocessors-unit-wise-qb.pdf" target="_blank" rel="noopener noreferrer" class="paper-btn btn-view-full">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>View PDF</span>
                       </a>
                     </div>
 
-                    <span class="upi-note">
-                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
-                    </span>
-
-                    <div class="card-feedback">
+                    <div class="card-feedback" style="margin-top: 15px;">
                       <div class="feedback-actions">
                         <button class="action-btn like-btn" title="Like">
                           <i class="fa-regular fa-heart"></i>
@@ -659,7 +647,7 @@
                     </div>
                   </div>
 
-                  <!-- DSM Resource 2 (PAID) -->
+                  <!-- DSM Resource 2: Most Important Questions (PAID GOLD) -->
                   <div class="paper-card paper-card-paid card-paid-gold" data-card-id="qb-sem6-dsm-imp">
                     <div class="paper-header">
                       <span class="year-badge lock-badge" style="color: #f59e0b;"><i class="fa-solid fa-lock"></i></span>
@@ -685,7 +673,7 @@
                     </div>
 
                     <div class="paper-actions">
-                      <!-- 🔴 Yahan Sem 6 DSM MIQ ka Razorpay Link Dalein -->
+                      <!-- 🔴 DSM MIQ Razorpay Link -->
                       <a href="https://rzp.io/rzp/sem6-qb-dsm-miq" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
                         <i class="fa-solid fa-lock-open"></i>
                         <span>Pay ₹39 & Download MIQ</span>
@@ -754,44 +742,34 @@
               <div class="accordion-inner">
                 <div class="papers-grid">
                   
-                  <!-- AI Resource 1 (PAID) -->
-                  <div class="paper-card paper-card-paid card-paid-cyan" data-card-id="qb-sem6-ai-unitwise">
+                  <!-- AI Resource 1: Unit-wise Question Bank (100% FREE CARD) -->
+                  <div class="paper-card" data-card-id="qb-sem6-ai-unitwise">
                     <div class="paper-header">
-                      <span class="year-badge lock-badge"><i class="fa-solid fa-lock"></i></span>
-                      <span class="status-badge status-cyan">
-                        <i class="fa-solid fa-book-bookmark"></i> Complete QB • Locked
+                      <span class="year-badge">📄</span>
+                      <span class="status-badge status-free">
+                        <i class="fa-solid fa-circle-check"></i> Available • Free
                       </span>
                     </div>
 
                     <h3 class="paper-title">
-                      Unit-wise Question Bank <span class="solved-pill">ALL UNITS</span>
+                      Unit-wise Question Bank <span class="free-pill">FREE ACCESS</span>
                     </h3>
 
-                    <p class="paid-features-text">
-                      <i class="fa-solid fa-circle-check"></i> Unit 1 to Unit 5 Complete AI Questions<br>
-                      <i class="fa-solid fa-circle-check"></i> State Space, Heuristics, Knowledge Rep & NLP<br>
-                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    <p class="paid-features-text" style="color: #cbd5e1; margin-bottom: 18px;">
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Unit 1 to Unit 5 Complete AI Questions<br>
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 1 Marks, 3 Marks & 6 Marks Question Format<br>
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 100% Free Open Access for all Students
                     </p>
 
-                    <div class="card-pricing-row">
-                      <span class="strike-price"><del>₹69</del></span>
-                      <span class="final-price" style="color: #38bdf8;">₹29</span>
-                      <span class="save-tag">SAVE 58%</span>
-                    </div>
-
+                    <!-- Direct View PDF Button (Free) -->
                     <div class="paper-actions">
-                      <!-- 🔴 Yahan Sem 6 AI Unit-wise ka Razorpay Link Dalein -->
-                      <a href="https://drive.google.com/file/d/1s_hbC2l0aWApVU5ckfLIBNvQwIOhxkvN/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-cyan">
-                        <i class="fa-solid fa-lock-open"></i>
-                        <span>Pay ₹29 & Download QB</span>
+                      <a href="../qb/sem6/artificial-intelligence-unit-wise-qb.pdf" target="_blank" rel="noopener noreferrer" class="paper-btn btn-view-full">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>View PDF</span>
                       </a>
                     </div>
 
-                    <span class="upi-note">
-                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
-                    </span>
-
-                    <div class="card-feedback">
+                    <div class="card-feedback" style="margin-top: 15px;">
                       <div class="feedback-actions">
                         <button class="action-btn like-btn" title="Like">
                           <i class="fa-regular fa-heart"></i>
@@ -822,7 +800,7 @@
                     </div>
                   </div>
 
-                  <!-- AI Resource 2 (PAID) -->
+                  <!-- AI Resource 2: Most Important Questions (PAID GOLD) -->
                   <div class="paper-card paper-card-paid card-paid-gold" data-card-id="qb-sem6-ai-imp">
                     <div class="paper-header">
                       <span class="year-badge lock-badge" style="color: #f59e0b;"><i class="fa-solid fa-lock"></i></span>
@@ -848,7 +826,7 @@
                     </div>
 
                     <div class="paper-actions">
-                      <!-- 🔴 Yahan Sem 6 AI MIQ ka Razorpay Link Dalein -->
+                      <!-- 🔴 AI MIQ Razorpay Link -->
                       <a href="https://rzp.io/rzp/sem6-qb-ai-miq" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
                         <i class="fa-solid fa-lock-open"></i>
                         <span>Pay ₹39 & Download MIQ</span>
@@ -917,44 +895,34 @@
               <div class="accordion-inner">
                 <div class="papers-grid">
                   
-                  <!-- ML Resource 1 (PAID) -->
-                  <div class="paper-card paper-card-paid card-paid-cyan" data-card-id="qb-sem6-ml-unitwise">
+                  <!-- ML Resource 1: Unit-wise Question Bank (100% FREE CARD) -->
+                  <div class="paper-card" data-card-id="qb-sem6-ml-unitwise">
                     <div class="paper-header">
-                      <span class="year-badge lock-badge"><i class="fa-solid fa-lock"></i></span>
-                      <span class="status-badge status-cyan">
-                        <i class="fa-solid fa-book-bookmark"></i> Complete QB • Locked
+                      <span class="year-badge">📄</span>
+                      <span class="status-badge status-free">
+                        <i class="fa-solid fa-circle-check"></i> Available • Free
                       </span>
                     </div>
 
                     <h3 class="paper-title">
-                      Unit-wise Question Bank <span class="solved-pill">ALL UNITS</span>
+                      Unit-wise Question Bank <span class="free-pill">FREE ACCESS</span>
                     </h3>
 
-                    <p class="paid-features-text">
-                      <i class="fa-solid fa-circle-check"></i> Unit 1 to Unit 5 Complete ML Questions<br>
-                      <i class="fa-solid fa-circle-check"></i> Supervised, Unsupervised, Neural Networks & Classification<br>
-                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    <p class="paid-features-text" style="color: #cbd5e1; margin-bottom: 18px;">
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Unit 1 to Unit 5 Complete ML Questions<br>
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 1 Marks, 3 Marks & 6 Marks Question Format<br>
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 100% Free Open Access for all Students
                     </p>
 
-                    <div class="card-pricing-row">
-                      <span class="strike-price"><del>₹69</del></span>
-                      <span class="final-price" style="color: #38bdf8;">₹29</span>
-                      <span class="save-tag">SAVE 58%</span>
-                    </div>
-
+                    <!-- Direct View PDF Button (Free) -->
                     <div class="paper-actions">
-                      <!-- 🔴 Yahan Sem 6 ML Unit-wise ka Razorpay Link Dalein -->
-                      <a href="https://drive.google.com/file/d/1Bumd3qx818vLumo2wc6N6_L-gtYkPbnh/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-cyan">
-                        <i class="fa-solid fa-lock-open"></i>
-                        <span>Pay ₹29 & Download QB</span>
+                      <a href="../qb/sem6/machine-learning-unit-wise-qb.pdf" target="_blank" rel="noopener noreferrer" class="paper-btn btn-view-full">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>View PDF</span>
                       </a>
                     </div>
 
-                    <span class="upi-note">
-                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
-                    </span>
-
-                    <div class="card-feedback">
+                    <div class="card-feedback" style="margin-top: 15px;">
                       <div class="feedback-actions">
                         <button class="action-btn like-btn" title="Like">
                           <i class="fa-regular fa-heart"></i>
@@ -985,7 +953,7 @@
                     </div>
                   </div>
 
-                  <!-- ML Resource 2 (PAID) -->
+                  <!-- ML Resource 2: Most Important Questions (PAID GOLD) -->
                   <div class="paper-card paper-card-paid card-paid-gold" data-card-id="qb-sem6-ml-imp">
                     <div class="paper-header">
                       <span class="year-badge lock-badge" style="color: #f59e0b;"><i class="fa-solid fa-lock"></i></span>
@@ -1011,7 +979,7 @@
                     </div>
 
                     <div class="paper-actions">
-                      <!-- 🔴 Yahan Sem 6 ML MIQ ka Razorpay Link Dalein -->
+                      <!-- 🔴 ML MIQ Razorpay Link -->
                       <a href="https://rzp.io/rzp/sem6-qb-ml-miq" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
                         <i class="fa-solid fa-lock-open"></i>
                         <span>Pay ₹39 & Download MIQ</span>
@@ -1080,44 +1048,34 @@
               <div class="accordion-inner">
                 <div class="papers-grid">
                   
-                  <!-- Minor Resource 1 (PAID) -->
-                  <div class="paper-card paper-card-paid card-paid-cyan" data-card-id="qb-sem6-minor-se-java-unitwise">
+                  <!-- Minor Resource 1: Unit-wise Question Bank (100% FREE CARD) -->
+                  <div class="paper-card" data-card-id="qb-sem6-minor-se-java-unitwise">
                     <div class="paper-header">
-                      <span class="year-badge lock-badge"><i class="fa-solid fa-lock"></i></span>
-                      <span class="status-badge status-cyan">
-                        <i class="fa-solid fa-book-bookmark"></i> Complete QB • Locked
+                      <span class="year-badge">📄</span>
+                      <span class="status-badge status-free">
+                        <i class="fa-solid fa-circle-check"></i> Available • Free
                       </span>
                     </div>
 
                     <h3 class="paper-title">
-                      Unit-wise Question Bank <span class="solved-pill">ALL UNITS</span>
+                      Unit-wise Question Bank <span class="free-pill">FREE ACCESS</span>
                     </h3>
 
-                    <p class="paid-features-text">
-                      <i class="fa-solid fa-circle-check"></i> Complete Unit-wise Minor Subject Questions<br>
-                      <i class="fa-solid fa-circle-check"></i> Combined SE Methodologies & Java OOP Syntax<br>
-                      <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+                    <p class="paid-features-text" style="color: #cbd5e1; margin-bottom: 18px;">
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Complete Unit-wise Minor Subject Questions<br>
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 1 Marks, 3 Marks & 6 Marks Question Format<br>
+                      <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 100% Free Open Access for all Students
                     </p>
 
-                    <div class="card-pricing-row">
-                      <span class="strike-price"><del>₹69</del></span>
-                      <span class="final-price" style="color: #38bdf8;">₹29</span>
-                      <span class="save-tag">SAVE 58%</span>
-                    </div>
-
+                    <!-- Direct View PDF Button (Free) -->
                     <div class="paper-actions">
-                      <!-- 🔴 Yahan Sem 6 Minor Unit-wise ka Razorpay Link Dalein -->
-                      <a href="https://drive.google.com/file/d/18gWgln2tUfS_KxW9i_1mBaRxiYDfq1vA/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-cyan">
-                        <i class="fa-solid fa-lock-open"></i>
-                        <span>Pay ₹29 & Download QB</span>
+                      <a href="../qb/sem6/software-engineering-and-java-programming-unit-wise-qb.pdf" target="_blank" rel="noopener noreferrer" class="paper-btn btn-view-full">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>View PDF</span>
                       </a>
                     </div>
 
-                    <span class="upi-note">
-                      <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
-                    </span>
-
-                    <div class="card-feedback">
+                    <div class="card-feedback" style="margin-top: 15px;">
                       <div class="feedback-actions">
                         <button class="action-btn like-btn" title="Like">
                           <i class="fa-regular fa-heart"></i>
@@ -1148,7 +1106,7 @@
                     </div>
                   </div>
 
-                  <!-- Minor Resource 2 (PAID) -->
+                  <!-- Minor Resource 2: Most Important Questions (PAID GOLD) -->
                   <div class="paper-card paper-card-paid card-paid-gold" data-card-id="qb-sem6-minor-se-java-imp">
                     <div class="paper-header">
                       <span class="year-badge lock-badge" style="color: #f59e0b;"><i class="fa-solid fa-lock"></i></span>
@@ -1174,7 +1132,7 @@
                     </div>
 
                     <div class="paper-actions">
-                      <!-- 🔴 Yahan Sem 6 Minor MIQ ka Razorpay Link Dalein -->
+                      <!-- 🔴 Minor MIQ Razorpay Link -->
                       <a href="https://rzp.io/rzp/sem6-qb-minor-miq" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
                         <i class="fa-solid fa-lock-open"></i>
                         <span>Pay ₹39 & Download MIQ</span>
@@ -1238,7 +1196,7 @@
     <div class="footer-container">
       <div class="footer-col brand-col">
         <a href="../index.html" class="logo footer-logo">
-          <img src="../images/FORSKO2.png" alt="Forsko Logo" class="logo-image">
+          <img src="../images/forsko-logo.png" alt="Forsko Logo" class="logo-image">
           <span>Forsko</span>
         </a>
         <p>

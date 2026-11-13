@@ -4274,7 +4274,7 @@
 
 
 <!-- =========================================================
-     FORSKO PREMIUM GLASSMORPHISM PRICING POPUP MODAL (COMPACT)
+     FORSKO POSTER 2x2 GRID PRICING MODAL
      ========================================================= -->
 <div 
   id="forskoPricingOverlay" 
@@ -4282,13 +4282,12 @@
   role="dialog" 
   aria-modal="true" 
   aria-labelledby="forskoPricingHeading" 
-  aria-describedby="forskoPricingSubheading"
   aria-hidden="true" 
   style="display: none;"
 >
   <div class="forsko-pricing-card">
     
-    <!-- Ambient Internal Glow -->
+    <!-- Top Ambient Laser Glow -->
     <div class="forsko-pricing-glow" aria-hidden="true"></div>
 
     <!-- Close Button -->
@@ -4301,12 +4300,8 @@
       <i class="fa-solid fa-xmark"></i>
     </button>
 
-    <!-- Modal Header -->
+    <!-- Header Section -->
     <div class="forsko-pricing-header">
-      <!-- Modal Header with Logo -->
-    <div class="forsko-pricing-header">
-      
-      <!-- Blue Capsule ki jagah Forsko Logo -->
       <div class="forsko-pricing-logo-wrap">
         <img 
           src="images/FORSKO2.png" 
@@ -4317,113 +4312,211 @@
       </div>
 
       <h2 id="forskoPricingHeading" class="forsko-pricing-title">
-        Study Smarter. Score Better. <span class="forsko-pricing-gradient">🚀</span>
+        <span class="sparkle-left">✦</span>
+        Study Materials
+        <span class="sparkle-right">✦</span>
       </h2>
-      <p id="forskoPricingSubheading" class="forsko-pricing-subtitle">
-        Everything you need for your academic journey, at student-friendly prices.
-      </p>
+
+      <div class="forsko-sub-pill">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>All Your Academic Needs in One Place!</span>
+      </div>
     </div>
 
-    <!-- Materials & Pricing Grid (Combined & Compact) -->
-    <div class="forsko-pricing-list">
-      
-      <!-- 1. Handwritten Notes -->
-      <div class="forsko-pricing-item">
-        <div class="forsko-pricing-item-left">
-          <div class="forsko-pricing-icon-wrap icon-cyan">
-            <i class="fa-solid fa-pen-fancy"></i>
-          </div>
-          <span class="forsko-pricing-item-name">Handwritten Notes</span>
+    <!-- 2x2 MAIN POSTER GRID -->
+    <div class="poster-2x2-grid">
+
+      <!-- CARD 1: NOTES (Top-Left) -->
+      <div class="poster-card card-cyan">
+        <div class="poster-card-badge">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Notes</span>
         </div>
-        <div class="forsko-pricing-tag">
-          <span class="forsko-pricing-subtext">Starting from</span>
-          <strong class="forsko-pricing-amount">₹19</strong>
+
+        <div class="poster-card-body">
+          <!-- Handwritten Notes -->
+          <div class="poster-item-row">
+            <div class="item-left">
+              <i class="fa-solid fa-file-lines item-icon"></i>
+              <span class="item-title">Handwritten<br>Notes</span>
+            </div>
+            <div class="item-divider"></div>
+            <div class="price-pill-cyan">₹19 – ₹39/-</div>
+          </div>
+
+          <!-- Infographics -->
+          <div class="poster-item-row">
+            <div class="item-left">
+              <i class="fa-solid fa-chart-simple item-icon"></i>
+              <span class="item-title">Infographics</span>
+            </div>
+            <div class="free-pill-neon">
+              <span class="free-ray"></span> FREE ACCESS <span class="free-ray"></span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- 2. Visual Infographics -->
-      <div class="forsko-pricing-item item-highlight-green">
-        <div class="forsko-pricing-item-left">
-          <div class="forsko-pricing-icon-wrap icon-green">
-            <i class="fa-solid fa-diagram-project"></i>
-          </div>
-          <span class="forsko-pricing-item-name">Infographics</span>
+      <!-- CARD 2: QUESTION BANKS (Top-Right) -->
+      <div class="poster-card card-cyan">
+        <div class="poster-card-badge">
+          <i class="fa-solid fa-clipboard-question"></i>
+          <span>Question Banks</span>
         </div>
-        <div class="forsko-pricing-tag">
-          <span class="forsko-pricing-free-badge">FREE ACCESS</span>
+
+        <div class="poster-card-body">
+          <!-- Unit-wise QB -->
+          <div class="poster-item-row">
+            <div class="item-left">
+              <i class="fa-solid fa-layer-group item-icon"></i>
+              <span class="item-title">Unit-wise<br>Question Bank</span>
+            </div>
+            <div class="free-pill-neon">
+              <span class="free-ray"></span> FREE ACCESS <span class="free-ray"></span>
+            </div>
+          </div>
+
+          <!-- Most Important QB -->
+          <div class="poster-item-row">
+            <div class="item-left">
+              <i class="fa-solid fa-bullseye item-icon"></i>
+              <span class="item-title">Most Important<br>Question Banks</span>
+            </div>
+            <div class="item-divider"></div>
+            <div class="price-pill-cyan">₹39/-</div>
+          </div>
         </div>
       </div>
 
-      <!-- 3. Combined Question Banks (Unit-wise + Most Imp.) -->
-      <div class="forsko-pricing-item">
-        <div class="forsko-pricing-item-left">
-          <div class="forsko-pricing-icon-wrap icon-blue">
-            <i class="fa-solid fa-clipboard-list"></i>
-          </div>
-          <span class="forsko-pricing-item-name">Question Banks <small style="color: #94a3b8; font-size: 0.75rem;">(Unit-wise & Imp.)</small></span>
+      <!-- CARD 3: PAPER PATTERN & SAMPLE PAPERS (Bottom-Left) -->
+      <div class="poster-card card-cyan">
+        <div class="poster-card-badge badge-long">
+          <i class="fa-solid fa-file-circle-check"></i>
+          <span>Paper Pattern & Sample Papers</span>
         </div>
-        <div class="forsko-pricing-tag">
-          <span class="forsko-pricing-subtext">Starting from</span>
-          <strong class="forsko-pricing-amount">₹19</strong>
+
+        <div class="poster-card-body">
+          <!-- Official Paper Pattern -->
+          <div class="poster-item-row">
+            <div class="item-left">
+              <i class="fa-solid fa-newspaper item-icon"></i>
+              <span class="item-title">Official<br>Paper Pattern</span>
+            </div>
+            <div class="free-pill-neon">
+              <span class="free-ray"></span> FREE ACCESS <span class="free-ray"></span>
+            </div>
+          </div>
+
+          <!-- Sample Papers -->
+          <div class="poster-item-row">
+            <div class="item-left">
+              <i class="fa-solid fa-copy item-icon"></i>
+              <span class="item-title">Sample<br>Papers</span>
+            </div>
+            <div class="item-divider"></div>
+            <div class="price-pill-cyan">₹29/-</div>
+          </div>
         </div>
       </div>
 
-      <!-- 4. Sample Papers -->
-      <div class="forsko-pricing-item">
-        <div class="forsko-pricing-item-left">
-          <div class="forsko-pricing-icon-wrap icon-rose">
-            <i class="fa-solid fa-chart-pie"></i>
-          </div>
-          <span class="forsko-pricing-item-name">Sample Papers</span>
+      <!-- CARD 4: PRACTICAL'S (Bottom-Right - GOLDEN HIGHLIGHT) -->
+      <div class="poster-card card-golden">
+        
+        <!-- Main Highlight Crown Badge -->
+        <div class="golden-crown-tag">
+          <i class="fa-solid fa-crown"></i>
+          <span></span>
         </div>
-        <div class="forsko-pricing-tag">
-          <span class="forsko-pricing-subtext">Starting from</span>
-          <strong class="forsko-pricing-amount">₹29</strong>
-        </div>
-      </div>
 
-      <!-- 5. Practical PDF -->
-      <div class="forsko-pricing-item">
-        <div class="forsko-pricing-item-left">
-          <div class="forsko-pricing-icon-wrap icon-purple">
-            <i class="fa-solid fa-file-pdf"></i>
-          </div>
-          <span class="forsko-pricing-item-name">Practical PDF</span>
+        <div class="poster-card-badge badge-practical">
+          <i class="fa-solid fa-flask"></i>
+          <span>Practical's</span>
         </div>
-        <div class="forsko-pricing-tag">
-          <span class="forsko-pricing-subtext">Starting from</span>
-          <strong class="forsko-pricing-amount">₹49</strong>
-        </div>
-      </div>
 
-      <!-- 6. Practical Editable DOCX -->
-      <div class="forsko-pricing-item">
-        <div class="forsko-pricing-item-left">
-          <div class="forsko-pricing-icon-wrap icon-sky">
-            <i class="fa-solid fa-file-word"></i>
+        <div class="poster-card-body">
+          <!-- Practical PDF -->
+          <div class="poster-item-row practical-row">
+            <div class="item-left">
+              <div class="badge-mini pdf-mini">PDF</div>
+              <div class="practical-text">
+                <strong>Practical PDF</strong>
+                <small>(Prices Starts From)</small>
+              </div>
+            </div>
+            <div class="item-divider"></div>
+            <div class="price-pill-cyan">₹49 – ₹59/-</div>
           </div>
-          <span class="forsko-pricing-item-name">Practical Editable DOCX</span>
-        </div>
-        <div class="forsko-pricing-tag">
-          <span class="forsko-pricing-subtext">Starting from</span>
-          <strong class="forsko-pricing-amount">₹129</strong>
+
+          <!-- Practical DOCX -->
+          <div class="poster-item-row practical-row">
+            <div class="item-left">
+              <div class="badge-mini docx-mini">W</div>
+              <div class="practical-text">
+                <strong>Practical Editable DocX</strong>
+                <small>(Prices Starts From)</small>
+              </div>
+            </div>
+            <div class="item-divider"></div>
+            <div class="price-pill-cyan">₹129 – ₹200/-</div>
+          </div>
+
+          <!-- Availability Green Strip -->
+          <div class="practical-avail-strip">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Sem 1 and Sem 2 Practical's Available</span>
+          </div>
         </div>
       </div>
 
     </div>
 
-    <!-- Availability Notice Callout -->
-    <div class="forsko-pricing-notice">
-      <i class="fa-solid fa-bolt-lightning"></i>
-      <span><b>Availability:</b> Sem 1 & Sem 2 Practical Materials are currently available.</span>
+    <!-- SAMPLE / PREVIEW BANNER -->
+    <div class="poster-preview-strip">
+      <div class="preview-left">
+        <i class="fa-solid fa-file-magnifying-glass preview-icon"></i>
+        <div class="preview-text-block">
+          <span class="preview-top-text">SAMPLE / PREVIEW</span>
+          <span class="preview-pill">ALSO AVAILABLE</span>
+        </div>
+      </div>
+
+      <div class="preview-vert-line"></div>
+
+      <div class="preview-right">
+        <span>Check Sample Before You Purchase!</span>
+        <i class="fa-solid fa-arrow-pointer pointer-arrow"></i>
+      </div>
     </div>
 
-    <!-- Pricing Disclaimer -->
-    <p class="forsko-pricing-disclaimer">
-      * Prices may vary depending on content and material depth.
-    </p>
+    <!-- 3 TRUST BADGES (Horizontal Row) -->
+    <div class="poster-trust-row">
+      <div class="trust-cell">
+        <i class="fa-solid fa-bolt trust-bolt"></i>
+        <span>Student Friendly Prices</span>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-cell">
+        <i class="fa-solid fa-shield-halved trust-shield"></i>
+        <span>Subject Wise & Updated</span>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-cell">
+        <i class="fa-solid fa-gem trust-gem"></i>
+        <span>High Quality & Exam Focused</span>
+      </div>
+    </div>
 
-    <!-- Footer Action CTA -->
+    <!-- Bottom Disclaimer Pill -->
+    <div class="poster-disclaimer-wrap">
+      <span class="disclaimer-line"></span>
+      <div class="disclaimer-pill">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>Prices may vary depending on the content and material.</span>
+      </div>
+      <span class="disclaimer-line"></span>
+    </div>
+
+    <!-- Explore Action Button -->
     <div class="forsko-pricing-footer">
       <a href="#bento-explore" id="forskoPricingActionBtn" class="forsko-pricing-btn-primary">
         <span>Explore Study Materials</span>
@@ -4433,5 +4526,7 @@
 
   </div>
 </div>
+
+
 </body>
 </html>
