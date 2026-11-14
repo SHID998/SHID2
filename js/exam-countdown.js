@@ -1,14 +1,13 @@
 /**
- * FORSKO - 3 Horizontal Exam Countdowns & Motivational Quotes Switcher
+ * FORSKO - Horizontal Exam Countdowns & Motivational Quotes (Live Admin Sync)
  */
 
-// =========================================================================
-// CONFIGURATION: CHANGE EXAM TARGET DATES HERE
-// Format: "Month Day, Year Hours:Minutes:Seconds"
-// =========================================================================
+// Default Fallback Config (Admin se save karne par Firestore ise live override karega)
 const COUNTDOWN_CONFIG = [
-  { // First Year
+  { // Card 1: First Year
     id: "1",
+    slotKey: "slot1",
+    mode: "timer",
     targetDate: new Date("November 02, 2026 09:00:00").getTime(),
     daysId: "days-1",
     hoursId: "hours-1",
@@ -17,8 +16,10 @@ const COUNTDOWN_CONFIG = [
     timerId: "timer-1",
     expiredId: "expired-1"
   },
-  { // Second Year
+  { // Card 2: Second Year
     id: "2",
+    slotKey: "slot2",
+    mode: "timer",
     targetDate: new Date("December 21, 2026 09:00:00").getTime(),
     daysId: "days-2",
     hoursId: "hours-2",
@@ -27,9 +28,11 @@ const COUNTDOWN_CONFIG = [
     timerId: "timer-2",
     expiredId: "expired-2"
   },
-  { // Third Year
+  { // Card 3: Third Year
     id: "3",
-    targetDate: new Date("December 21, 2026 09:00:00").getTime(),
+    slotKey: "slot3",
+    mode: "coming_soon",
+    targetDate: NaN,
     daysId: "days-3",
     hoursId: "hours-3",
     minutesId: "minutes-3",
@@ -37,9 +40,11 @@ const COUNTDOWN_CONFIG = [
     timerId: "timer-3",
     expiredId: "expired-3"
   },
-  { // Back Exams
+  { // Card 4: Back Exams
     id: "4",
-    targetDate: new Date("Ma 21, 2027 09:00:00").getTime(),
+    slotKey: "slot4",
+    mode: "coming_soon",
+    targetDate: NaN,
     daysId: "days-4",
     hoursId: "hours-4",
     minutesId: "minutes-4",
@@ -49,7 +54,6 @@ const COUNTDOWN_CONFIG = [
   }
 ];
 
-// Interactive Motivational Quotes Bank
 const MOTIVATIONAL_QUOTES = [
   "\"Every line of code you write brings you closer to your goal. Stay focused!\"",
   "\"Consistency beats intensity. 1 hour of daily revision creates top rankers!\"",
@@ -61,14 +65,19 @@ const MOTIVATIONAL_QUOTES = [
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Helper function for two-digit formatting (5 -> "05")
   function padZero(num) {
     return String(num).padStart(2, "0");
   }
 
-  // Update All 3 Timers simultaneously
+  function safeHref(url) {
+    if (!url) return "";
+    const trimmed = String(url).trim();
+    if (/^(javascript|data|vbscript):/i.test(trimmed)) return "";
+    return trimmed;
+  }
+
   function updateAllCountdowns() {
-    const now = new Date().getTime();
+    const now = Date.now();
 
     COUNTDOWN_CONFIG.forEach(config => {
       const daysEl = document.getElementById(config.daysId);
@@ -78,13 +87,31 @@ document.addEventListener("DOMContentLoaded", () => {
       const timerBox = document.getElementById(config.timerId);
       const expiredMsg = document.getElementById(config.expiredId);
 
-      const timeRemaining = config.targetDate - now;
-
-      if (timeRemaining <= 0) {
+      // Coming Soon mode
+      if (config.mode === "coming_soon" || isNaN(config.targetDate)) {
         if (timerBox) timerBox.style.display = "none";
-        if (expiredMsg) expiredMsg.classList.remove("hidden");
+        if (expiredMsg) {
+          expiredMsg.classList.remove("hidden");
+          expiredMsg.innerHTML = '<span class="coming-soon-badge">⏳ Coming Soon</span>';
+        }
         return;
       }
+
+      const timeRemaining = config.targetDate - now;
+
+      // Exam Started mode
+      if (timeRemaining <= 0) {
+        if (timerBox) timerBox.style.display = "none";
+        if (expiredMsg) {
+          expiredMsg.classList.remove("hidden");
+          expiredMsg.innerHTML = '<span class="expired-badge">🎉 Exam Started</span>';
+        }
+        return;
+      }
+
+      // Live Timer Active
+      if (timerBox) timerBox.style.display = "flex";
+      if (expiredMsg) expiredMsg.classList.add("hidden");
 
       const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -95,6 +122,65 @@ document.addEventListener("DOMContentLoaded", () => {
       if (hoursEl) hoursEl.textContent = padZero(hours);
       if (minutesEl) minutesEl.textContent = padZero(minutes);
       if (secondsEl) secondsEl.textContent = padZero(seconds);
+    });
+  }
+
+  // Live Firestore Sync with Admin Countdown Manager
+  function connectAdminCountdowns() {
+    if (typeof firebase === "undefined" || !firebase.apps.length) return;
+    const db = firebase.firestore();
+    const cards = document.querySelectorAll("#examCountdownSection .countdown-card");
+
+    db.collection("site_settings").doc("exam_countdowns").onSnapshot(doc => {
+      if (!doc.exists) return;
+      const slots = doc.data().slots || {};
+
+      COUNTDOWN_CONFIG.forEach((config, idx) => {
+        const slotData = slots[config.slotKey];
+        const cardEl = cards[idx];
+        if (!slotData) return;
+
+        // Update mode & targetDate
+        config.mode = slotData.mode || "coming_soon";
+        config.targetDate = slotData.examDateISO ? new Date(slotData.examDateISO).getTime() : NaN;
+
+        if (cardEl) {
+          // Update Card Title
+          const titleEl = cardEl.querySelector(".card-title");
+          if (titleEl && slotData.title) {
+            titleEl.textContent = slotData.title;
+          }
+
+          // Update Footer Date Text
+          const dateEl = cardEl.querySelector(".exam-date");
+          if (dateEl) {
+            dateEl.innerHTML = '<i class="fa-regular fa-calendar-days"></i> ';
+            dateEl.appendChild(document.createTextNode(slotData.dateLabel || "Coming Soon"));
+          }
+
+          // Update / Add / Remove Schedule PDF Button
+          const footer = cardEl.querySelector(".card-footer");
+          if (footer) {
+            let schedBtn = footer.querySelector(".card-btn");
+            const cleanUrl = safeHref(slotData.scheduleUrl);
+            if (cleanUrl) {
+              if (!schedBtn) {
+                schedBtn = document.createElement("a");
+                schedBtn.className = "card-btn";
+                schedBtn.innerHTML = 'Schedule <i class="fa-solid fa-arrow-right"></i>';
+                footer.appendChild(schedBtn);
+              }
+              schedBtn.setAttribute("href", cleanUrl);
+            } else if (schedBtn) {
+              schedBtn.remove();
+            }
+          }
+        }
+      });
+
+      updateAllCountdowns();
+    }, err => {
+      console.warn("Countdown Firestore sync error:", err);
     });
   }
 
@@ -115,8 +201,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Run Immediately & Update Every Second
+  // Start Countdown & Admin Sync
   updateAllCountdowns();
   setInterval(updateAllCountdowns, 1000);
+  connectAdminCountdowns();
 
 });

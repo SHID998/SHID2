@@ -125,6 +125,238 @@
     </div>
   </header>
 
+<!-- ==========================================
+       FORSKO LIVE ANNOUNCEMENT (DYNAMIC LIQUID CAPSULE)
+       ========================================== -->
+  <style>
+    body.fln-active .hero {
+      padding-top: 120px !important;
+      transition: padding-top 0.3s ease;
+    }
+
+    #forskoLiveNoticeBar {
+      display: none;
+      position: fixed;
+      top: 84px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: fit-content;
+      max-width: calc(100vw - 24px);
+      z-index: 950;
+      pointer-events: none;
+      animation: flnIslandIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes flnIslandIn {
+      from { opacity: 0; transform: translate(-50%, -14px) scale(0.92); }
+      to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    }
+
+    .fln-inner {
+      pointer-events: auto;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      max-width: 100%;
+      gap: 12px;
+      padding: 6px 8px 6px 7px;
+      border-radius: 999px;
+      overflow: hidden;
+
+      /* True Transparent Liquid Glass */
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.13) 0%,
+        rgba(56, 189, 248, 0.08) 50%,
+        rgba(255, 255, 255, 0.05) 100%
+      );
+      -webkit-backdrop-filter: blur(28px) saturate(210%) brightness(1.12);
+      backdrop-filter: blur(28px) saturate(210%) brightness(1.12);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+
+      /* Water-Droplet Specular Highlight & Glass Depth */
+      box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.35),
+        0 0 26px rgba(56, 189, 248, 0.18),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.45),
+        inset 0 -2px 6px rgba(56, 189, 248, 0.18),
+        inset 0 0 18px rgba(255, 255, 255, 0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .fln-inner:hover {
+      transform: translateY(-1px) scale(1.01);
+      border-color: rgba(125, 211, 252, 0.55);
+      box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.45),
+        0 0 32px rgba(56, 189, 248, 0.28),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.55),
+        inset 0 -2px 8px rgba(56, 189, 248, 0.24);
+    }
+
+    /* Flowing Liquid Caustic Light */
+    .fln-inner::before {
+      content: "";
+      position: absolute;
+      inset: -50% -30%;
+      background: radial-gradient(
+        ellipse at 30% 50%,
+        rgba(56, 189, 248, 0.28) 0%,
+        rgba(168, 85, 247, 0.16) 45%,
+        transparent 75%
+      );
+      filter: blur(14px);
+      animation: flnLiquidDrift 7s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes flnLiquidDrift {
+      0% { transform: translateX(-25%) rotate(-3deg); }
+      100% { transform: translateX(25%) rotate(3deg); }
+    }
+
+    /* Wet-Glass Shine Reflection Sweep */
+    .fln-inner::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 55%;
+      height: 100%;
+      background: linear-gradient(
+        115deg,
+        transparent 25%,
+        rgba(255, 255, 255, 0.26) 50%,
+        transparent 75%
+      );
+      transform: skewX(-20deg);
+      animation: flnGlassSweep 5.5s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes flnGlassSweep {
+      0%, 55% { left: -120%; }
+      100% { left: 170%; }
+    }
+
+    .fln-badge,
+    .fln-track-wrap,
+    .fln-close {
+      position: relative;
+      z-index: 2;
+    }
+
+    .fln-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.18);
+      border: 1px solid rgba(125, 211, 252, 0.42);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      color: #e0f2fe;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+
+    .fln-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 10px #10b981;
+      animation: flnPulse 1.6s infinite;
+    }
+
+    @keyframes flnPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .fln-track-wrap {
+      flex: 0 1 auto;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .fln-text {
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 600;
+      line-height: 1.35;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+      word-break: break-word;
+    }
+
+    .fln-close {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      color: #f1f5f9;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+    }
+
+    .fln-close:hover {
+      background: rgba(244, 63, 94, 0.35);
+      border-color: rgba(251, 113, 133, 0.7);
+      color: #fff;
+      transform: rotate(90deg);
+    }
+
+    @media (max-width: 600px) {
+      body.fln-active .hero {
+        padding-top: 105px !important;
+      }
+      #forskoLiveNoticeBar {
+        top: 80px;
+        max-width: calc(100vw - 20px);
+      }
+      .fln-inner {
+        border-radius: 26px;
+        gap: 8px;
+        padding: 6px 8px;
+      }
+      .fln-badge { padding: 5px 8px; }
+      .fln-badge span.fln-label-text { display: none; }
+      .fln-text { font-size: 0.8rem; }
+    }
+  </style>
+
+  <div id="forskoLiveNoticeBar" role="region" aria-label="Live Announcement">
+    <div class="fln-inner">
+      <span class="fln-badge">
+        <span class="fln-dot"></span>
+        <i class="fa-solid fa-bullhorn"></i>
+        <span class="fln-label-text">Notice</span>
+      </span>
+
+      <div class="fln-track-wrap">
+        <span class="fln-text" id="forskoLiveNoticeText"></span>
+      </div>
+
+      <button type="button" class="fln-close" id="forskoLiveNoticeClose" aria-label="Dismiss Notice" title="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
 
 
   <!-- ==========================================
@@ -3380,13 +3612,70 @@
 
 
 
- <!-- ================================================== -->
+<!-- ================================================== -->
 <!-- FORSKO COMMUNITY NOTES & PYQ CONTRIBUTION CTA      -->
 <!-- ================================================== -->
+
+<style>
+  .contrib-main-header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 42px auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .sub-badge.sub-badge-emerald {
+    background: rgba(16, 185, 129, 0.12) !important;
+    border: 1px solid rgba(16, 185, 129, 0.35) !important;
+    color: #34d399 !important;
+    box-shadow: 0 0 18px rgba(16, 185, 129, 0.15);
+  }
+
+  .contrib-dropzone-mock {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .contrib-dropzone-mock:hover {
+    transform: translateY(-4px);
+    border-color: rgba(16, 185, 129, 0.55) !important;
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4), 0 0 28px rgba(16, 185, 129, 0.18);
+  }
+
+  /* Live One-by-One Contributor Capsule Rotator */
+  #contribRotatorChip {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  #contribRotatorText {
+    display: inline-block;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    line-height: 1.35;
+  }
+
+  #contribRotatorText.is-switching {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  @media (max-width: 600px) {
+    .contrib-main-header { margin-bottom: 28px; }
+  }
+</style>
 
 <section class="contribute-section" id="contribute">
   <!-- Background Glow Blob -->
   <div class="contribute-ambient-glow"></div>
+
+  <!-- Main Centered Section Header -->
+  <div class="section-header contrib-main-header">
+    <span class="sub-badge sub-badge-emerald">
+      <i class="fa-solid fa-hand-holding-heart"></i> Community Driven
+    </span>
+    <h2>Contribute to <span class="title-gradient-green">Forsko</span></h2>
+    <p class="section-subtitle"><b>Share your clean notes or exam papers and help thousands of SGBAU CS peers prepare smarter.</b></p>
+  </div>
 
   <div class="contribute-container">
     <div class="contribute-card glass-panel-3d" data-tilt>
@@ -3398,8 +3687,8 @@
         <!-- Left Content -->
         <div class="contribute-info">
           <div class="header-pill-badge badge-emerald">
-            <i class="fa-solid fa-hand-holding-heart"></i>
-            <span>Community Driven</span>
+            <i class="fa-solid fa-award"></i>
+            <span>Verified Program</span>
           </div>
 
           <h2 class="contribute-title">
@@ -3414,7 +3703,7 @@
           <div class="contribute-perks">
             <div class="perk-item">
               <i class="fa-solid fa-circle-check perk-ico"></i>
-              <span>Contributor Badge on Dashboard</span>
+              <span>Verified Contributor Spotlight &amp; Badge</span>
             </div>
             <div class="perk-item">
               <i class="fa-solid fa-circle-check perk-ico"></i>
@@ -3422,19 +3711,17 @@
             </div>
             <div class="perk-item">
               <i class="fa-solid fa-circle-check perk-ico"></i>
-              <span>Instant Direct Review by Team Forsko</span>
+              <span>Instant Direct Upload &amp; Admin Review</span>
             </div>
           </div>
 
           <!-- Action Buttons -->
           <div class="contribute-buttons">
-            <!-- Direct On-Site Upload Modal Trigger -->
             <button type="button" class="btn btn-contrib-form" onclick="openContributeModal()">
               <i class="fa-solid fa-cloud-arrow-up"></i>
               <span>Upload Paper / Notes</span>
             </button>
 
-            <!-- WhatsApp Direct Send -->
             <a href="https://chat.whatsapp.com/Cn0U4hxrBxHKgInjYUkCFQ?s=cl&p=a&mlu=4&iam=2" target="_blank" rel="noopener noreferrer" class="btn btn-contrib-wa">
               <i class="fa-brands fa-whatsapp"></i>
               <span>Drop on WhatsApp</span>
@@ -3446,12 +3733,12 @@
         <div class="contribute-visual-box">
           <div class="contrib-shield-aura"></div>
           
-          <div class="contrib-dropzone-mock" onclick="openContributeModal()" style="cursor: pointer;" title="Click to Upload Study Material">
+          <div class="contrib-dropzone-mock" role="button" tabindex="0" onclick="openContributeModal()" onkeydown="if(event.key==='Enter'||event.key===' ')openContributeModal()" style="cursor: pointer;" title="Click to Upload Study Material">
             <div class="drop-icon-wrap">
               <i class="fa-solid fa-file-arrow-up drop-main-icon"></i>
             </div>
             <h4 class="drop-title">Share Study Material</h4>
-            <p class="drop-sub">Click here to upload PDFs, Scans, or Drive Links</p>
+            <p class="drop-sub">Click here to upload PDFs or Exam Paper Photos directly</p>
             
             <div class="drop-pill-tags">
               <span class="d-tag">#SummerPapers</span>
@@ -3459,10 +3746,10 @@
               <span class="d-tag">#HandwrittenNotes</span>
             </div>
 
-            <!-- Contributor Counter Badge -->
-            <div class="contrib-count-chip">
-              <i class="fa-solid fa-users-viewfinder"></i>
-              <span><b>50+</b> SSC Undergrads already contributed!</span>
+            <!-- Contributor Live One-by-One Rotator Badge -->
+            <div class="contrib-count-chip" id="contribRotatorChip">
+              <i class="fa-solid fa-users-viewfinder" id="contribRotatorIcon"></i>
+              <span id="contribRotatorText"><b>50+</b> SSC Undergrads already contributed!</span>
             </div>
           </div>
         </div>
@@ -3515,7 +3802,7 @@
         <input type="text" id="studYear" class="modal-input" placeholder="e.g. Winter 2024 / Summer 2025">
       </div>
 
-      <!-- 🔥 DIRECT FILE CHOOSER (NO DRIVE LINK REQUIRED) -->
+      <!-- DIRECT FILE CHOOSER -->
       <div class="form-group">
         <label>Select PDF / Photo File *</label>
         <input type="file" id="studFile" class="modal-input" accept="application/pdf,image/*" required style="padding: 7px;">
@@ -3958,6 +4245,11 @@
     <button class="fab-menu-item" id="fabBackToTop" type="button" role="menuitem" title="Back to Top">
       <span class="fab-item-label">Back to Top</span>
       <span class="fab-item-icon"><i class="fa-solid fa-arrow-up"></i></span>
+    </button>
+
+    <button class="fab-menu-item" type="button" onclick="openStudyBag()" role="menuitem" title="My Study Bag">
+      <span class="fab-item-label">My Study Bag</span>
+      <span class="fab-item-icon"><i class="fa-solid fa-bookmark"></i></span>
     </button>
 
     <!-- 8. Feedback -->
@@ -4555,6 +4847,218 @@
   </div>
 </div>
 
+<!-- Live Announcement Ticker Sync (Connected to Admin Command Center) -->
+  <script>
+    (function() {
+      const bar = document.getElementById('forskoLiveNoticeBar');
+      const textEl = document.getElementById('forskoLiveNoticeText');
+      const closeBtn = document.getElementById('forskoLiveNoticeClose');
+
+      if (!bar || !textEl || typeof firebase === 'undefined' || !firebase.apps.length) return;
+
+      const noticeDb = firebase.firestore();
+      let currentNoticeText = '';
+
+      noticeDb.collection('site_settings').doc('announcement').onSnapshot(doc => {
+        if (!doc.exists) {
+          bar.style.display = 'none';
+          document.body.classList.remove('fln-active');
+          return;
+        }
+
+        const data = doc.data() || {};
+        const text = (data.text || '').trim();
+        const isActive = Boolean(data.active);
+        const dismissedText = sessionStorage.getItem('forsko_dismissed_notice');
+
+        if (isActive && text && dismissedText !== text) {
+          currentNoticeText = text;
+          textEl.textContent = text;
+          bar.style.display = 'block';
+          document.body.classList.add('fln-active');
+        } else {
+          bar.style.display = 'none';
+          document.body.classList.remove('fln-active');
+        }
+      }, err => {
+        console.warn("Live notice sync error:", err);
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          bar.style.display = 'none';
+          document.body.classList.remove('fln-active');
+          if (currentNoticeText) {
+            sessionStorage.setItem('forsko_dismissed_notice', currentNoticeText);
+          }
+        });
+      }
+    })();
+  </script>
+
+<!-- Dynamic Latest Updates Sync -->
+  <script>
+    (function() {
+      if (typeof firebase === 'undefined' || !firebase.apps.length) return;
+      const liveDb = firebase.firestore();
+      const updatesGrid = document.querySelector('#latest-updates .updates-grid');
+      if (!updatesGrid) return;
+
+      function safeLink(url) {
+        if (!url) return '#';
+        const trimmed = String(url).trim();
+        return /^(javascript|data|vbscript):/i.test(trimmed) ? '#' : trimmed;
+      }
+
+      function relativeDateText(dateStr) {
+        if (!dateStr) return 'Recently';
+        const parsed = new Date(dateStr + 'T00:00:00');
+        if (isNaN(parsed.getTime())) return dateStr;
+        const diffDays = Math.floor((Date.now() - parsed.getTime()) / 86400000);
+        if (diffDays <= 0) return 'Today';
+        if (diffDays === 1) return '1 day ago';
+        if (diffDays < 30) return diffDays + ' days ago';
+        return parsed.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+      }
+
+      liveDb.collection('live_updates').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+        updatesGrid.querySelectorAll('.update-card[data-dynamic="true"]').forEach(el => el.remove());
+
+        const frag = document.createDocumentFragment();
+        snapshot.forEach(docSnap => {
+          const u = docSnap.data() || {};
+          const card = document.createElement('div');
+          card.className = 'update-card';
+          card.setAttribute('data-dynamic', 'true');
+
+          let badgeClass = 'badge-new';
+          let badgeHtml = '<span class="badge-dot"></span> New';
+          if (u.badge === 'blueprint') {
+            badgeClass = 'badge-announcement';
+            badgeHtml = 'BLUEPRINT';
+          } else if (u.badge === 'urgent') {
+            badgeClass = 'badge-new';
+            badgeHtml = '<span class="badge-dot" style="background:#f43f5e; box-shadow:0 0 8px #f43f5e;"></span> Urgent';
+          }
+
+          card.innerHTML = `
+            <div class="update-card-header">
+              <span class="update-badge ${badgeClass}">${badgeHtml}</span>
+              <span class="update-date" data-date="">
+                <i class="fa-regular fa-clock"></i>
+                <span class="time-text"></span>
+              </span>
+            </div>
+            <div class="update-card-body">
+              <h3 class="update-title"></h3>
+              <p class="update-desc"></p>
+            </div>
+            <div class="update-card-footer">
+              <a class="btn-update-open">
+                <span>Open</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          `;
+
+          card.querySelector('.update-title').textContent = u.title || 'New Update';
+          card.querySelector('.update-desc').textContent = u.desc || '';
+          card.querySelector('.time-text').textContent = relativeDateText(u.date);
+          card.querySelector('.btn-update-open').setAttribute('href', safeLink(u.link));
+          frag.appendChild(card);
+        });
+
+        updatesGrid.prepend(frag);
+      });
+    })();
+  </script>
+
+
+<!-- Verified Contributors Live Capsule Rotator (No Wall) -->
+  <script>
+    (function() {
+      const rotatorText = document.getElementById('contribRotatorText');
+      const rotatorIcon = document.getElementById('contribRotatorIcon');
+      if (!rotatorText || typeof firebase === 'undefined' || !firebase.apps.length) return;
+
+      const contribDb = firebase.firestore();
+      let rotatorTimer = null;
+      let rotatorItems = [];
+      let rotatorIdx = 0;
+
+      function renderRotatorItem(item) {
+        if (item.isDefault) {
+          rotatorText.innerHTML = '<b>50+</b> SSC Undergrads already contributed!';
+          if (rotatorIcon) rotatorIcon.className = 'fa-solid fa-users-viewfinder';
+          return;
+        }
+
+        rotatorText.textContent = '';
+        const boldName = document.createElement('b');
+        boldName.textContent = item.name;
+        rotatorText.appendChild(boldName);
+
+        const detail = item.semester
+          ? ` shared ${item.contribution} (${item.semester})`
+          : ` shared ${item.contribution}`;
+        rotatorText.appendChild(document.createTextNode(detail));
+
+        if (rotatorIcon) {
+          rotatorIcon.className = item.badge === 'gold'
+            ? 'fa-solid fa-crown'
+            : 'fa-solid fa-circle-check';
+        }
+      }
+
+      function startCapsuleRotator(items) {
+        if (rotatorTimer) {
+          clearInterval(rotatorTimer);
+          rotatorTimer = null;
+        }
+
+        if (items.length === 0) {
+          renderRotatorItem({ isDefault: true });
+          return;
+        }
+
+        // Agar sirf 1 contributor ho to uske aur default message ke beech alternate karega
+        rotatorItems = items.length === 1 ? [items[0], { isDefault: true }] : items;
+        rotatorIdx = 0;
+        renderRotatorItem(rotatorItems[0]);
+
+        rotatorTimer = setInterval(() => {
+          rotatorText.classList.add('is-switching');
+          setTimeout(() => {
+            rotatorIdx = (rotatorIdx + 1) % rotatorItems.length;
+            renderRotatorItem(rotatorItems[rotatorIdx]);
+            rotatorText.classList.remove('is-switching');
+          }, 320);
+        }, 3000);
+      }
+
+      contribDb.collection('verified_contributors').orderBy('createdAt', 'desc').onSnapshot(snap => {
+        if (snap.empty) {
+          startCapsuleRotator([]);
+          return;
+        }
+
+        const list = [];
+        snap.forEach(docSnap => {
+          const c = docSnap.data() || {};
+          list.push({
+            name: (c.name || 'Forsko Student').trim(),
+            contribution: (c.contribution || 'Study Material').trim(),
+            semester: (c.semester || '').trim(),
+            badge: c.badge || 'verified'
+          });
+        });
+
+        startCapsuleRotator(list);
+      });
+    })();
+  </script>
+
+  <script src="js/study-bag.js"></script>
 
 </body>
 </html>

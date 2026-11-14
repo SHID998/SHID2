@@ -641,7 +641,7 @@
         <div style="font-size: 0.8rem; color: var(--text-dim);" id="trendingLikeDisplay">Calculating metrics...</div>
       </div>
 
-      <!-- NEW FEATURE: Live Notice / Broadcast Announcement Manager -->
+      <!-- Live Notice / Broadcast Announcement Manager -->
       <div class="broadcast-card">
         <div class="broadcast-header">
           <h3>
@@ -662,6 +662,96 @@
             <i class="fa-solid fa-paper-plane"></i> Publish Notice
           </button>
         </div>
+      </div>
+
+      <!-- Dynamic Latest Updates Manager -->
+      <div class="broadcast-card">
+        <div class="broadcast-header">
+          <h3>
+            <i class="fa-solid fa-bolt" style="color: var(--accent-blue);"></i>
+            Latest Updates Feed Manager
+          </h3>
+          <span style="font-size: 0.8rem; color: var(--text-dim);">Published updates appear at the top of Homepage Feed</span>
+        </div>
+
+        <div class="broadcast-inputs-row">
+          <input type="text" id="updateTitleInput" class="broadcast-input" placeholder="Update Title (e.g. Sem 3 Python Notes Added)">
+          <select id="updateBadgeSelect" class="broadcast-input" style="max-width: 180px; min-width: 140px; background: #0f172a;">
+            <option value="new">NEW (Green Dot)</option>
+            <option value="blueprint">BLUEPRINT</option>
+            <option value="urgent">URGENT</option>
+          </select>
+          <input type="date" id="updateDateInput" class="broadcast-input" style="max-width: 170px; min-width: 140px;">
+        </div>
+
+        <div class="broadcast-inputs-row">
+          <input type="text" id="updateDescInput" class="broadcast-input" placeholder="Short Description (e.g. Complete unit-wise handwritten notes available)">
+          <input type="text" id="updateLinkInput" class="broadcast-input" placeholder="Target Link (e.g. pages/notes-semester3.html or timetable/timetable.pdf)">
+          <button class="btn-save-notice" id="publishUpdateBtn" type="button">
+            <i class="fa-solid fa-plus"></i> Publish Update
+          </button>
+        </div>
+
+        <div id="dynamicUpdatesList" style="display: flex; flex-direction: column; gap: 10px; margin-top: 6px;"></div>
+      </div>
+
+      <!-- Exam Countdown Manager (Synced with js/exam-countdown.js) -->
+      <div class="broadcast-card">
+        <div class="broadcast-header">
+          <div>
+            <h3>
+              <i class="fa-solid fa-calendar-days" style="color: var(--accent-amber);"></i>
+              Exam Countdowns Manager (4 Cards)
+            </h3>
+            <span style="font-size: 0.78rem; color: var(--text-dim);">Changes sync live with Homepage Exam Countdowns</span>
+          </div>
+          <button class="btn-save-notice" id="saveCountdownsBtn" type="button">
+            <i class="fa-solid fa-floppy-disk"></i> Save All Countdowns
+          </button>
+        </div>
+        <div id="countdownEditorGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px;"></div>
+      </div>
+
+      <!-- Verified Contributors Wall Manager -->
+      <div class="broadcast-card">
+        <div class="broadcast-header">
+          <div>
+            <h3>
+              <i class="fa-solid fa-award" style="color: var(--accent-green);"></i>
+              Verified "Forsko Contributors" Wall
+            </h3>
+            <span style="font-size: 0.78rem; color: var(--text-dim);">Featured students appear with a Verified Badge on Homepage</span>
+          </div>
+          <select id="contribQuickFillSelect" class="broadcast-input" style="max-width: 280px; min-width: 220px; padding: 8px 12px; font-size: 0.82rem; background: #0f172a;">
+            <option value="">⚡ Quick-fill from Student Submissions...</option>
+          </select>
+        </div>
+
+        <div class="broadcast-inputs-row">
+          <input type="text" id="contribNameInput" class="broadcast-input" placeholder="Student Name (e.g. Aryan Deshmukh)">
+          <select id="contribSemSelect" class="broadcast-input" style="max-width: 160px; min-width: 130px; background: #0f172a;">
+            <option value="Sem 1">Sem 1</option>
+            <option value="Sem 2">Sem 2</option>
+            <option value="Sem 3">Sem 3</option>
+            <option value="Sem 4">Sem 4</option>
+            <option value="Sem 5">Sem 5</option>
+            <option value="Sem 6">Sem 6</option>
+          </select>
+          <select id="contribBadgeSelect" class="broadcast-input" style="max-width: 190px; min-width: 150px; background: #0f172a;">
+            <option value="verified">✓ Verified Contributor</option>
+            <option value="gold">★ Top Contributor</option>
+            <option value="pyq">📄 PYQ Hero</option>
+          </select>
+        </div>
+
+        <div class="broadcast-inputs-row">
+          <input type="text" id="contribMaterialInput" class="broadcast-input" placeholder="What did they share? (e.g. Data Structures Notes / Winter 2026 PYQ)">
+          <button class="btn-save-notice" id="addContributorBtn" type="button" style="background: linear-gradient(135deg, #10b981, #059669);">
+            <i class="fa-solid fa-user-check"></i> Add to Wall
+          </button>
+        </div>
+
+        <div id="adminContributorsList" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px;"></div>
       </div>
 
       <!-- Top Overview Stats -->
@@ -753,7 +843,6 @@
       </div>
 
       <div class="table-container">
-       <div class="table-container">
         <table>
           <thead>
             <tr>
@@ -769,7 +858,6 @@
             <tr><td colspan="6" class="empty-state">Loading student submissions...</td></tr>
           </tbody>
         </table>
-      </div>
       </div>
 
       <!-- Section 3: Comments Moderation -->
@@ -1188,6 +1276,9 @@
       syncStudentUploads();
       syncBadWords();
       syncAnnouncementSettings();
+      syncDynamicUpdatesAdmin();
+      syncExamCountdownsAdmin();
+      syncContributorsAdmin();
       startLiveClock();
     }
 
@@ -1234,7 +1325,6 @@
             commentsCount: (commentsByCard[cardId] || []).length
           };
 
-          // Attach real-time listener for this card's comments once
           if (!commentUnsubscribers[cardId]) {
             commentUnsubscribers[cardId] = db.collection('cards_data')
               .doc(cardId)
@@ -1262,7 +1352,6 @@
           }
         });
 
-        // Cleanup listeners for removed cards
         Object.keys(commentUnsubscribers).forEach(cardId => {
           if (!activeIds.has(cardId)) {
             commentUnsubscribers[cardId]();
@@ -1466,7 +1555,6 @@
 
       modalSaveCommentBtn.disabled = true;
       try {
-        // Ensure parent doc exists in cards_data without overwriting existing likes
         await db.collection('cards_data').doc(cardId).set({
           likes: firebase.firestore.FieldValue.increment(0)
         }, { merge: true });
@@ -1644,7 +1732,6 @@
         .trim()
         .replace(/\s+/g, '_') || 'forsko-file';
 
-      // Google Drive direct download
       if (urls.isDrive) {
         const link = document.createElement('a');
         link.href = urls.downloadUrl;
@@ -1657,7 +1744,6 @@
         return;
       }
 
-      // Direct PDF / Firebase Storage download via Blob (with fallback)
       try {
         const res = await fetch(urls.downloadUrl);
         if (!res.ok) throw new Error('Fetch failed');
@@ -2076,6 +2162,362 @@
         tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
       );
     }
+
+    // -------------------------------------------------------------
+    // DYNAMIC LATEST UPDATES MANAGER (Admin)
+    // -------------------------------------------------------------
+    const updateDateInput = document.getElementById('updateDateInput');
+    if (updateDateInput) {
+      updateDateInput.value = new Date().toISOString().slice(0, 10);
+    }
+
+    document.getElementById('publishUpdateBtn')?.addEventListener('click', async () => {
+      const title = document.getElementById('updateTitleInput').value.trim();
+      const desc = document.getElementById('updateDescInput').value.trim();
+      const badge = document.getElementById('updateBadgeSelect').value;
+      const link = document.getElementById('updateLinkInput').value.trim() || '#';
+      const dateStr = document.getElementById('updateDateInput').value || new Date().toISOString().slice(0, 10);
+
+      if (!title || !desc) {
+        showToast("Please enter Update Title and Description!", "danger");
+        return;
+      }
+
+      const btn = document.getElementById('publishUpdateBtn');
+      btn.disabled = true;
+      try {
+        await db.collection('live_updates').add({
+          title,
+          desc,
+          badge,
+          link,
+          date: dateStr,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        document.getElementById('updateTitleInput').value = '';
+        document.getElementById('updateDescInput').value = '';
+        document.getElementById('updateLinkInput').value = '';
+        showToast("Update published to Homepage Feed!", "success");
+      } catch (err) {
+        showToast("Failed to publish update!", "danger");
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    function syncDynamicUpdatesAdmin() {
+      const listEl = document.getElementById('dynamicUpdatesList');
+      if (!listEl) return;
+
+      db.collection('live_updates').orderBy('createdAt', 'desc').onSnapshot(snap => {
+        listEl.innerHTML = '';
+        if (snap.empty) {
+          listEl.innerHTML = '<div style="font-size:0.82rem; color:var(--text-dim);">No dynamic updates published yet.</div>';
+          return;
+        }
+
+        snap.forEach(docSnap => {
+          const u = docSnap.data() || {};
+          const row = document.createElement('div');
+          row.style.cssText = 'display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 14px; background:rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius:10px; flex-wrap:wrap;';
+          row.innerHTML = `
+            <div style="flex:1; min-width:220px;">
+              <span class="cat-badge" style="margin-right:6px;">${escapeHTML((u.badge || 'new').toUpperCase())}</span>
+              <strong style="color:#fff; font-size:0.9rem;">${escapeHTML(u.title || '')}</strong>
+              <div style="font-size:0.78rem; color:var(--text-muted); margin-top:2px;">${escapeHTML(u.desc || '')} • <span style="color:var(--accent-blue);">${escapeHTML(u.link || '')}</span> (${escapeHTML(u.date || '')})</div>
+            </div>
+            <button type="button" class="btn-delete"><i class="fa-solid fa-trash-can"></i> Remove</button>
+          `;
+          row.querySelector('.btn-delete').addEventListener('click', async () => {
+            try {
+              await db.collection('live_updates').doc(docSnap.id).delete();
+              showToast("Update removed from Homepage!", "success");
+            } catch {
+              showToast("Failed to remove update!", "danger");
+            }
+          });
+          listEl.appendChild(row);
+        });
+      }, err => {
+        console.warn("Live updates sync error:", err);
+      });
+    }
+
+    // -------------------------------------------------------------
+    // EXAM COUNTDOWNS MANAGER (Admin -> Synced with exam-countdown.js)
+    // -------------------------------------------------------------
+    const DEFAULT_COUNTDOWN_SLOTS = [
+      {
+        key: 'slot1',
+        tag: 'FIRST YEAR',
+        tagColor: '#34d399',
+        tagBg: 'rgba(16, 185, 129, 0.15)',
+        title: 'Sem I Theory',
+        examDateISO: '2026-11-02T09:00',
+        dateLabel: '02 Nov 2026',
+        scheduleUrl: 'timetable/exam-regular.pdf',
+        mode: 'timer'
+      },
+      {
+        key: 'slot2',
+        tag: 'SECOND YEAR',
+        tagColor: '#fbbf24',
+        tagBg: 'rgba(245, 158, 11, 0.15)',
+        title: 'Sem III Theory',
+        examDateISO: '2026-12-21T09:00',
+        dateLabel: '21 Dec 2026',
+        scheduleUrl: 'timetable/regular-sem3.pdf',
+        mode: 'timer'
+      },
+      {
+        key: 'slot3',
+        tag: 'THIRD YEAR',
+        tagColor: '#c084fc',
+        tagBg: 'rgba(168, 85, 247, 0.15)',
+        title: 'Sem V',
+        examDateISO: '',
+        dateLabel: 'Coming Soon',
+        scheduleUrl: '',
+        mode: 'coming_soon'
+      },
+      {
+        key: 'slot4',
+        tag: 'BACK EXAMS',
+        tagColor: '#f87171',
+        tagBg: 'rgba(239, 68, 68, 0.15)',
+        title: 'Sem I, III, V Theory',
+        examDateISO: '',
+        dateLabel: 'Coming Soon',
+        scheduleUrl: '',
+        mode: 'coming_soon'
+      }
+    ];
+
+    function formatDisplayDateFromISO(isoVal) {
+      if (!isoVal) return '';
+      const d = new Date(isoVal);
+      if (isNaN(d.getTime())) return '';
+      return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    function syncExamCountdownsAdmin() {
+      const grid = document.getElementById('countdownEditorGrid');
+      if (!grid) return;
+
+      db.collection('site_settings').doc('exam_countdowns').onSnapshot(doc => {
+        const saved = doc.exists ? (doc.data().slots || {}) : {};
+        grid.innerHTML = '';
+
+        DEFAULT_COUNTDOWN_SLOTS.forEach(def => {
+          const item = { ...def, ...(saved[def.key] || {}) };
+          const isComingSoon = item.mode === 'coming_soon';
+
+          const box = document.createElement('div');
+          box.style.cssText = 'background:rgba(15,23,42,0.72); border:1px solid var(--border-subtle); border-radius:14px; padding:16px; display:flex; flex-direction:column; gap:10px;';
+          box.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:0.72rem; font-weight:800; color:${def.tagColor}; background:${def.tagBg}; border:1px solid ${def.tagColor}55; padding:3px 10px; border-radius:20px; letter-spacing:0.6px;">
+                ${escapeHTML(def.tag)}
+              </span>
+              <span style="font-size:0.72rem; color:var(--text-dim); font-family:'JetBrains Mono', monospace;">${def.key.toUpperCase()}</span>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <div>
+                <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:4px;">Card Title</label>
+                <input type="text" class="broadcast-input" style="width:100%; min-width:0; padding:8px 11px; font-size:0.84rem;" data-field="title" data-slot="${def.key}" value="${escapeHTML(item.title)}" placeholder="e.g. Sem I Theory">
+              </div>
+              <div>
+                <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:4px;">Display Mode</label>
+                <select class="broadcast-input" style="width:100%; min-width:0; padding:8px 11px; font-size:0.84rem; background:#0f172a;" data-field="mode" data-slot="${def.key}">
+                  <option value="timer" ${item.mode === 'timer' ? 'selected' : ''}>Live Timer Active</option>
+                  <option value="coming_soon" ${isComingSoon ? 'selected' : ''}>Coming Soon</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <div>
+                <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:4px;">Target Exam Date & Time</label>
+                <input type="datetime-local" class="broadcast-input" style="width:100%; min-width:0; padding:8px 10px; font-size:0.8rem; opacity:${isComingSoon ? '0.45' : '1'};" data-field="examDateISO" data-slot="${def.key}" value="${escapeHTML(item.examDateISO || '')}" ${isComingSoon ? 'disabled' : ''}>
+              </div>
+              <div>
+                <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:4px;">Footer Date Text</label>
+                <input type="text" class="broadcast-input" style="width:100%; min-width:0; padding:8px 11px; font-size:0.84rem;" data-field="dateLabel" data-slot="${def.key}" value="${escapeHTML(item.dateLabel)}" placeholder="e.g. 21 Dec 2026">
+              </div>
+            </div>
+
+            <div>
+              <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:4px;">Schedule PDF Link (Blank = Hide Button)</label>
+              <input type="text" class="broadcast-input" style="width:100%; min-width:0; padding:8px 11px; font-size:0.84rem;" data-field="scheduleUrl" data-slot="${def.key}" value="${escapeHTML(item.scheduleUrl || '')}" placeholder="e.g. timetable/exam-regular.pdf">
+            </div>
+          `;
+
+          const modeSel = box.querySelector(`[data-field="mode"]`);
+          const isoInput = box.querySelector(`[data-field="examDateISO"]`);
+          const labelInput = box.querySelector(`[data-field="dateLabel"]`);
+
+          modeSel.addEventListener('change', () => {
+            const coming = modeSel.value === 'coming_soon';
+            isoInput.disabled = coming;
+            isoInput.style.opacity = coming ? '0.45' : '1';
+            if (coming) {
+              labelInput.value = 'Coming Soon';
+            } else if (isoInput.value) {
+              labelInput.value = formatDisplayDateFromISO(isoInput.value);
+            }
+          });
+
+          isoInput.addEventListener('change', () => {
+            const formatted = formatDisplayDateFromISO(isoInput.value);
+            if (formatted) labelInput.value = formatted;
+          });
+
+          grid.appendChild(box);
+        });
+      }, err => {
+        console.warn("Countdowns sync error:", err);
+      });
+    }
+
+    document.getElementById('saveCountdownsBtn')?.addEventListener('click', async () => {
+      const slots = {};
+      DEFAULT_COUNTDOWN_SLOTS.forEach(def => {
+        const getVal = (f) => document.querySelector(`[data-slot="${def.key}"][data-field="${f}"]`)?.value.trim() || '';
+        const mode = getVal('mode') || 'coming_soon';
+        slots[def.key] = {
+          title: getVal('title') || def.title,
+          mode,
+          examDateISO: mode === 'coming_soon' ? '' : getVal('examDateISO'),
+          dateLabel: getVal('dateLabel') || (mode === 'coming_soon' ? 'Coming Soon' : ''),
+          scheduleUrl: getVal('scheduleUrl')
+        };
+      });
+
+      const btn = document.getElementById('saveCountdownsBtn');
+      btn.disabled = true;
+      try {
+        await db.collection('site_settings').doc('exam_countdowns').set({
+          slots,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        showToast("All 4 Exam Countdowns updated live!", "success");
+      } catch (err) {
+        showToast("Failed to save countdowns!", "danger");
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    // -------------------------------------------------------------
+    // VERIFIED FORSKO CONTRIBUTORS WALL MANAGER (Admin)
+    // -------------------------------------------------------------
+    function syncContributorsAdmin() {
+      const quickSelect = document.getElementById('contribQuickFillSelect');
+      const listEl = document.getElementById('adminContributorsList');
+      if (!listEl) return;
+
+      db.collection('student_contributions').orderBy('createdAt', 'desc').limit(25).onSnapshot(snap => {
+        if (!quickSelect) return;
+        quickSelect.innerHTML = '<option value="">⚡ Quick-fill from Student Submissions...</option>';
+        snap.forEach(docSnap => {
+          const d = docSnap.data() || {};
+          const opt = document.createElement('option');
+          opt.value = JSON.stringify({
+            name: d.name || 'Student',
+            sem: (d.semester || 'Sem 1')
+              .replace(/Semester\s+III/i, 'Sem 3')
+              .replace(/Semester\s+II/i, 'Sem 2')
+              .replace(/Semester\s+IV/i, 'Sem 4')
+              .replace(/Semester\s+VI/i, 'Sem 6')
+              .replace(/Semester\s+V/i, 'Sem 5')
+              .replace(/Semester\s+I/i, 'Sem 1'),
+            subject: d.subject || ''
+          });
+          opt.textContent = `${d.name || 'Student'} — ${d.subject || 'Material'} (${d.semester || ''})`;
+          quickSelect.appendChild(opt);
+        });
+      });
+
+      if (quickSelect) {
+        quickSelect.addEventListener('change', () => {
+          if (!quickSelect.value) return;
+          try {
+            const picked = JSON.parse(quickSelect.value);
+            document.getElementById('contribNameInput').value = picked.name || '';
+            document.getElementById('contribMaterialInput').value = picked.subject || '';
+            const semSel = document.getElementById('contribSemSelect');
+            if ([...semSel.options].some(o => o.value === picked.sem)) {
+              semSel.value = picked.sem;
+            }
+          } catch {}
+        });
+      }
+
+      db.collection('verified_contributors').orderBy('createdAt', 'desc').onSnapshot(snap => {
+        listEl.innerHTML = '';
+        if (snap.empty) {
+          listEl.innerHTML = '<div style="font-size:0.82rem; color:var(--text-dim);">No verified contributors added yet.</div>';
+          return;
+        }
+
+        snap.forEach(docSnap => {
+          const c = docSnap.data() || {};
+          const chip = document.createElement('div');
+          chip.style.cssText = 'display:inline-flex; align-items:center; gap:10px; padding:8px 12px; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.28); border-radius:10px;';
+          chip.innerHTML = `
+            <div>
+              <strong style="color:#fff; font-size:0.86rem;">${escapeHTML(c.name || '')}</strong>
+              <span class="sem-badge" style="margin-left:5px;">${escapeHTML(c.semester || '')}</span>
+              <div style="font-size:0.74rem; color:#34d399;">${escapeHTML(c.contribution || '')}</div>
+            </div>
+            <button type="button" class="btn-delete" style="padding:4px 8px; font-size:0.72rem;"><i class="fa-solid fa-xmark"></i></button>
+          `;
+          chip.querySelector('.btn-delete').addEventListener('click', async () => {
+            try {
+              await db.collection('verified_contributors').doc(docSnap.id).delete();
+              showToast("Contributor removed from wall!", "success");
+            } catch {
+              showToast("Failed to remove contributor!", "danger");
+            }
+          });
+          listEl.appendChild(chip);
+        });
+      });
+    }
+
+    document.getElementById('addContributorBtn')?.addEventListener('click', async () => {
+      const name = document.getElementById('contribNameInput').value.trim();
+      const semester = document.getElementById('contribSemSelect').value;
+      const badge = document.getElementById('contribBadgeSelect').value;
+      const contribution = document.getElementById('contribMaterialInput').value.trim();
+
+      if (!name || !contribution) {
+        showToast("Please enter Student Name and Material Shared!", "danger");
+        return;
+      }
+
+      const btn = document.getElementById('addContributorBtn');
+      btn.disabled = true;
+      try {
+        await db.collection('verified_contributors').add({
+          name,
+          semester,
+          badge,
+          contribution,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        document.getElementById('contribNameInput').value = '';
+        document.getElementById('contribMaterialInput').value = '';
+        document.getElementById('contribQuickFillSelect').value = '';
+        showToast(`${name} added to Verified Contributors Wall!`, "success");
+      } catch (err) {
+        showToast("Failed to add contributor!", "danger");
+      } finally {
+        btn.disabled = false;
+      }
+    });
   </script>
+
 </body>
 </html>
