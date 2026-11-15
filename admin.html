@@ -20,22 +20,23 @@
 
   <style>
     :root {
-      --bg-base: #050811;
-      --bg-surface: rgba(15, 23, 42, 0.65);
-      --bg-surface-hover: rgba(30, 41, 59, 0.75);
-      --bg-card: rgba(17, 24, 39, 0.55);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-glow: rgba(56, 189, 248, 0.35);
+      --bg-base: #131c31;
+      --bg-surface: rgba(30, 41, 59, 0.72);
+      --bg-surface-hover: rgba(41, 55, 78, 0.86);
+      --bg-card: rgba(30, 41, 59, 0.62);
+      --bg-input: rgba(15, 23, 42, 0.45);
+      --border-subtle: rgba(255, 255, 255, 0.13);
+      --border-glow: rgba(56, 189, 248, 0.45);
       --text-main: #F8FAFC;
-      --text-muted: #94A3B8;
-      --text-dim: #64748B;
+      --text-muted: #CBD5E1;
+      --text-dim: #94A3B8;
       --accent-blue: #38BDF8;
       --accent-indigo: #6366F1;
       --accent-gradient: linear-gradient(135deg, #38BDF8 0%, #6366F1 50%, #A855F7 100%);
       --accent-green: #10B981;
       --accent-amber: #F59E0B;
       --accent-red: #F43F5E;
-      --shadow-ambient: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+      --shadow-ambient: 0 18px 38px -15px rgba(2, 6, 23, 0.55);
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
@@ -46,10 +47,11 @@
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       background-color: var(--bg-base);
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
-        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.5) 0px, transparent 100%);
+      background-image:
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.22) 0px, transparent 55%),
+        radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.16) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.2) 0px, transparent 55%),
+        radial-gradient(at 50% 45%, rgba(30, 41, 59, 0.7) 0px, transparent 100%);
       background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
@@ -58,33 +60,35 @@
     }
 
     ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg-base); }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+    ::-webkit-scrollbar-track { background: #131c31; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.35); }
+
+    select option { background: #1e293b; color: #f8fafc; }
 
     /* Login Screen */
     #loginScreen {
       position: fixed; inset: 0;
-      background: radial-gradient(circle at center, rgba(15, 23, 42, 0.88), var(--bg-base) 90%);
-      backdrop-filter: blur(25px);
+      background: radial-gradient(circle at center, rgba(30, 41, 59, 0.88), #131c31 92%);
+      backdrop-filter: blur(22px);
       display: flex; align-items: center; justify-content: center;
       z-index: 9999; padding: 20px;
     }
 
     .login-box {
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(30, 41, 59, 0.85);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       padding: 44px 38px; max-width: 420px; width: 100%;
       text-align: center;
-      box-shadow: var(--shadow-ambient), 0 0 50px rgba(56, 189, 248, 0.12);
+      box-shadow: var(--shadow-ambient), 0 0 50px rgba(56, 189, 248, 0.18);
     }
 
     .login-icon-wrap {
       width: 76px; height: 76px; margin: 0 auto 20px;
       border-radius: 20px;
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(99, 102, 241, 0.2));
-      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(99, 102, 241, 0.25));
+      border: 1px solid rgba(56, 189, 248, 0.4);
       display: flex; align-items: center; justify-content: center;
       font-size: 1.9rem; color: var(--accent-blue);
       box-shadow: 0 10px 25px rgba(56, 189, 248, 0.22);
@@ -104,7 +108,7 @@
     .login-box p { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 26px; }
 
     .login-input {
-      width: 100%; background: rgba(255, 255, 255, 0.04);
+      width: 100%; background: var(--bg-input);
       border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
       color: #fff; padding: 14px 18px; font-size: 1rem;
       margin-bottom: 16px; outline: none; text-align: center; transition: all 0.25s;
@@ -112,9 +116,8 @@
     .login-input:focus {
       border-color: var(--accent-blue);
       box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
-      background: rgba(255, 255, 255, 0.07);
+      background: rgba(30, 41, 59, 0.75);
     }
-    select.login-input option { background: #0f172a; color: #fff; }
 
     .login-btn {
       width: 100%; background: var(--accent-gradient); color: #fff;
@@ -130,7 +133,7 @@
     #dashboardScreen { display: none; padding-bottom: 110px; }
 
     .dash-navbar {
-      background: rgba(6, 9, 19, 0.88); backdrop-filter: blur(20px);
+      background: rgba(19, 28, 49, 0.85); backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
       padding: 12px 32px; display: flex; justify-content: space-between; align-items: center;
       position: sticky; top: 0; z-index: 100; gap: 14px; flex-wrap: wrap;
@@ -152,8 +155,8 @@
 
     .live-status {
       display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.25);
-      color: #34d399; font-size: 0.72rem; font-weight: 700;
+      background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #6ee7b7; font-size: 0.72rem; font-weight: 700;
       padding: 4px 11px; border-radius: 30px;
     }
     .pulse-dot {
@@ -170,21 +173,21 @@
 
     .clock-display {
       font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.04); padding: 7px 12px; border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.06); padding: 7px 12px; border-radius: var(--radius-sm);
       border: 1px solid var(--border-subtle);
     }
 
     .btn-action-nav {
-      background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.07); border: 1px solid var(--border-subtle);
       color: var(--text-main); padding: 7px 14px; border-radius: 10px;
       cursor: pointer; font-weight: 700; font-size: 0.82rem; transition: all 0.2s;
       display: flex; align-items: center; gap: 7px;
     }
-    .btn-action-nav:hover { background: rgba(56, 189, 248, 0.15); border-color: var(--accent-blue); color: var(--accent-blue); }
+    .btn-action-nav:hover { background: rgba(56, 189, 248, 0.18); border-color: var(--accent-blue); color: var(--accent-blue); }
 
     .logout-btn {
-      background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.25);
-      color: #fb7185; padding: 7px 15px; border-radius: 10px;
+      background: rgba(244, 63, 94, 0.16); border: 1px solid rgba(244, 63, 94, 0.35);
+      color: #fda4af; padding: 7px 15px; border-radius: 10px;
       cursor: pointer; font-weight: 700; font-size: 0.82rem;
       transition: all 0.2s; display: flex; align-items: center; gap: 7px;
     }
@@ -194,14 +197,14 @@
 
     /* Trending Banner */
     .trending-banner {
-      background: linear-gradient(90deg, rgba(56, 189, 248, 0.1), rgba(99, 102, 241, 0.1));
-      border: 1px solid rgba(56, 189, 248, 0.25);
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.16), rgba(99, 102, 241, 0.16));
+      border: 1px solid rgba(56, 189, 248, 0.35);
       border-radius: var(--radius-md); padding: 13px 20px;
       margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 12px;
     }
     .trending-tag { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.9rem; color: #fff; }
-    .trending-tag i { color: #f59e0b; }
+    .trending-tag i { color: #fbbf24; }
     .trending-subject { color: var(--accent-blue); font-family: 'JetBrains Mono', monospace; font-weight: 700; }
 
     /* Top Stats Grid */
@@ -227,14 +230,14 @@
       width: 52px; height: 52px; border-radius: 15px;
       display: flex; align-items: center; justify-content: center; font-size: 1.45rem;
     }
-    .stat-icon-likes { background: rgba(244, 63, 94, 0.12); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.25); }
-    .stat-icon-comments { background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25); }
-    .stat-icon-cards { background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.25); }
-    .stat-icon-uploads { background: rgba(245, 158, 11, 0.12); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.25); }
+    .stat-icon-likes { background: rgba(244, 63, 94, 0.16); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
+    .stat-icon-comments { background: rgba(56, 189, 248, 0.16); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .stat-icon-cards { background: rgba(16, 185, 129, 0.16); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .stat-icon-uploads { background: rgba(245, 158, 11, 0.16); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
 
-    /* Section Switcher Nav (Index Style Pills) */
+    /* Section Switcher Nav */
     .section-nav-bar {
-      background: rgba(15, 23, 42, 0.78);
+      background: rgba(30, 41, 59, 0.82);
       backdrop-filter: blur(16px);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
@@ -261,14 +264,14 @@
       white-space: nowrap;
       transition: all 0.2s;
     }
-    .sec-nav-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+    .sec-nav-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
     .sec-nav-btn.active {
       background: var(--accent-gradient);
       color: #fff;
       box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
     }
 
-    /* Section Headers & Glowing Dividers (Matching index.html) */
+    /* Section Headers & Glowing Dividers */
     .admin-section { margin-bottom: 18px; }
     .admin-section.is-hidden { display: none; }
 
@@ -277,7 +280,7 @@
       height: 1px;
       width: 100%;
       margin: 38px 0 30px;
-      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.35), transparent);
+      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.45), transparent);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -299,7 +302,7 @@
     .sec-heading-left { display: flex; flex-direction: column; gap: 4px; }
     .sec-pill {
       display: inline-flex; align-items: center; gap: 7px; width: fit-content;
-      background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.28);
+      background: rgba(56, 189, 248, 0.16); border: 1px solid rgba(56, 189, 248, 0.35);
       color: var(--accent-blue); font-size: 0.72rem; font-weight: 800;
       text-transform: uppercase; letter-spacing: 0.8px;
       padding: 4px 12px; border-radius: 30px;
@@ -327,22 +330,25 @@
     }
     .broadcast-inputs-row { display: flex; gap: 12px; flex-wrap: wrap; }
     .broadcast-input {
-      flex: 1; min-width: 240px; background: rgba(15, 23, 42, 0.6);
+      flex: 1; min-width: 240px; background: var(--bg-input);
       border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);
       color: #fff; padding: 11px 16px; font-size: 0.9rem; outline: none; transition: 0.2s;
     }
-    .broadcast-input:focus { border-color: var(--accent-indigo); box-shadow: 0 0 15px rgba(99, 102, 241, 0.25); }
+    .broadcast-input::placeholder { color: var(--text-dim); }
+    .broadcast-input:focus { border-color: var(--accent-indigo); box-shadow: 0 0 15px rgba(99, 102, 241, 0.28); background: rgba(15, 23, 42, 0.65); }
+
+    select.broadcast-input { background-color: #1e293b; }
 
     .switch-wrap {
       display: flex; align-items: center; gap: 10px;
-      background: rgba(255, 255, 255, 0.04); padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.06); padding: 6px 14px;
       border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);
       font-size: 0.85rem; font-weight: 600; color: var(--text-muted);
     }
     .toggle-switch { position: relative; width: 44px; height: 24px; cursor: pointer; }
     .toggle-switch input { opacity: 0; width: 0; height: 0; }
     .toggle-slider {
-      position: absolute; inset: 0; background-color: #334155;
+      position: absolute; inset: 0; background-color: #475569;
       border-radius: 24px; transition: .3s;
     }
     .toggle-slider:before {
@@ -359,10 +365,11 @@
       transition: all 0.2s;
     }
     .btn-save-notice:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35); }
+    .btn-save-notice:disabled { opacity: 0.6; cursor: not-allowed; }
 
     /* Filter Controls */
     .filter-controls-card {
-      background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border-subtle);
+      background: var(--bg-surface); border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg); padding: 16px; margin-bottom: 24px;
       display: flex; flex-direction: column; gap: 12px;
     }
@@ -372,19 +379,19 @@
       border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;
       display: flex; align-items: center; gap: 7px; white-space: nowrap; transition: 0.2s;
     }
-    .tab-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+    .tab-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
     .tab-btn.active {
       background: var(--accent-gradient); color: #fff; font-weight: 700;
       box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
     }
     .sem-pill-btn {
-      background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-subtle);
-      color: var(--text-dim); padding: 4px 12px; border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border-subtle);
+      color: var(--text-muted); padding: 4px 12px; border-radius: 20px;
       font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: 0.2s;
     }
-    .sem-pill-btn:hover { color: #fff; border-color: rgba(255,255,255,0.2); }
+    .sem-pill-btn:hover { color: #fff; border-color: rgba(255,255,255,0.28); }
     .sem-pill-btn.active {
-      background: rgba(56, 189, 248, 0.15); color: var(--accent-blue);
+      background: rgba(56, 189, 248, 0.2); color: var(--accent-blue);
       border-color: var(--accent-blue); font-weight: 700;
     }
 
@@ -398,7 +405,7 @@
       display: flex; align-items: center; gap: 10px;
     }
     .count-badge {
-      background: rgba(255, 255, 255, 0.08); color: var(--accent-blue);
+      background: rgba(255, 255, 255, 0.1); color: var(--accent-blue);
       font-size: 0.8rem; font-weight: 700; padding: 2px 10px;
       border-radius: 20px; font-family: 'JetBrains Mono', monospace;
     }
@@ -411,18 +418,19 @@
       color: var(--text-dim); font-size: 0.85rem; pointer-events: none;
     }
     .search-input {
-      width: 100%; background: rgba(15, 23, 42, 0.6);
+      width: 100%; background: var(--bg-surface);
       border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);
       color: #fff; padding: 9px 16px 9px 38px; font-size: 0.88rem; outline: none; transition: 0.2s;
     }
+    .search-input::placeholder { color: var(--text-dim); }
     .search-input:focus {
-      border-color: var(--accent-blue); background: rgba(30, 41, 59, 0.7);
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+      border-color: var(--accent-blue); background: rgba(30, 41, 59, 0.9);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
     }
 
     .btn-export {
-      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #34d399; font-weight: 700; font-size: 0.82rem;
+      background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #6ee7b7; font-weight: 700; font-size: 0.82rem;
       padding: 8px 16px; border-radius: var(--radius-sm); cursor: pointer;
       display: inline-flex; align-items: center; gap: 7px; transition: all 0.2s;
     }
@@ -432,8 +440,8 @@
     }
 
     .btn-danger-outline {
-      background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.3);
-      color: #fb7185; font-weight: 700; font-size: 0.82rem;
+      background: rgba(244, 63, 94, 0.16); border: 1px solid rgba(244, 63, 94, 0.35);
+      color: #fda4af; font-weight: 700; font-size: 0.82rem;
       padding: 8px 16px; border-radius: var(--radius-sm); cursor: pointer;
       display: inline-flex; align-items: center; gap: 7px; transition: all 0.2s;
     }
@@ -454,8 +462,8 @@
       display: flex; flex-direction: column; justify-content: space-between; transition: all 0.25s ease;
     }
     .admin-card:hover {
-      border-color: rgba(56, 189, 248, 0.3); transform: translateY(-4px);
-      box-shadow: var(--shadow-ambient), 0 0 25px rgba(56, 189, 248, 0.08);
+      border-color: rgba(56, 189, 248, 0.42); transform: translateY(-4px);
+      box-shadow: var(--shadow-ambient), 0 0 25px rgba(56, 189, 248, 0.12);
       background: var(--bg-surface-hover);
     }
 
@@ -463,11 +471,11 @@
     .cat-badge {
       font-size: 0.7rem; font-weight: 800; padding: 3px 8px; border-radius: 6px;
       text-transform: uppercase; letter-spacing: 0.5px;
-      background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);
+      background: rgba(99, 102, 241, 0.22); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.38);
     }
     .sem-badge {
       font-size: 0.72rem; font-weight: 700; color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.05); padding: 2px 8px; border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08); padding: 2px 8px; border-radius: 6px;
     }
     .admin-card-title { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.4; }
     .card-id-code {
@@ -481,23 +489,23 @@
     }
     .like-actions-wrap { display: flex; align-items: center; gap: 8px; }
     .stat-like-badge {
-      color: #fb7185; font-weight: 800; font-size: 0.95rem;
+      color: #fda4af; font-weight: 800; font-size: 0.95rem;
       display: flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace;
     }
 
     .btn-edit-like {
-      background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25);
-      color: #38bdf8; padding: 4px 10px; border-radius: 6px; font-size: 0.74rem; font-weight: 700;
+      background: rgba(56, 189, 248, 0.14); border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #7dd3fc; padding: 4px 10px; border-radius: 6px; font-size: 0.74rem; font-weight: 700;
       cursor: pointer; display: inline-flex; align-items: center; gap: 4px; transition: all 0.2s;
     }
     .btn-edit-like:hover { background: var(--accent-blue); color: #02131e; box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35); }
 
     .stat-comment-badge {
-      color: #38bdf8; font-weight: 700; font-size: 0.88rem;
+      color: #7dd3fc; font-weight: 700; font-size: 0.88rem;
       display: flex; align-items: center; gap: 6px; cursor: pointer;
       padding: 4px 8px; border-radius: 6px; transition: background 0.2s; font-family: 'JetBrains Mono', monospace;
     }
-    .stat-comment-badge:hover { background: rgba(56, 189, 248, 0.12); }
+    .stat-comment-badge:hover { background: rgba(56, 189, 248, 0.16); }
 
     /* Tables */
     .table-container {
@@ -507,15 +515,15 @@
     }
     table { width: 100%; border-collapse: collapse; text-align: left; }
     th {
-      background: rgba(255, 255, 255, 0.02); padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.04); padding: 16px 20px;
       font-size: 0.78rem; color: var(--text-dim); text-transform: uppercase;
       letter-spacing: 0.8px; font-weight: 800; border-bottom: 1px solid var(--border-subtle);
     }
-    td { padding: 16px 20px; font-size: 0.88rem; border-bottom: 1px solid rgba(255, 255, 255, 0.04); vertical-align: middle; }
-    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+    td { padding: 16px 20px; font-size: 0.88rem; border-bottom: 1px solid rgba(255, 255, 255, 0.06); vertical-align: middle; }
+    tr:hover td { background: rgba(255, 255, 255, 0.04); }
 
-    tr.is-pinned td { background: rgba(245, 158, 11, 0.05); }
-    tr.is-flagged td { background: rgba(244, 63, 94, 0.08); }
+    tr.is-pinned td { background: rgba(245, 158, 11, 0.08); }
+    tr.is-flagged td { background: rgba(244, 63, 94, 0.1); }
 
     .pinned-badge {
       background: linear-gradient(135deg, #f59e0b, #d97706);
@@ -524,45 +532,45 @@
       letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 3px;
     }
     .flagged-badge {
-      background: rgba(244, 63, 94, 0.2); border: 1px solid rgba(244, 63, 94, 0.4);
-      color: #fda4af; font-size: 0.68rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; margin-right: 6px;
+      background: rgba(244, 63, 94, 0.22); border: 1px solid rgba(244, 63, 94, 0.45);
+      color: #fecdd3; font-size: 0.68rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; margin-right: 6px;
     }
 
     .user-avatar-tag { display: flex; align-items: center; gap: 10px; }
     .avatar-initial {
       width: 32px; height: 32px; border-radius: 8px;
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.3));
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.24), rgba(99, 102, 241, 0.34));
+      border: 1px solid rgba(56, 189, 248, 0.38);
       color: #fff; font-weight: 800; font-size: 0.82rem; display: flex; align-items: center; justify-content: center;
     }
 
     .btn-pin {
-      background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3);
-      color: #fbbf24; padding: 6px 12px; border-radius: 6px;
+      background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fcd34d; padding: 6px 12px; border-radius: 6px;
       font-size: 0.78rem; font-weight: 700; cursor: pointer;
       display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; margin-right: 4px;
     }
     .btn-pin:hover, .btn-pin.active { background: var(--accent-amber); color: #000; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35); }
 
     .btn-approve {
-      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #34d399; padding: 6px 12px; border-radius: 6px;
+      background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #6ee7b7; padding: 6px 12px; border-radius: 6px;
       font-size: 0.78rem; font-weight: 700; cursor: pointer;
       display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; margin-right: 4px;
     }
     .btn-approve:hover { background: var(--accent-green); color: #042f1a; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35); }
 
     .btn-delete {
-      background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.25);
-      color: #fb7185; padding: 6px 12px; border-radius: 6px;
+      background: rgba(244, 63, 94, 0.16); border: 1px solid rgba(244, 63, 94, 0.32);
+      color: #fda4af; padding: 6px 12px; border-radius: 6px;
       font-size: 0.78rem; font-weight: 700; cursor: pointer;
       display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s;
     }
     .btn-delete:hover { background: var(--accent-red); color: #fff; box-shadow: 0 4px 12px rgba(244, 63, 94, 0.4); }
 
     .btn-preview-link {
-      background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3);
-      color: #38bdf8; font-weight: 700; font-size: 0.8rem;
+      background: rgba(56, 189, 248, 0.16); border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #7dd3fc; font-weight: 700; font-size: 0.8rem;
       padding: 6px 12px; border-radius: 6px; cursor: pointer;
       display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;
     }
@@ -575,13 +583,14 @@
       box-shadow: var(--shadow-ambient);
     }
     .profanity-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
-    .profanity-header h3 { color: #fb7185; font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+    .profanity-header h3 { color: #fda4af; font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
     .profanity-input-wrap { display: flex; gap: 12px; }
     .profanity-input {
-      flex: 1; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-subtle);
+      flex: 1; background: var(--bg-input); border: 1px solid var(--border-subtle);
       border-radius: var(--radius-sm); color: #fff; padding: 11px 18px; font-size: 0.9rem; outline: none; transition: 0.2s;
     }
-    .profanity-input:focus { border-color: var(--accent-red); box-shadow: 0 0 15px rgba(244, 63, 94, 0.2); }
+    .profanity-input::placeholder { color: var(--text-dim); }
+    .profanity-input:focus { border-color: var(--accent-red); box-shadow: 0 0 15px rgba(244, 63, 94, 0.25); }
     .btn-block-word {
       background: linear-gradient(135deg, #f43f5e, #e11d48); color: #fff; font-weight: 700;
       border: none; padding: 11px 22px; border-radius: var(--radius-sm); cursor: pointer;
@@ -590,43 +599,43 @@
     .btn-block-word:hover { box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4); transform: translateY(-1px); }
     .profanity-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
     .word-tag {
-      background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.25);
-      color: #fda4af; padding: 6px 14px; border-radius: 30px; font-size: 0.82rem; font-weight: 600;
+      background: rgba(244, 63, 94, 0.16); border: 1px solid rgba(244, 63, 94, 0.32);
+      color: #fecdd3; padding: 6px 14px; border-radius: 30px; font-size: 0.82rem; font-weight: 600;
       display: flex; align-items: center; gap: 8px;
     }
-    .word-tag i { cursor: pointer; color: #f43f5e; }
+    .word-tag i { cursor: pointer; color: #fb7185; }
 
     .empty-state { text-align: center; padding: 45px 20px; color: var(--text-dim); font-size: 0.95rem; }
 
     /* Modals */
     .modal-overlay {
-      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75);
+      position: fixed; inset: 0; background: rgba(15, 23, 42, 0.72);
       backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center;
       z-index: 10000; padding: 20px;
     }
     .modal-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
 
     .modern-modal {
-      background: rgba(15, 23, 42, 0.95); border: 1px solid var(--border-subtle);
+      background: rgba(30, 41, 59, 0.96); border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg); padding: 30px; max-width: 440px; width: 100%;
-      box-shadow: var(--shadow-ambient), 0 0 50px rgba(56, 189, 248, 0.15);
+      box-shadow: var(--shadow-ambient), 0 0 50px rgba(56, 189, 248, 0.18);
       animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .modal-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 6px; }
     .modal-subtitle { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px; word-break: break-all; }
     .stepper-actions { display: flex; gap: 8px; margin-bottom: 16px; }
     .btn-step {
-      flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle);
+      flex: 1; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--border-subtle);
       color: var(--text-main); padding: 8px; border-radius: 8px; font-weight: 700;
       font-size: 0.82rem; cursor: pointer; transition: 0.2s;
     }
-    .btn-step:hover { background: rgba(56, 189, 248, 0.15); border-color: var(--accent-blue); color: var(--accent-blue); }
+    .btn-step:hover { background: rgba(56, 189, 248, 0.18); border-color: var(--accent-blue); color: var(--accent-blue); }
     .modal-actions { display: flex; gap: 12px; margin-top: 22px; }
     .btn-modal-cancel {
-      flex: 1; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border-subtle);
+      flex: 1; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--border-subtle);
       color: var(--text-muted); padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer;
     }
-    .btn-modal-cancel:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+    .btn-modal-cancel:hover { background: rgba(255, 255, 255, 0.14); color: #fff; }
     .btn-modal-confirm {
       flex: 1; background: var(--accent-gradient); border: none;
       color: #fff; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer;
@@ -642,7 +651,7 @@
       display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;
     }
     .preview-modal-body {
-      flex: 1; background: rgba(0, 0, 0, 0.4); border-radius: var(--radius-sm);
+      flex: 1; background: rgba(15, 23, 42, 0.55); border-radius: var(--radius-sm);
       overflow: hidden; display: flex; align-items: center; justify-content: center;
     }
     .preview-modal-body iframe, .preview-modal-body img {
@@ -652,9 +661,9 @@
     /* Toasts */
     .toast-container { position: fixed; bottom: 25px; right: 25px; z-index: 10001; display: flex; flex-direction: column; gap: 10px; }
     .modern-toast {
-      background: rgba(15, 23, 42, 0.95); border: 1px solid var(--border-subtle);
+      background: rgba(30, 41, 59, 0.96); border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md); padding: 14px 20px; display: flex; align-items: center; gap: 12px;
-      color: #fff; font-size: 0.88rem; font-weight: 600; box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+      color: #fff; font-size: 0.88rem; font-weight: 600; box-shadow: 0 15px 35px rgba(0,0,0,0.45);
       backdrop-filter: blur(16px); animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .toast-icon-success { color: var(--accent-green); font-size: 1.1rem; }
@@ -715,9 +724,7 @@
 
     <div class="container">
 
-      <!-- ==================================================
-           TOP OVERVIEW: TRENDING + ALL COUNTS TOGETHER AT TOP
-           ================================================== -->
+      <!-- TOP OVERVIEW: TRENDING + ALL COUNTS TOGETHER AT TOP -->
       <div class="trending-banner">
         <div class="trending-tag">
           <i class="fa-solid fa-fire-flame-curved"></i>
@@ -761,7 +768,7 @@
         </div>
       </div>
 
-      <!-- SECTION-WISE NAVIGATION BAR (Like index.html Ecosystem) -->
+      <!-- SECTION-WISE NAVIGATION BAR -->
       <nav class="section-nav-bar" aria-label="Dashboard Sections">
         <button type="button" class="sec-nav-btn active" data-sec="all"><i class="fa-solid fa-layer-group"></i> All Sections</button>
         <button type="button" class="sec-nav-btn" data-sec="sec-live"><i class="fa-solid fa-bullhorn"></i> Live Controls</button>
@@ -778,7 +785,7 @@
         <div class="sec-heading-block">
           <div class="sec-heading-left">
             <span class="sec-pill"><i class="fa-solid fa-tower-broadcast"></i> Homepage Live Sync</span>
-            <h2 class="sec-title">Notice, Updates, Countdowns &amp; <span>Contributors</span></h2>
+            <h2 class="sec-title">Notice, Updates, Countdowns, Contributors &amp; <span>PYQ Unlocker</span></h2>
           </div>
         </div>
 
@@ -817,7 +824,7 @@
 
           <div class="broadcast-inputs-row">
             <input type="text" id="updateTitleInput" class="broadcast-input" placeholder="Update Title (e.g. Sem 3 Python Notes Added)">
-            <select id="updateBadgeSelect" class="broadcast-input" style="max-width: 180px; min-width: 140px; background: #0f172a;">
+            <select id="updateBadgeSelect" class="broadcast-input" style="max-width: 180px; min-width: 140px;">
               <option value="new">NEW (Green Dot)</option>
               <option value="blueprint">BLUEPRINT</option>
               <option value="urgent">URGENT</option>
@@ -863,14 +870,14 @@
               </h3>
               <span style="font-size: 0.78rem; color: var(--text-dim);">Rotates one-by-one inside Homepage Contribute Capsule</span>
             </div>
-            <select id="contribQuickFillSelect" class="broadcast-input" style="max-width: 280px; min-width: 220px; padding: 8px 12px; font-size: 0.82rem; background: #0f172a;">
+            <select id="contribQuickFillSelect" class="broadcast-input" style="max-width: 280px; min-width: 220px; padding: 8px 12px; font-size: 0.82rem;">
               <option value="">⚡ Quick-fill from Student Submissions...</option>
             </select>
           </div>
 
           <div class="broadcast-inputs-row">
             <input type="text" id="contribNameInput" class="broadcast-input" placeholder="Student Name (e.g. Aryan Deshmukh)">
-            <select id="contribSemSelect" class="broadcast-input" style="max-width: 160px; min-width: 130px; background: #0f172a;">
+            <select id="contribSemSelect" class="broadcast-input" style="max-width: 160px; min-width: 130px;">
               <option value="Sem 1">Sem 1</option>
               <option value="Sem 2">Sem 2</option>
               <option value="Sem 3">Sem 3</option>
@@ -878,7 +885,7 @@
               <option value="Sem 5">Sem 5</option>
               <option value="Sem 6">Sem 6</option>
             </select>
-            <select id="contribBadgeSelect" class="broadcast-input" style="max-width: 190px; min-width: 150px; background: #0f172a;">
+            <select id="contribBadgeSelect" class="broadcast-input" style="max-width: 190px; min-width: 150px;">
               <option value="verified">✓ Verified Contributor</option>
               <option value="gold">★ Top Contributor</option>
               <option value="pyq">📄 PYQ Hero</option>
@@ -894,6 +901,77 @@
 
           <div id="adminContributorsList" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px;"></div>
         </div>
+
+        <!-- 1E: PYQ Paper Unlocker & New Paper Adder -->
+        <div class="broadcast-card">
+          <div class="broadcast-header">
+            <div>
+              <h3>
+                <i class="fa-solid fa-file-circle-plus" style="color: var(--accent-blue);"></i>
+                PYQ Unlocker &amp; Future Paper Adder
+              </h3>
+              <span style="font-size: 0.78rem; color: var(--text-dim);">Unlock "Coming Soon" PYQs or add brand-new Winter/Summer 2027+ papers live</span>
+            </div>
+          </div>
+
+          <div class="broadcast-inputs-row">
+            <div style="flex: 1.4; min-width: 240px;">
+              <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:5px;">Quick-Pick Existing PYQ (or leave blank for New)</label>
+              <select id="pyqCardSelect" class="broadcast-input" style="width: 100%;">
+                <option value="">-- Select Existing PYQ Card --</option>
+              </select>
+            </div>
+            <div style="flex: 1; min-width: 210px;">
+              <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:5px;">Card ID (Existing or New) *</label>
+              <input type="text" id="pyqCardIdInput" class="broadcast-input" style="width: 100%; min-width: 0;" placeholder="e.g. pyq-sem5-core-java-w2026 or pyq-sem3-ds-w2027">
+            </div>
+          </div>
+
+          <div class="broadcast-inputs-row">
+            <div style="flex: 0.8; min-width: 130px;">
+              <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:5px;">Semester *</label>
+              <select id="pyqSemSelect" class="broadcast-input" style="width: 100%; min-width: 0;">
+                <option value="Sem 1">Sem 1</option>
+                <option value="Sem 2">Sem 2</option>
+                <option value="Sem 3">Sem 3</option>
+                <option value="Sem 4">Sem 4</option>
+                <option value="Sem 5">Sem 5</option>
+                <option value="Sem 6">Sem 6</option>
+              </select>
+            </div>
+            <div style="flex: 1.4; min-width: 200px;">
+              <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:5px;">Subject Name (Match Subject Title) *</label>
+              <input type="text" id="pyqSubjectInput" class="broadcast-input" style="width: 100%; min-width: 0;" placeholder="e.g. Data Structures / Core Java / Python">
+            </div>
+            <div style="flex: 1.2; min-width: 180px;">
+              <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:5px;">Exam Section Title *</label>
+              <input type="text" id="pyqExamTitleInput" class="broadcast-input" style="width: 100%; min-width: 0;" placeholder="e.g. Winter 2027 Examination">
+            </div>
+            <div style="flex: 0.6; min-width: 100px;">
+              <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:5px;">Year</label>
+              <input type="text" id="pyqYearInput" class="broadcast-input" style="width: 100%; min-width: 0;" placeholder="2027" value="2027">
+            </div>
+          </div>
+
+          <div class="broadcast-inputs-row" style="align-items: flex-end;">
+            <div style="flex: 0.8; min-width: 150px;">
+              <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:5px;">Status</label>
+              <select id="pyqStatusSelect" class="broadcast-input" style="width: 100%; min-width: 0;">
+                <option value="available">Available (Unlock PDF)</option>
+                <option value="coming_soon">Coming Soon (Lock)</option>
+              </select>
+            </div>
+            <div style="flex: 2; min-width: 240px;">
+              <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:5px;">PDF Link (Supabase / Drive / Direct PDF)</label>
+              <input type="text" id="pyqPdfUrlInput" class="broadcast-input" style="width: 100%; min-width: 0;" placeholder="https://...">
+            </div>
+            <button class="btn-save-notice" id="savePyqPaperBtn" type="button" style="height: 42px;">
+              <i class="fa-solid fa-unlock-keyhole"></i> Save / Unlock PYQ
+            </button>
+          </div>
+
+          <div id="livePyqsAdminList" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px;"></div>
+        </div>
       </div>
 
       <div class="sec-divider" data-divider-for="sec-pricing"><div class="sec-divider-node"></div></div>
@@ -904,7 +982,7 @@
       <div class="admin-section" id="sec-pricing" data-section="sec-pricing">
         <div class="sec-heading-block">
           <div class="sec-heading-left">
-            <span class="sec-pill" style="color:#fbbf24; background:rgba(245,158,11,0.12); border-color:rgba(245,158,11,0.3);"><i class="fa-solid fa-tags"></i> Monetization Control</span>
+            <span class="sec-pill" style="color:#fbbf24; background:rgba(245,158,11,0.16); border-color:rgba(245,158,11,0.35);"><i class="fa-solid fa-tags"></i> Monetization Control</span>
             <h2 class="sec-title">Pricing, Discounts &amp; <span>Payment Links</span></h2>
           </div>
         </div>
@@ -918,13 +996,13 @@
               </h3>
               <span style="font-size: 0.78rem; color: var(--text-dim);">Update Strike Price, Offer Price, Discount % &amp; Razorpay Link live across Notes, QBs &amp; Sample Papers</span>
             </div>
-            <span class="cat-badge" id="pricePreviewBadge" style="font-size: 0.8rem; padding: 6px 14px; background: rgba(245, 158, 11, 0.16); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">SAVE 0%</span>
+            <span class="cat-badge" id="pricePreviewBadge" style="font-size: 0.8rem; padding: 6px 14px; background: rgba(245, 158, 11, 0.2); color: #fcd34d; border-color: rgba(245, 158, 11, 0.45);">SAVE 0%</span>
           </div>
 
           <div class="broadcast-inputs-row">
             <div style="flex: 1.5; min-width: 260px;">
               <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:5px;">Select Paid Card (Notes / Question Banks / Sample Papers)</label>
-              <select id="priceCardSelect" class="broadcast-input" style="width: 100%; background: #0f172a;">
+              <select id="priceCardSelect" class="broadcast-input" style="width: 100%;">
                 <option value="">-- Select Paid Card --</option>
               </select>
             </div>
@@ -1022,7 +1100,7 @@
       <div class="admin-section" id="sec-uploads" data-section="sec-uploads">
         <div class="sec-heading-block">
           <div class="sec-heading-left">
-            <span class="sec-pill" style="color:#fbbf24; background:rgba(245,158,11,0.12); border-color:rgba(245,158,11,0.3);"><i class="fa-solid fa-inbox"></i> Community Uploads</span>
+            <span class="sec-pill" style="color:#fbbf24; background:rgba(245,158,11,0.16); border-color:rgba(245,158,11,0.35);"><i class="fa-solid fa-inbox"></i> Community Uploads</span>
             <h2 class="sec-title">Student Submitted <span>Materials</span></h2>
           </div>
         </div>
@@ -1340,6 +1418,7 @@
       { id: 'pyq-sem5-adv-python-w2026', title: 'Sem 5 Adv Python - Winter 2026 Exam', cat: 'PYQs', sem: 'Sem 5' },
       { id: 'pyq-sem5-data-mining-w2026', title: 'Sem 5 Data Mining - Winter 2026 Exam', cat: 'PYQs', sem: 'Sem 5' },
       { id: 'pyq-sem5-data-science-w2026', title: 'Sem 5 Data Science - Winter 2026 Exam', cat: 'PYQs', sem: 'Sem 5' },
+      { id: 'pyq-sem5-minor-cn-python-w2026', title: 'Sem 5 Minor CN & Adv Python - Winter 2026 Exam', cat: 'PYQs', sem: 'Sem 5' },
       { id: 'pyq-sem6-adv-java-s2027', title: 'Sem 6 Adv Java - Summer 2027 Exam', cat: 'PYQs', sem: 'Sem 6' },
       { id: 'pyq-sem6-computer-animation-s2027', title: 'Sem 6 Animation - Summer 2027 Exam', cat: 'PYQs', sem: 'Sem 6' },
       { id: 'pyq-sem6-dsm-s2027', title: 'Sem 6 DSM - Summer 2027 Exam', cat: 'PYQs', sem: 'Sem 6' },
@@ -1401,8 +1480,7 @@
       { id: 'sample-paper-sem3', title: 'Semester III Sample Paper', cat: 'Sample Papers', sem: 'Sem 3' },
       { id: 'sample-paper-sem4', title: 'Semester IV Sample Paper', cat: 'Sample Papers', sem: 'Sem 4' },
       { id: 'sample-paper-sem5', title: 'Semester V Sample Paper', cat: 'Sample Papers', sem: 'Sem 5' },
-      { id: 'sample-paper-sem6', title: 'Semester VI Sample Paper', cat: 'Sample Papers', sem: 'Sem 6' },
-      { id: 'pyq-sem5-minor-cn-python-w2026', title: 'Sem 5 Minor CN & Adv Python - Winter 2026 Exam', cat: 'PYQs', sem: 'Sem 5' },
+      { id: 'sample-paper-sem6', title: 'Semester VI Sample Paper', cat: 'Sample Papers', sem: 'Sem 6' }
     ];
 
     // State
@@ -1536,6 +1614,7 @@
       syncExamCountdownsAdmin();
       syncContributorsAdmin();
       syncPricingAdmin();
+      syncPyqManagerAdmin();
       startLiveClock();
     }
 
@@ -1560,6 +1639,7 @@
         renderCards();
         renderComments();
         populatePricingDropdown();
+        populatePyqDropdown();
       }, 50);
     }
 
@@ -1621,6 +1701,8 @@
 
         lastCombinedUserLikes = combinedUserLikes;
         scheduleDashboardRender();
+      }, err => {
+        console.warn("cards_data sync error:", err);
       });
     }
 
@@ -1848,7 +1930,7 @@
           noticeTextInput.value = data.text || '';
           noticeActiveToggle.checked = !!data.active;
         }
-      });
+      }, err => console.warn("Announcement sync error:", err));
     }
 
     saveNoticeBtn.addEventListener('click', async () => {
@@ -1899,7 +1981,7 @@
             <td><span style="color: var(--text-muted); font-size: 0.85rem;">${escapeHTML(d.examYear || 'N/A')}</span></td>
             <td>
               <div class="user-avatar-tag">
-                <div class="avatar-initial" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3);">
+                <div class="avatar-initial" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.35);">
                   ${escapeHTML((d.name || 'S').trim().charAt(0).toUpperCase())}
                 </div>
                 <span>${escapeHTML(d.name || 'Anonymous Student')}</span>
@@ -1943,7 +2025,7 @@
 
           tbody.appendChild(tr);
         });
-      });
+      }, err => console.warn("Student uploads sync error:", err));
     }
 
     // Document In-App Preview & Direct Download Helpers
@@ -2107,7 +2189,7 @@
           <td>
             <div class="user-avatar-tag">
               <div class="avatar-initial">${initial}</div>
-              <strong style="color: #cbd5e1;">${escapeHTML(c.name)}</strong>
+              <strong style="color: #e2e8f0;">${escapeHTML(c.name)}</strong>
             </div>
           </td>
           <td style="max-width: 400px; word-break: break-word;">
@@ -2209,7 +2291,7 @@
       }
     });
 
-    // Safe CSV cell formatter (escapes quotes, newlines & Excel formulas)
+    // Safe CSV cell formatter
     function csvCell(val) {
       let str = String(val ?? '').replace(/\r?\n|\r/g, ' ');
       if (/^[=+\-@]/.test(str)) str = "'" + str;
@@ -2257,7 +2339,9 @@
         trackedCards: getTrackedCards(),
         comments: allComments,
         studentContributions: studentUploadsList,
-        blockedWords: currentBlockedWords
+        blockedWords: currentBlockedWords,
+        cardPricing: savedPricingCache,
+        livePyqs: livePyqsCache
       };
       const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
@@ -2291,7 +2375,7 @@
         }
         renderBadWords();
         renderComments();
-      });
+      }, err => console.warn("Blocked words sync error:", err));
     }
 
     function renderBadWords() {
@@ -2482,7 +2566,7 @@
         snap.forEach(docSnap => {
           const u = docSnap.data() || {};
           const row = document.createElement('div');
-          row.style.cssText = 'display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 14px; background:rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius:10px; flex-wrap:wrap;';
+          row.style.cssText = 'display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 14px; background:rgba(255,255,255,0.05); border:1px solid var(--border-subtle); border-radius:10px; flex-wrap:wrap;';
           row.innerHTML = `
             <div style="flex:1; min-width:220px;">
               <span class="cat-badge" style="margin-right:6px;">${escapeHTML((u.badge || 'new').toUpperCase())}</span>
@@ -2514,7 +2598,7 @@
         key: 'slot1',
         tag: 'FIRST YEAR',
         tagColor: '#34d399',
-        tagBg: 'rgba(16, 185, 129, 0.15)',
+        tagBg: 'rgba(16, 185, 129, 0.18)',
         title: 'Sem I Theory',
         examDateISO: '2026-11-02T09:00',
         dateLabel: '02 Nov 2026',
@@ -2525,7 +2609,7 @@
         key: 'slot2',
         tag: 'SECOND YEAR',
         tagColor: '#fbbf24',
-        tagBg: 'rgba(245, 158, 11, 0.15)',
+        tagBg: 'rgba(245, 158, 11, 0.18)',
         title: 'Sem III Theory',
         examDateISO: '2026-12-21T09:00',
         dateLabel: '21 Dec 2026',
@@ -2536,7 +2620,7 @@
         key: 'slot3',
         tag: 'THIRD YEAR',
         tagColor: '#c084fc',
-        tagBg: 'rgba(168, 85, 247, 0.15)',
+        tagBg: 'rgba(168, 85, 247, 0.18)',
         title: 'Sem V',
         examDateISO: '',
         dateLabel: 'Coming Soon',
@@ -2547,7 +2631,7 @@
         key: 'slot4',
         tag: 'BACK EXAMS',
         tagColor: '#f87171',
-        tagBg: 'rgba(239, 68, 68, 0.15)',
+        tagBg: 'rgba(239, 68, 68, 0.18)',
         title: 'Sem I, III, V Theory',
         examDateISO: '',
         dateLabel: 'Coming Soon',
@@ -2576,7 +2660,7 @@
           const isComingSoon = item.mode === 'coming_soon';
 
           const box = document.createElement('div');
-          box.style.cssText = 'background:rgba(15,23,42,0.72); border:1px solid var(--border-subtle); border-radius:14px; padding:16px; display:flex; flex-direction:column; gap:10px;';
+          box.style.cssText = 'background:rgba(15,23,42,0.45); border:1px solid var(--border-subtle); border-radius:14px; padding:16px; display:flex; flex-direction:column; gap:10px;';
           box.innerHTML = `
             <div style="display:flex; justify-content:space-between; align-items:center;">
               <span style="font-size:0.72rem; font-weight:800; color:${def.tagColor}; background:${def.tagBg}; border:1px solid ${def.tagColor}55; padding:3px 10px; border-radius:20px; letter-spacing:0.6px;">
@@ -2592,7 +2676,7 @@
               </div>
               <div>
                 <label style="display:block; font-size:0.72rem; color:var(--text-muted); margin-bottom:4px;">Display Mode</label>
-                <select class="broadcast-input" style="width:100%; min-width:0; padding:8px 11px; font-size:0.84rem; background:#0f172a;" data-field="mode" data-slot="${def.key}">
+                <select class="broadcast-input" style="width:100%; min-width:0; padding:8px 11px; font-size:0.84rem;" data-field="mode" data-slot="${def.key}">
                   <option value="timer" ${item.mode === 'timer' ? 'selected' : ''}>Live Timer Active</option>
                   <option value="coming_soon" ${isComingSoon ? 'selected' : ''}>Coming Soon</option>
                 </select>
@@ -2700,7 +2784,7 @@
           opt.textContent = `${d.name || 'Student'} — ${d.subject || 'Material'} (${d.semester || ''})`;
           quickSelect.appendChild(opt);
         });
-      });
+      }, err => console.warn("Contributors quick-fill error:", err));
 
       if (quickSelect) {
         quickSelect.addEventListener('change', () => {
@@ -2727,12 +2811,12 @@
         snap.forEach(docSnap => {
           const c = docSnap.data() || {};
           const chip = document.createElement('div');
-          chip.style.cssText = 'display:inline-flex; align-items:center; gap:10px; padding:8px 12px; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.28); border-radius:10px;';
+          chip.style.cssText = 'display:inline-flex; align-items:center; gap:10px; padding:8px 12px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.32); border-radius:10px;';
           chip.innerHTML = `
             <div>
               <strong style="color:#fff; font-size:0.86rem;">${escapeHTML(c.name || '')}</strong>
               <span class="sem-badge" style="margin-left:5px;">${escapeHTML(c.semester || '')}</span>
-              <div style="font-size:0.74rem; color:#34d399;">${escapeHTML(c.contribution || '')}</div>
+              <div style="font-size:0.74rem; color:#6ee7b7;">${escapeHTML(c.contribution || '')}</div>
             </div>
             <button type="button" class="btn-delete" style="padding:4px 8px; font-size:0.72rem;"><i class="fa-solid fa-xmark"></i></button>
           `;
@@ -2746,7 +2830,7 @@
           });
           listEl.appendChild(chip);
         });
-      });
+      }, err => console.warn("Verified contributors sync error:", err));
     }
 
     document.getElementById('addContributorBtn')?.addEventListener('click', async () => {
@@ -2872,14 +2956,14 @@
             : 0;
 
           const chip = document.createElement('div');
-          chip.style.cssText = 'display:inline-flex; align-items:center; gap:10px; padding:8px 12px; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.3); border-radius:10px;';
+          chip.style.cssText = 'display:inline-flex; align-items:center; gap:10px; padding:8px 12px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.35); border-radius:10px;';
           chip.innerHTML = `
             <div>
               <strong style="color:#fff; font-size:0.84rem; font-family:\'JetBrains Mono\', monospace;">${escapeHTML(cardId)}</strong>
-              <div style="font-size:0.78rem; color:#fbbf24;">
-                <del style="color:#64748b;">₹${p.strikePrice}</del> → <b>₹${p.finalPrice}</b>
-                <span style="color:#34d399; margin-left:6px;">(${escapeHTML(p.customTag || (pct > 0 ? 'SAVE ' + pct + '%' : 'FLAT'))})</span>
-                ${p.paymentUrl ? '<span style="color:#38bdf8; margin-left:6px;">• Custom Link</span>' : ''}
+              <div style="font-size:0.78rem; color:#fcd34d;">
+                <del style="color:#94a3b8;">₹${p.strikePrice}</del> → <b>₹${p.finalPrice}</b>
+                <span style="color:#6ee7b7; margin-left:6px;">(${escapeHTML(p.customTag || (pct > 0 ? 'SAVE ' + pct + '%' : 'FLAT'))})</span>
+                ${p.paymentUrl ? '<span style="color:#7dd3fc; margin-left:6px;">• Custom Link</span>' : ''}
               </div>
             </div>
             <button type="button" class="btn-edit-like" style="padding:4px 8px;">Edit</button>
@@ -2905,7 +2989,7 @@
 
           listEl.appendChild(chip);
         });
-      });
+      }, err => console.warn("Pricing sync error:", err));
     }
 
     document.getElementById('savePriceBtn')?.addEventListener('click', async () => {
@@ -2947,6 +3031,195 @@
         showToast(`Live price & link updated for ${cardId}!`, "success");
       } catch (err) {
         showToast("Failed to save price!", "danger");
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    // -------------------------------------------------------------
+    // PYQ UNLOCKER & FUTURE PAPER ADDER (Admin -> Firestore live_pyqs)
+    // -------------------------------------------------------------
+    let livePyqsCache = {};
+
+    function populatePyqDropdown() {
+      const sel = document.getElementById('pyqCardSelect');
+      if (!sel) return;
+      const currentVal = sel.value;
+
+      const pyqCards = getTrackedCards().filter(c => c.cat === 'PYQs');
+      sel.innerHTML = '<option value="">-- Select Existing PYQ Card --</option>';
+      pyqCards.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = `[${c.sem}] ${c.title} (${c.id})`;
+        sel.appendChild(opt);
+      });
+
+      if (currentVal) sel.value = currentVal;
+    }
+
+    function parseExistingPyqCard(card) {
+      const parts = (card.title || '').split(' - ');
+      const left = (parts[0] || '').replace(/^Sem\s*[1-6]\s*/i, '').trim();
+      const right = (parts[1] || '').trim();
+      const yearMatch = right.match(/\b(20\d{2})\b/);
+
+      return {
+        sem: card.sem || 'Sem 1',
+        subject: left,
+        examTitle: right.replace(/\bExam$/i, 'Examination').trim() || right,
+        year: yearMatch ? yearMatch[1] : '2026'
+      };
+    }
+
+    function fillPyqForm(cardId, data = null) {
+      document.getElementById('pyqCardIdInput').value = cardId || '';
+      const cached = data || livePyqsCache[cardId];
+
+      if (cached) {
+        if (cached.sem) document.getElementById('pyqSemSelect').value = cached.sem;
+        document.getElementById('pyqSubjectInput').value = cached.subject || '';
+        document.getElementById('pyqExamTitleInput').value = cached.examTitle || '';
+        document.getElementById('pyqYearInput').value = cached.year || '2027';
+        document.getElementById('pyqStatusSelect').value = cached.status || 'available';
+        document.getElementById('pyqPdfUrlInput').value = cached.pdfUrl || '';
+        return;
+      }
+
+      const card = getTrackedCards().find(c => c.id === cardId);
+      if (card) {
+        const parsed = parseExistingPyqCard(card);
+        document.getElementById('pyqSemSelect').value = parsed.sem;
+        document.getElementById('pyqSubjectInput').value = parsed.subject;
+        document.getElementById('pyqExamTitleInput').value = parsed.examTitle;
+        document.getElementById('pyqYearInput').value = parsed.year;
+        document.getElementById('pyqStatusSelect').value = 'available';
+        document.getElementById('pyqPdfUrlInput').value = '';
+      }
+    }
+
+    document.getElementById('pyqCardSelect')?.addEventListener('change', (e) => {
+      const cardId = e.target.value;
+      if (cardId) fillPyqForm(cardId);
+    });
+
+    function syncPyqManagerAdmin() {
+      populatePyqDropdown();
+      const listEl = document.getElementById('livePyqsAdminList');
+      if (!listEl) return;
+
+      db.collection('live_pyqs').onSnapshot(snap => {
+        livePyqsCache = {};
+        listEl.innerHTML = '';
+
+        if (snap.empty) {
+          listEl.innerHTML = '<div style="font-size:0.82rem; color:var(--text-dim);">No live PYQ overrides or future papers saved yet.</div>';
+          return;
+        }
+
+        const docs = [];
+        snap.forEach(docSnap => {
+          const data = docSnap.data() || {};
+          livePyqsCache[docSnap.id] = data;
+          docs.push({ id: docSnap.id, ...data });
+        });
+
+        docs.sort((a, b) => (a.sem || '').localeCompare(b.sem || '') || a.id.localeCompare(b.id));
+
+        docs.forEach(p => {
+          const isAvail = p.status === 'available';
+          const chip = document.createElement('div');
+          chip.style.cssText = `display:inline-flex; align-items:center; gap:10px; padding:8px 12px; background:${isAvail ? 'rgba(16,185,129,0.12)' : 'rgba(245,158,11,0.12)'}; border:1px solid ${isAvail ? 'rgba(16,185,129,0.35)' : 'rgba(245,158,11,0.35)'}; border-radius:10px;`;
+          chip.innerHTML = `
+            <div>
+              <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                <span class="sem-badge">${escapeHTML(p.sem || '')}</span>
+                <strong style="color:#fff; font-size:0.84rem;">${escapeHTML(p.subject || '')} — ${escapeHTML(p.examTitle || '')}</strong>
+                <span style="font-size:0.7rem; font-weight:800; color:${isAvail ? '#6ee7b7' : '#fcd34d'};">${isAvail ? 'UNLOCKED' : 'LOCKED'}</span>
+              </div>
+              <div style="font-size:0.74rem; color:var(--text-dim); font-family:'JetBrains Mono', monospace; margin-top:2px;">
+                ${escapeHTML(p.id)} (${escapeHTML(p.year || '')})
+              </div>
+            </div>
+            <button type="button" class="btn-edit-like" style="padding:4px 8px;">Edit</button>
+            ${p.pdfUrl ? `<button type="button" class="btn-preview-link" style="padding:4px 8px; font-size:0.72rem;" title="Preview PDF"><i class="fa-solid fa-eye"></i></button>` : ''}
+            <button type="button" class="btn-delete" style="padding:4px 8px; font-size:0.72rem;" title="Delete PYQ Override"><i class="fa-solid fa-trash-can"></i></button>
+          `;
+
+          chip.querySelector('.btn-edit-like').addEventListener('click', () => {
+            const sel = document.getElementById('pyqCardSelect');
+            if ([...sel.options].some(o => o.value === p.id)) {
+              sel.value = p.id;
+            } else {
+              sel.value = '';
+            }
+            fillPyqForm(p.id, p);
+          });
+
+          const previewBtn = chip.querySelector('.btn-preview-link');
+          if (previewBtn) {
+            previewBtn.addEventListener('click', () => openDocPreview(p.pdfUrl, `${p.subject || ''} (${p.examTitle || ''})`));
+          }
+
+          chip.querySelector('.btn-delete').addEventListener('click', async () => {
+            try {
+              await db.collection('live_pyqs').doc(p.id).delete();
+              showToast(`Removed ${p.id} from live PYQs!`, "success");
+            } catch {
+              showToast("Failed to delete PYQ!", "danger");
+            }
+          });
+
+          listEl.appendChild(chip);
+        });
+      }, err => {
+        console.warn("Live PYQs sync error:", err);
+      });
+    }
+
+    document.getElementById('savePyqPaperBtn')?.addEventListener('click', async () => {
+      const cardId = document.getElementById('pyqCardIdInput').value.trim();
+      const sem = document.getElementById('pyqSemSelect').value;
+      const subject = document.getElementById('pyqSubjectInput').value.trim();
+      const examTitle = document.getElementById('pyqExamTitleInput').value.trim();
+      const year = document.getElementById('pyqYearInput').value.trim() || '2027';
+      const status = document.getElementById('pyqStatusSelect').value;
+      const pdfUrl = document.getElementById('pyqPdfUrlInput').value.trim();
+
+      if (!cardId) {
+        showToast("Please enter or select a PYQ Card ID!", "danger");
+        return;
+      }
+      if (!subject || !examTitle) {
+        showToast("Please enter Subject Name and Exam Section Title!", "danger");
+        return;
+      }
+      if (status === 'available' && (!pdfUrl || !/^https?:\/\//i.test(pdfUrl))) {
+        showToast("Please enter a valid PDF link (starting with https:// or http://) to unlock!", "danger");
+        return;
+      }
+      if (pdfUrl && !/^https?:\/\//i.test(pdfUrl)) {
+        showToast("PDF Link must start with https:// or http://", "danger");
+        return;
+      }
+
+      const btn = document.getElementById('savePyqPaperBtn');
+      btn.disabled = true;
+      try {
+        await db.collection('live_pyqs').doc(cardId).set({
+          sem,
+          subject,
+          examTitle,
+          year,
+          status,
+          pdfUrl,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+
+        showToast(`PYQ "${cardId}" saved (${status === 'available' ? 'Unlocked' : 'Locked'})!`, "success");
+      } catch (err) {
+        console.error(err);
+        showToast("Failed to save PYQ paper!", "danger");
       } finally {
         btn.disabled = false;
       }

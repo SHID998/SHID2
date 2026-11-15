@@ -1,7 +1,8 @@
 /**
  * Forsko - PYQs Semester Page JavaScript
  * Handles: Navbar Scroll, Mobile Menu, Single-Open Accordions, Real-Time Search Filtering,
- *          WhatsApp Share, and Firebase Live Likes (Base: 200), Dislikes & Pinned Comments.
+ *          WhatsApp Share, Firebase Live Likes (Base: 200), Dislikes, Pinned Comments,
+ *          and Real-Time Admin PYQ Unlocker / Adder (Firestore `live_pyqs`).
  */
 
 const firebaseConfig = {
@@ -36,9 +37,66 @@ document.addEventListener('DOMContentLoaded', () => {
   const noResultsState = document.getElementById('noResultsState');
 
   /* --------------------------------------------------------------------------
+     Helpers: Sanitization & Semester Detection
+     -------------------------------------------------------------------------- */
+  function escapeHTML(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/[&<>'"]/g,
+      tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      }[tag] || tag)
+    );
+  }
+
+  function safeUrl(rawUrl) {
+    if (!rawUrl) return '#';
+    const trimmed = String(rawUrl).trim();
+    if (/^(https?:\/\/|\.\.?\/|\/)/i.test(trimmed)) {
+      return trimmed;
+    }
+    return '#';
+  }
+
+  function detectCurrentPyqSemester() {
+    const text = `${document.title || ''} ${window.location.pathname || ''}`;
+    if (/semester\s+iii\b|semester[-_]?3\b|sem[-_]?3\b/i.test(text)) return 'Sem 3';
+    if (/semester\s+ii\b|semester[-_]?2\b|sem[-_]?2\b/i.test(text)) return 'Sem 2';
+    if (/semester\s+iv\b|semester[-_]?4\b|sem[-_]?4\b/i.test(text)) return 'Sem 4';
+    if (/semester\s+vi\b|semester[-_]?6\b|sem[-_]?6\b/i.test(text)) return 'Sem 6';
+    if (/semester\s+v\b|semester[-_]?5\b|sem[-_]?5\b/i.test(text)) return 'Sem 5';
+    if (/semester\s+i\b|semester[-_]?1\b|sem[-_]?1\b/i.test(text)) return 'Sem 1';
+    return null;
+  }
+
+  const currentSem = detectCurrentPyqSemester();
+  const semSlug = (currentSem || 'sem1').toLowerCase().replace(/\s+/g, '');
+
+  function refreshAccordionHeight(accordionCard) {
+    if (!accordionCard || !accordionCard.classList.contains('open')) return;
+    const content = accordionCard.querySelector('.accordion-content');
+    if (content) {
+      content.style.maxHeight = content.scrollHeight + 40 + 'px';
+    }
+  }
+
+  function updatePaperCountBadge(accordionCard) {
+    if (!accordionCard) return;
+    const grid = accordionCard.querySelector('.papers-grid');
+    const countBadge = accordionCard.querySelector('.papers-count-badge');
+    if (!grid || !countBadge) return;
+    const availCount = grid.querySelectorAll('.status-available').length;
+    countBadge.innerHTML = `<i class="fa-solid fa-file-lines"></i> ${availCount} Paper${availCount === 1 ? '' : 's'}`;
+  }
+
+  /* --------------------------------------------------------------------------
      1. Navbar Scroll Effect
      -------------------------------------------------------------------------- */
   window.addEventListener('scroll', () => {
+    if (!navbar) return;
     if (window.scrollY > 20) {
       navbar.classList.add('scrolled');
     } else {
@@ -53,20 +111,21 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger.addEventListener('click', () => {
       navMenu.classList.toggle('active');
       const icon = hamburger.querySelector('i');
-      if (navMenu.classList.contains('active')) {
-        icon.classList.replace('fa-bars', 'fa-xmark');
-      } else {
-        icon.classList.replace('fa-xmark', 'fa-bars');
+      if (icon) {
+        if (navMenu.classList.contains('active')) {
+          icon.classList.replace('fa-bars', 'fa-xmark');
+        } else {
+          icon.classList.replace('fa-xmark', 'fa-bars');
+        }
       }
     });
   }
 
-  const navLinks = document.querySelectorAll('.nav-link');
-  navLinks.forEach(link => {
+  document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
       if (navMenu && navMenu.classList.contains('active')) {
         navMenu.classList.remove('active');
-        const icon = hamburger.querySelector('i');
+        const icon = hamburger?.querySelector('i');
         if (icon) {
           icon.classList.replace('fa-xmark', 'fa-bars');
         }
@@ -105,11 +164,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (content) {
-      content.style.maxHeight = content.scrollHeight + 'px';
+      content.style.maxHeight = content.scrollHeight + 40 + 'px';
     }
   }
 
   accordionCards.forEach(card => {
+    updatePaperCountBadge(card);
     const header = card.querySelector('.accordion-header');
 
     if (header) {
@@ -135,6 +195,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  window.addEventListener('resize', () => {
+    accordionCards.forEach(card => refreshAccordionHeight(card));
+  });
+
   /* --------------------------------------------------------------------------
      4. Real-Time Subject Search Filtering
      -------------------------------------------------------------------------- */
@@ -142,14 +206,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const query = searchInput.value.toLowerCase().trim();
     let visibleCount = 0;
 
-    if (query.length > 0) {
-      searchClearBtn.classList.remove('hidden');
-    } else {
-      searchClearBtn.classList.add('hidden');
+    if (searchClearBtn) {
+      if (query.length > 0) {
+        searchClearBtn.classList.remove('hidden');
+      } else {
+        searchClearBtn.classList.add('hidden');
+      }
     }
 
     accordionCards.forEach(card => {
-      const subjectData = card.getAttribute('data-subject') || '';
+      const subjectData = (card.getAttribute('data-subject') || '').toLowerCase();
       const titleText = card.querySelector('.subject-title')?.textContent.toLowerCase() || '';
       const descText = card.querySelector('.subject-description')?.textContent.toLowerCase() || '';
 
@@ -166,10 +232,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    if (visibleCount === 0) {
-      noResultsState.classList.remove('hidden');
-    } else {
-      noResultsState.classList.add('hidden');
+    if (noResultsState) {
+      if (visibleCount === 0) {
+        noResultsState.classList.remove('hidden');
+      } else {
+        noResultsState.classList.add('hidden');
+      }
     }
   }
 
@@ -186,37 +254,69 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------------------------------
-     5. One-Click WhatsApp Share
+     5. Reusable WhatsApp Share + Firebase Feedback Binding
      -------------------------------------------------------------------------- */
-  document.querySelectorAll('.share-btn').forEach(btn => {
+  function bindShareButton(btn) {
+    if (!btn || btn.dataset.shareBound === 'true') return;
+    btn.dataset.shareBound = 'true';
+
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const card = btn.closest('.paper-card, .subject-accordion-card');
-      const title = card ? (card.querySelector('.paper-title, .subject-title')?.textContent.trim() || 'Study Material') : 'Study Material';
+      const accordion = btn.closest('.subject-accordion-card');
+      const subjectName = accordion?.querySelector('.subject-title')?.textContent.trim() || '';
+      const paperTitle = card?.querySelector('.paper-title, .subject-title')?.textContent.trim() || 'Study Material';
+      const fullTitle = subjectName && paperTitle !== subjectName ? `${subjectName} (${paperTitle})` : paperTitle;
       const pageUrl = window.location.href;
 
-      const message = encodeURIComponent(`📚 *${title}*\nB.Sc. Computer Science ke PYQs aur Papers Forsko par mil gaye!\nAbhi check karo:\n🔗 ${pageUrl}`);
-      window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
+      const message = encodeURIComponent(`📚 *${fullTitle}*\nB.Sc. Computer Science ke PYQs aur Papers Forsko par mil gaye!\nAbhi check karo:\n🔗 ${pageUrl}`);
+      window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank', 'noopener,noreferrer');
     });
-  });
-
-  /* --------------------------------------------------------------------------
-     6. Firebase Live Likes (Base 200), Dislikes & Pinned Comments
-     -------------------------------------------------------------------------- */
-  if (!db) {
-    console.warn("Firebase SDK not loaded on this page. Add firebase-app-compat & firebase-firestore-compat scripts in HTML.");
-    return;
   }
 
-  const paperCards = document.querySelectorAll('.paper-card');
+  function createFeedbackMarkup() {
+    return `
+      <div class="feedback-actions">
+        <button type="button" class="action-btn like-btn" title="Like">
+          <i class="fa-regular fa-heart"></i>
+          <span class="like-count">${BASE_LIKES}</span>
+        </button>
+        <button type="button" class="action-btn dislike-btn" title="Dislike">
+          <i class="fa-solid fa-arrow-down"></i>
+        </button>
+        <button type="button" class="action-btn comment-toggle-btn" title="Comments">
+          <i class="fa-regular fa-comment-dots"></i>
+          <span class="comment-count-badge">0</span>
+        </button>
+        <button type="button" class="action-btn share-btn" title="Share on WhatsApp">
+          <i class="fa-brands fa-whatsapp"></i>
+        </button>
+      </div>
 
-  paperCards.forEach((card, index) => {
-    const cardId = card.getAttribute('data-card-id') || `paper_sem1_${index}`;
+      <div class="comments-dropdown">
+        <div class="comments-list"></div>
+        <form class="comment-form">
+          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+          <div class="input-with-btn">
+            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+          </div>
+        </form>
+      </div>
+    `;
+  }
+
+  function bindPaperCardFeedback(card, fallbackIndex = 0) {
+    if (!card || card.dataset.feedbackBound === 'true') return;
+
+    const shareBtn = card.querySelector('.share-btn');
+    if (shareBtn) bindShareButton(shareBtn);
+
+    if (!db) return;
 
     const likeBtn = card.querySelector('.like-btn');
     const dislikeBtn = card.querySelector('.dislike-btn');
     const likeCountSpan = card.querySelector('.like-count');
-
     const commentToggleBtn = card.querySelector('.comment-toggle-btn');
     const commentDropdown = card.querySelector('.comments-dropdown');
     const commentCountBadge = card.querySelector('.comment-count-badge');
@@ -225,6 +325,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!likeBtn || !dislikeBtn || !commentForm) return;
 
+    card.dataset.feedbackBound = 'true';
+
+    const cardId = card.getAttribute('data-card-id') || `paper_${semSlug}_${fallbackIndex}`;
     likeCountSpan.textContent = BASE_LIKES;
 
     let userReaction = localStorage.getItem(`reaction_${cardId}`) || null;
@@ -257,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         likeCountSpan.textContent = BASE_LIKES;
       }
-    });
+    }, err => console.warn(`Likes sync error (${cardId}):`, err));
 
     // LIVE COMMENTS LISTENER (Pinned Sabse Upar + Newest First)
     const commentsColRef = cardDocRef.collection('comments');
@@ -307,14 +410,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       commentsList.scrollTop = 0;
-
-      // Keep accordion height updated if open
-      const parentAccordion = card.closest('.subject-accordion-card');
-      const content = parentAccordion ? parentAccordion.querySelector('.accordion-content') : null;
-      if (content && parentAccordion.classList.contains('open')) {
-        content.style.maxHeight = content.scrollHeight + 300 + 'px';
-      }
-    });
+      refreshAccordionHeight(card.closest('.subject-accordion-card'));
+    }, err => console.warn(`Comments sync error (${cardId}):`, err));
 
     // LIKE BUTTON CLICK
     likeBtn.addEventListener('click', async (e) => {
@@ -370,12 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
       commentToggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         commentDropdown.classList.toggle('show');
-
-        const parentAccordion = card.closest('.subject-accordion-card');
-        const content = parentAccordion ? parentAccordion.querySelector('.accordion-content') : null;
-        if (content && parentAccordion.classList.contains('open')) {
-          content.style.maxHeight = content.scrollHeight + 300 + 'px';
-        }
+        refreshAccordionHeight(card.closest('.subject-accordion-card'));
       });
     }
 
@@ -414,19 +506,198 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sendBtn) sendBtn.disabled = false;
       }
     });
+  }
+
+  document.querySelectorAll('.share-btn').forEach(bindShareButton);
+
+  if (!db) {
+    console.warn("Firebase SDK not loaded on this page. Add firebase-app-compat & firebase-firestore-compat scripts in HTML.");
+    return;
+  }
+
+  document.querySelectorAll('.paper-card').forEach((card, index) => {
+    bindPaperCardFeedback(card, index);
   });
 
-  function escapeHTML(str) {
-    if (str === null || str === undefined) return '';
-    return String(str).replace(/[&<>'"]/g,
-      tag => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        "'": '&#39;',
-        '"': '&quot;'
-      }[tag] || tag)
-    );
+  /* --------------------------------------------------------------------------
+     6. Dynamic PYQ Unlocker & Future Paper Adder (`live_pyqs` from Admin Panel)
+     -------------------------------------------------------------------------- */
+  const SUBJECT_ALIASES = {
+    'foc': ['fundamentals of computer'],
+    'c': ['programming with c'],
+    'ds': ['data structures', 'data structure'],
+    'rdbms': ['relational database management systems', 'rdbms'],
+    'iks': ['iks in computational sciences', 'iks theory'],
+    'oop': ['object oriented programming', 'c++'],
+    'oop c++': ['object oriented programming with c++'],
+    'cn': ['computer networks'],
+    'python': ['python programming'],
+    'java': ['core java programming'],
+    'core java': ['core java programming'],
+    'se': ['software engineering'],
+    'adv python': ['advanced python programming'],
+    'adv java': ['advanced java programming'],
+    'animation': ['computer animation'],
+    'dsm': ['digital systems and microprocessors'],
+    'ai': ['artificial intelligence'],
+    'ml': ['machine learning'],
+    'data mining': ['data mining'],
+    'data science': ['data science'],
+    'minor cn & adv python': ['minor theory - computer networks and advanced python'],
+    'minor cn & python': ['minor theory - computer networks and advanced python'],
+    'minor ds & rdbms': ['minor theory - data structures and rdbms'],
+    'minor c++ & python': ['minor theory - c++ and python'],
+    'minor se & java': ['minor theory - software engineering and java']
+  };
+
+  function findTargetAccordion(accordions, subjectQuery) {
+    if (!subjectQuery) return null;
+    const clean = subjectQuery.toLowerCase().trim();
+    const wantsMinor = clean.includes('minor');
+    const aliases = SUBJECT_ALIASES[clean] || [clean];
+
+    // Prefer exact Minor/Major separation so "Data Structures" doesn't hit "Minor Data Structures"
+    const pool = accordions.filter(acc => {
+      const ds = (acc.getAttribute('data-subject') || '').toLowerCase();
+      const tt = (acc.querySelector('.subject-title')?.textContent || '').toLowerCase();
+      const isMinorAcc = ds.includes('minor') || tt.includes('minor');
+      return wantsMinor ? isMinorAcc : !isMinorAcc;
+    });
+
+    const searchList = pool.length ? pool : accordions;
+
+    return searchList.find(acc => {
+      const ds = (acc.getAttribute('data-subject') || '').toLowerCase();
+      const tt = (acc.querySelector('.subject-title')?.textContent || '').toLowerCase();
+      const combined = `${ds} ${tt}`;
+
+      if (aliases.some(term => combined.includes(term))) return true;
+      // Exact word match fallback for short abbreviations
+      const escaped = clean.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return new RegExp(`\\b${escaped}\\b`, 'i').test(combined);
+    }) || null;
   }
+
+  function buildPaperActionsHtml(pdfUrl, isAvailable) {
+    if (isAvailable && pdfUrl) {
+      const cleanUrl = escapeHTML(safeUrl(pdfUrl));
+      return `
+        <a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="paper-btn btn-preview">
+          <i class="fa-solid fa-eye"></i> Preview
+        </a>
+        <a href="${cleanUrl}" download class="paper-btn btn-download">
+          <i class="fa-solid fa-download"></i> Download
+        </a>
+      `;
+    }
+    return `
+      <button type="button" class="paper-btn btn-disabled" disabled>
+        <i class="fa-solid fa-lock"></i> Coming Soon
+      </button>
+    `;
+  }
+
+  function syncDynamicPyqs() {
+    if (!currentSem || !document.getElementById('accordionsList')) return;
+
+    const accordions = Array.from(document.querySelectorAll('.subject-accordion-card'));
+
+    db.collection('live_pyqs')
+      .where('sem', '==', currentSem)
+      .onSnapshot(snap => {
+        if (snap.empty) return;
+
+        snap.forEach(docSnap => {
+          const p = docSnap.data() || {};
+          const cardId = docSnap.id;
+          const subjQuery = (p.subject || '').trim();
+          const examQuery = (p.examTitle || '').toLowerCase().trim();
+          const isAvail = p.status === 'available' && Boolean(p.pdfUrl);
+
+          // 1. Pehle poore page par exact data-card-id se dhundhein (most reliable!)
+          let targetCard = document.querySelector(`.paper-card[data-card-id="${CSS.escape(cardId)}"]`);
+          let targetAcc = targetCard ? targetCard.closest('.subject-accordion-card') : findTargetAccordion(accordions, subjQuery);
+
+          if (!targetAcc) return;
+          const grid = targetAcc.querySelector('.papers-grid');
+          if (!grid) return;
+
+          // 2. Agar data-card-id page par nahi tha, to accordion ke andar examTitle se match karein
+          if (!targetCard && examQuery) {
+            targetCard = Array.from(grid.querySelectorAll('.paper-card')).find(c => {
+              const t = (c.querySelector('.paper-title')?.textContent || '').toLowerCase().trim();
+              return t === examQuery;
+            }) || null;
+          }
+
+          if (targetCard) {
+            // Existing card ("Coming Soon" ya existing paper) ko live update karein
+            targetCard.setAttribute('data-card-id', cardId);
+
+            const yrEl = targetCard.querySelector('.year-badge');
+            if (yrEl && p.year) yrEl.textContent = p.year;
+
+            const titleEl = targetCard.querySelector('.paper-title');
+            if (titleEl && p.examTitle) titleEl.textContent = p.examTitle;
+
+            const badgeEl = targetCard.querySelector('.status-badge');
+            if (badgeEl) {
+              badgeEl.className = isAvail ? 'status-badge status-available' : 'status-badge status-coming-soon';
+              badgeEl.innerHTML = isAvail
+                ? '<i class="fa-solid fa-circle-check"></i> Available'
+                : '<i class="fa-solid fa-clock"></i> Coming Soon';
+            }
+
+            const actionsEl = targetCard.querySelector('.paper-actions');
+            if (actionsEl) {
+              actionsEl.innerHTML = buildPaperActionsHtml(p.pdfUrl, isAvail);
+            }
+
+            // Agar Coming Soon card par feedback section nahi tha aur ab unlock hua hai to add karein
+            if (isAvail && !targetCard.querySelector('.card-feedback')) {
+              const feedbackDiv = document.createElement('div');
+              feedbackDiv.className = 'card-feedback';
+              feedbackDiv.innerHTML = createFeedbackMarkup();
+              targetCard.appendChild(feedbackDiv);
+            }
+
+            bindPaperCardFeedback(targetCard);
+          } else {
+            // 3. Brand-New Paper Card (e.g. Winter 2027 / Summer 2027) create karein
+            const newCard = document.createElement('div');
+            newCard.className = 'paper-card';
+            newCard.setAttribute('data-card-id', cardId);
+            newCard.setAttribute('data-dynamic-pyq', 'true');
+            newCard.innerHTML = `
+              <div class="paper-header">
+                <span class="year-badge"></span>
+                <span class="status-badge ${isAvail ? 'status-available' : 'status-coming-soon'}">
+                  ${isAvail ? '<i class="fa-solid fa-circle-check"></i> Available' : '<i class="fa-solid fa-clock"></i> Coming Soon'}
+                </span>
+              </div>
+              <h3 class="paper-title"></h3>
+              <div class="paper-actions">${buildPaperActionsHtml(p.pdfUrl, isAvail)}</div>
+              <div class="card-feedback">${createFeedbackMarkup()}</div>
+            `;
+            newCard.querySelector('.year-badge').textContent = p.year || '2027';
+            newCard.querySelector('.paper-title').textContent = p.examTitle || 'New Examination';
+            grid.appendChild(newCard);
+
+            bindPaperCardFeedback(newCard);
+          }
+
+          updatePaperCountBadge(targetAcc);
+          refreshAccordionHeight(targetAcc);
+        });
+
+        if (typeof window.attachBookmarkButtons === 'function') {
+          window.attachBookmarkButtons();
+        }
+      }, err => {
+        console.warn('Dynamic PYQs sync error:', err);
+      });
+  }
+
+  syncDynamicPyqs();
 
 });
