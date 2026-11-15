@@ -4594,7 +4594,7 @@
 
 
 <!-- =========================================================
-     FORSKO POSTER 2x2 GRID PRICING MODAL
+     FORSKO 6-CARD ACADEMIC RESOURCES MODAL (3x2 POSTER GRID)
      ========================================================= -->
 <div 
   id="forskoPricingOverlay" 
@@ -4605,7 +4605,7 @@
   aria-hidden="true" 
   style="display: none;"
 >
-  <div class="forsko-pricing-card">
+  <div class="forsko-pricing-card forsko-res-card">
     
     <!-- Top Ambient Laser Glow -->
     <div class="forsko-pricing-glow" aria-hidden="true"></div>
@@ -4621,7 +4621,7 @@
     </button>
 
     <!-- Header Section -->
-    <div class="forsko-pricing-header">
+    <div class="forsko-pricing-header res-header">
       <div class="forsko-pricing-logo-wrap">
         <img 
           src="images/FORSKO2.png" 
@@ -4631,217 +4631,201 @@
         >
       </div>
 
-      <h2 id="forskoPricingHeading" class="forsko-pricing-title">
-        <span class="sparkle-left">✦</span>
-        Study Materials
-        <span class="sparkle-right">✦</span>
+      <!-- Wreath Decorated Title -->
+      <h2 id="forskoPricingHeading" class="res-main-title">
+        <i class="fa-solid fa-award wreath-icon"></i>
+        <span>Academic <span class="res-cyan-gradient">Resources</span></span>
+        <i class="fa-solid fa-award wreath-icon wreath-flip"></i>
       </h2>
 
-      <div class="forsko-sub-pill">
-        <i class="fa-solid fa-layer-group"></i>
-        <span>All Your Academic Needs in One Place!</span>
+      <div class="forsko-sub-pill res-sub-pill">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>All Your Exam Preparation Resources in One Place!</span>
       </div>
     </div>
 
-    <!-- 2x2 MAIN POSTER GRID -->
-    <div class="poster-2x2-grid">
+    <!-- 6 CARDS (3x2 GRID) -->
+    <div class="res-3x2-grid">
 
-      <!-- CARD 1: NOTES (Top-Left) -->
-      <div class="poster-card card-cyan">
-        <div class="poster-card-badge">
-          <i class="fa-solid fa-book-open"></i>
-          <span>Notes</span>
+      <!-- CARD 01: SYLLABUS (Cyan Glow) -->
+      <div class="res-card-box card-box-01">
+        <div class="card-num-badge num-01">01</div>
+        
+        <div class="card-head-line">
+          <div class="card-ico-circle cyan-ico"><i class="fa-solid fa-book-bookmark"></i></div>
+          <div class="card-title-group">
+            <h3 class="card-title-text">Syllabus</h3>
+            <span class="card-sub-text">B.Sc. Computer Science</span>
+          </div>
         </div>
 
-        <div class="poster-card-body">
-          <!-- Handwritten Notes -->
-          <div class="poster-item-row">
-            <div class="item-left">
-              <i class="fa-solid fa-file-lines item-icon"></i>
-              <span class="item-title">Handwritten<br>Notes</span>
-            </div>
-            <div class="item-divider"></div>
-            <div class="price-pill-cyan">₹19 – ₹39/-</div>
-          </div>
+        <div class="card-mid-label">
+          <i class="fa-regular fa-folder-open"></i>
+          <span>Semester-wise Syllabus</span>
+        </div>
 
-          <!-- Infographics -->
-          <div class="poster-item-row">
-            <div class="item-left">
-              <i class="fa-solid fa-chart-simple item-icon"></i>
-              <span class="item-title">Infographics</span>
-            </div>
-            <div class="free-pill-neon">
-              <span class="free-ray"></span> FREE ACCESS <span class="free-ray"></span>
-            </div>
+        <!-- 6 Semester Folder Pills -->
+        <div class="sem-pills-row">
+          <span class="sem-tag"><i class="fa-solid fa-folder"></i> Sem 1</span>
+          <span class="sem-tag"><i class="fa-solid fa-folder"></i> Sem 2</span>
+          <span class="sem-tag"><i class="fa-solid fa-folder"></i> Sem 3</span>
+          <span class="sem-tag"><i class="fa-solid fa-folder"></i> Sem 4</span>
+          <span class="sem-tag"><i class="fa-solid fa-folder"></i> Sem 5</span>
+          <span class="sem-tag"><i class="fa-solid fa-folder"></i> Sem 6</span>
+        </div>
+
+        <div class="price-pill-free"><p class="center-text">FREE ACCESS</p>
+</div>
+      </div>
+
+      <!-- CARD 02: NOTES (Purple Glow) -->
+      <div class="res-card-box card-box-02">
+        <div class="card-num-badge num-02">02</div>
+
+        <div class="card-head-line">
+          <div class="card-ico-circle purple-ico"><i class="fa-solid fa-book-open"></i></div>
+          <div class="card-title-group">
+            <h3 class="card-title-text">Notes</h3>
+          </div>
+        </div>
+
+        <div class="card-rows-wrap">
+          <div class="card-list-row">
+            <div class="list-left"><i class="fa-solid fa-file-pen"></i> <span>Handwritten Notes</span></div>
+             <div class="price-pill-cyan">₹19 - ₹39/-</div>
+          </div>
+          <div class="card-list-row">
+            <div class="list-left"><i class="fa-solid fa-chart-simple"></i> <span>Infographics</span></div>
+            <div class="price-pill-free">FREE ACCESS</div>
           </div>
         </div>
       </div>
 
-      <!-- CARD 2: QUESTION BANKS (Top-Right) -->
-      <div class="poster-card card-cyan">
-        <div class="poster-card-badge">
-          <i class="fa-solid fa-clipboard-question"></i>
-          <span>Question Banks</span>
+      <!-- CARD 03: QUESTION BANK (Gold/Orange Glow) -->
+      <div class="res-card-box card-box-03">
+        <div class="card-num-badge num-03">03</div>
+
+        <div class="card-head-line">
+          <div class="card-ico-circle gold-ico"><i class="fa-solid fa-database"></i></div>
+          <div class="card-title-group">
+            <h3 class="card-title-text">Question Bank</h3>
+          </div>
         </div>
 
-        <div class="poster-card-body">
-          <!-- Unit-wise QB -->
-          <div class="poster-item-row">
-            <div class="item-left">
-              <i class="fa-solid fa-layer-group item-icon"></i>
-              <span class="item-title">Unit-wise<br>Question Bank</span>
-            </div>
-            <div class="free-pill-neon">
-              <span class="free-ray"></span> FREE ACCESS <span class="free-ray"></span>
-            </div>
+        <div class="card-rows-wrap">
+          <div class="card-list-row">
+            <div class="list-left"><i class="fa-solid fa-layer-group"></i> <span>Unit-wise Question Bank</span></div>
+            <div class="price-pill-free">FREE ACCESS</div>
           </div>
-
-          <!-- Most Important QB -->
-          <div class="poster-item-row">
-            <div class="item-left">
-              <i class="fa-solid fa-bullseye item-icon"></i>
-              <span class="item-title">Most Important<br>Question Banks</span>
-            </div>
-            <div class="item-divider"></div>
+          <div class="card-list-row">
+            <div class="list-left"><i class="fa-solid fa-crown text-gold"></i> <span>Most Important Questions Bank</span></div>
             <div class="price-pill-cyan">₹39/-</div>
           </div>
         </div>
       </div>
 
-      <!-- CARD 3: PAPER PATTERN & SAMPLE PAPERS (Bottom-Left) -->
-      <div class="poster-card card-cyan">
-        <div class="poster-card-badge badge-long">
-          <i class="fa-solid fa-file-circle-check"></i>
-          <span>Paper Pattern & Sample Papers</span>
+      <!-- CARD 04: PYQS (Green Glow) -->
+      <div class="res-card-box card-box-04">
+        <div class="card-num-badge num-04">04</div>
+
+        <div class="card-head-line">
+          <div class="card-ico-circle green-ico"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <div class="card-title-group">
+            <h3 class="card-title-text">PYQs</h3>
+          </div>
         </div>
 
-        <div class="poster-card-body">
-          <!-- Official Paper Pattern -->
-          <div class="poster-item-row">
-            <div class="item-left">
-              <i class="fa-solid fa-newspaper item-icon"></i>
-              <span class="item-title">Official<br>Paper Pattern</span>
-            </div>
-            <div class="free-pill-neon">
-              <span class="free-ray"></span> FREE ACCESS <span class="free-ray"></span>
-            </div>
+         <div class="card-rows-wrap">
+          <div class="card-list-row">
+            <div class="list-left"><i class="fa-solid fa-clock-rotate-left"></i> <span>Previous Year Question Papers</span></div>
+            <div class="price-pill-free">FREE ACCESS</div>
           </div>
+          <div class="card-list-row">
+            <div class="list-left"><i class="fa-solid fa-download"></i> <span>PYQS Downloads</span></div>
+            <div class="price-pill-free">FREE ACCESS</div>
+          </div>
+         
+        </div>
+       
+      </div>
 
-          <!-- Sample Papers -->
-          <div class="poster-item-row">
-            <div class="item-left">
-              <i class="fa-solid fa-copy item-icon"></i>
-              <span class="item-title">Sample<br>Papers</span>
-            </div>
-            <div class="item-divider"></div>
+      <!-- CARD 05: PAPER PATTERN & SAMPLE PAPERS (Pink Glow) -->
+      <div class="res-card-box card-box-05">
+        <div class="card-num-badge num-05">05</div>
+
+        <div class="card-head-line">
+          <div class="card-ico-circle pink-ico"><i class="fa-solid fa-file-lines"></i></div>
+          <div class="card-title-group">
+            <h3 class="card-title-text small-title">Paper Pattern & Sample Papers</h3>
+          </div>
+        </div>
+
+        <div class="card-rows-wrap">
+          <div class="card-list-row">
+            <div class="list-left"><i class="fa-regular fa-clipboard"></i> <span>Paper Pattern (Official)</span></div>
+            <div class="price-pill-free">FREE ACCESS</div>
+          </div>
+          <div class="card-list-row">
+            <div class="list-left"><i class="fa-solid fa-copy"></i> <span>Sample Papers</span></div>
             <div class="price-pill-cyan">₹29/-</div>
           </div>
         </div>
       </div>
 
-      <!-- CARD 4: PRACTICAL'S (Bottom-Right - GOLDEN HIGHLIGHT) -->
-      <div class="poster-card card-golden">
-        
-        <!-- Main Highlight Crown Badge -->
-        <div class="golden-crown-tag">
-          <i class="fa-solid fa-crown"></i>
-          <span></span>
+      <!-- CARD 06: PRACTICALS (Sky Blue Glow) -->
+      <div class="res-card-box card-box-06">
+        <div class="card-num-badge num-06">06</div>
+
+        <div class="card-head-line">
+          <div class="card-ico-circle sky-ico"><i class="fa-solid fa-laptop-code"></i></div>
+          <div class="card-title-group">
+            <h3 class="card-title-text">Practicals</h3>
+          </div>
         </div>
 
-        <div class="poster-card-badge badge-practical">
-          <i class="fa-solid fa-flask"></i>
-          <span>Practical's</span>
-        </div>
-
-        <div class="poster-card-body">
-          <!-- Practical PDF -->
-          <div class="poster-item-row practical-row">
-            <div class="item-left">
-              <div class="badge-mini pdf-mini">PDF</div>
-              <div class="practical-text">
-                <strong>Practical PDF</strong>
-                <small>(Prices Starts From)</small>
-              </div>
+        <div class="card-rows-wrap">
+          <div class="card-list-row">
+            <div class="list-left">
+              <span class="badge-tag-pdf">PDF</span>
+              <span>Practical PDFs</span>
             </div>
-            <div class="item-divider"></div>
             <div class="price-pill-cyan">₹49 – ₹59/-</div>
           </div>
-
-          <!-- Practical DOCX -->
-          <div class="poster-item-row practical-row">
-            <div class="item-left">
-              <div class="badge-mini docx-mini">W</div>
-              <div class="practical-text">
-                <strong>Practical Editable DocX</strong>
-                <small>(Prices Starts From)</small>
-              </div>
+          <div class="card-list-row">
+            <div class="list-left">
+              <span class="badge-tag-docx">W</span>
+              <span>Practical Editable DOCX</span>
             </div>
-            <div class="item-divider"></div>
             <div class="price-pill-cyan">₹129 – ₹200/-</div>
           </div>
-
-          <!-- Availability Green Strip -->
-          <div class="practical-avail-strip">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Sem 1 and Sem 2 Practical's Available</span>
-          </div>
         </div>
       </div>
 
     </div>
 
-    <!-- SAMPLE / PREVIEW BANNER -->
-    <div class="poster-preview-strip">
-      <div class="preview-left">
-        <i class="fa-solid fa-file-magnifying-glass preview-icon"></i>
-        <div class="preview-text-block">
-          <span class="preview-top-text">SAMPLE / PREVIEW</span>
-          <span class="preview-pill">ALSO AVAILABLE</span>
-        </div>
-      </div>
-
-      <div class="preview-vert-line"></div>
-
-      <div class="preview-right">
-        <span>Check Sample Before You Purchase!</span>
-        <i class="fa-solid fa-arrow-pointer pointer-arrow"></i>
-      </div>
+    <!-- 5 HORIZONTAL TRUST BADGES -->
+    <div class="res-trust-bar">
+      <div class="trust-pill"><i class="fa-solid fa-bolt text-cyan"></i> <span>Student Friendly</span></div>
+      <div class="trust-div"></div>
+      <div class="trust-pill"><i class="fa-solid fa-shield-halved text-cyan"></i> <span>Semester-wise Resources</span></div>
+      <div class="trust-div"></div>
+      <div class="trust-pill"><i class="fa-solid fa-layer-group text-cyan"></i> <span>Complete Academic Support</span></div>
+      <div class="trust-div"></div>
+      <div class="trust-pill"><i class="fa-solid fa-arrows-rotate text-cyan"></i> <span>Regular Updates</span></div>
+      <div class="trust-div"></div>
+      <div class="trust-pill"><i class="fa-solid fa-gem text-cyan"></i> <span>High Quality & Well Organized</span></div>
     </div>
 
-    <!-- 3 TRUST BADGES (Horizontal Row) -->
-    <div class="poster-trust-row">
-      <div class="trust-cell">
-        <i class="fa-solid fa-bolt trust-bolt"></i>
-        <span>Student Friendly Prices</span>
-      </div>
-      <div class="trust-divider"></div>
-      <div class="trust-cell">
-        <i class="fa-solid fa-shield-halved trust-shield"></i>
-        <span>Subject Wise & Updated</span>
-      </div>
-      <div class="trust-divider"></div>
-      <div class="trust-cell">
-        <i class="fa-solid fa-gem trust-gem"></i>
-        <span>High Quality & Exam Focused</span>
-      </div>
-    </div>
-
-    <!-- Bottom Disclaimer Pill -->
-    <div class="poster-disclaimer-wrap">
-      <span class="disclaimer-line"></span>
-      <div class="disclaimer-pill">
-        <i class="fa-solid fa-circle-info"></i>
-        <span>Prices may vary depending on the content and material.</span>
-      </div>
-      <span class="disclaimer-line"></span>
-    </div>
-
-    <!-- Explore Action Button -->
-    <div class="forsko-pricing-footer">
-      <a href="#bento-explore" id="forskoPricingActionBtn" class="forsko-pricing-btn-primary">
-        <span>Explore Study Materials</span>
-        <i class="fa-solid fa-arrow-right"></i>
+    <!-- FOOTER WITH EXPLORE BUTTON & LEGEND -->
+    <div class="res-footer-bar">
+      <!-- Main Action Button -->
+      <a href="#bento-explore" id="forskoPricingActionBtn" class="res-explore-btn">
+        <i class="fa-solid fa-globe"></i>
+        <span>Explore Now</span>
+        <i class="fa-solid fa-arrow-pointer pointer-icon"></i>
       </a>
+
+      
     </div>
 
   </div>

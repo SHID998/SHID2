@@ -1,6 +1,7 @@
 /**
- * Forsko - My Saved / Bookmarks (Student Study Bag)
+ * Forsko - My Saved / Bookmarks (Student Study Bag) + Live Admin Pricing Sync
  * Auto-injects Bookmark buttons on all [data-card-id] cards + Floating Study Bag Drawer
+ * Syncs live Prices, Discounts & Payment Links across Notes, Question Banks & Sample Papers
  */
 (function () {
   const STORAGE_KEY = 'forsko_study_bag_v1';
@@ -55,7 +56,6 @@
   function extractCardInfo(cardEl) {
     const cardId = cardEl.getAttribute('data-card-id');
 
-    // Title extract (badge pills hata kar clean title nikalna)
     const titleNode = cardEl.querySelector('.paper-title, .subject-title, .card-title, h3, h2');
     let title = cardId;
     if (titleNode) {
@@ -64,13 +64,11 @@
       title = clone.textContent.replace(/\s+/g, ' ').trim() || titleNode.textContent.trim();
     }
 
-    // Subject / Page Context
     const accordion = cardEl.closest('.subject-accordion-card');
     const accTitle = accordion?.querySelector('.subject-title')?.textContent.trim();
     const pageTitle = document.title.split('|')[0].trim();
     const context = accTitle || pageTitle || 'Forsko Material';
 
-    // Primary PDF / Page URL
     const linkEl = cardEl.querySelector(
       '.paper-actions a, .card-actions a, a.btn-view-full, a.btn-preview, a.paper-btn, a[href$=".pdf"]'
     );
@@ -96,7 +94,6 @@
     const style = document.createElement('style');
     style.id = 'fsb-styles';
     style.textContent = `
-      /* Bookmark Button Inside Cards */
       .action-btn.fsb-bookmark-btn.active {
         background: rgba(56, 189, 248, 0.18) !important;
         border-color: rgba(56, 189, 248, 0.5) !important;
@@ -106,7 +103,6 @@
         color: #38bdf8 !important;
       }
 
-      /* Floating Study Bag Trigger Pill (Bottom-Left) */
       #fsbFloatingBtn {
         position: fixed;
         bottom: 24px;
@@ -152,7 +148,6 @@
         justify-content: center;
       }
 
-      /* Study Bag Modal / Drawer */
       #fsbOverlay {
         position: fixed;
         inset: 0;
@@ -371,7 +366,6 @@
         display: block;
       }
 
-      /* Mini Toast */
       #fsbToast {
         position: fixed;
         bottom: 78px;
@@ -641,12 +635,92 @@
   }
 
   /* --------------------------------------------------------------------------
-     5. Init
+     5. Universal Live Admin Pricing & Payment Link Sync (Notes, QB & Sample Papers)
+     -------------------------------------------------------------------------- */
+  function replacePriceTextInBtn(btn, newPrice) {
+    const walker = document.createTreeWalker(btn, NodeFilter.SHOW_TEXT, null);
+    let node;
+    while ((node = walker.nextNode())) {
+      if (/₹\s*\d+/.test(node.nodeValue)) {
+        node.nodeValue = node.nodeValue.replace(/₹\s*\d+/g, '₹' + newPrice);
+      }
+    }
+  }
+
+  function syncLivePricing(retriesLeft = 4) {
+    if (typeof firebase === 'undefined') return;
+    if (!document.querySelector('.card-pricing-row, .final-price, .strike-price')) return;
+
+    if (!firebase.apps.length) {
+      if (retriesLeft > 0) {
+        setTimeout(() => syncLivePricing(retriesLeft - 1), 250);
+      }
+      return;
+    }
+
+    firebase.firestore().collection('site_settings').doc('card_pricing').onSnapshot(doc => {
+      if (!doc.exists) return;
+      const cardsMap = doc.data().cards || {};
+
+      document.querySelectorAll('[data-card-id]').forEach(cardEl => {
+        const cardId = cardEl.getAttribute('data-card-id');
+        const p = cardsMap[cardId];
+        if (!p) return;
+
+        const strikeEl = cardEl.querySelector('.strike-price');
+        const finalEl = cardEl.querySelector('.final-price');
+        const saveTagEl = cardEl.querySelector('.save-tag');
+        const buyBtn = cardEl.querySelector('.btn-unlock-full, .btn-buy-gold, .btn-buy-vip, .btn-buy-cyan, a[href*="rzp.io"]');
+
+        if (strikeEl && p.strikePrice > p.finalPrice) {
+          strikeEl.innerHTML = '';
+          const del = document.createElement('del');
+          del.textContent = '₹' + p.strikePrice;
+          strikeEl.appendChild(del);
+          strikeEl.style.display = '';
+        } else if (strikeEl) {
+          strikeEl.style.display = 'none';
+        }
+
+        if (finalEl && typeof p.finalPrice === 'number') {
+          finalEl.textContent = '₹' + p.finalPrice;
+        }
+
+        if (saveTagEl) {
+          if (p.customTag) {
+            saveTagEl.textContent = p.customTag;
+            saveTagEl.style.display = '';
+          } else if (p.strikePrice > p.finalPrice && p.strikePrice > 0) {
+            const pct = Math.round(((p.strikePrice - p.finalPrice) / p.strikePrice) * 100);
+            saveTagEl.textContent = `SAVE ${pct}%`;
+            saveTagEl.style.display = '';
+          } else {
+            saveTagEl.style.display = 'none';
+          }
+        }
+
+        if (buyBtn) {
+          if (typeof p.finalPrice === 'number') {
+            replacePriceTextInBtn(buyBtn, p.finalPrice);
+          }
+          if (p.paymentUrl && /^https?:\/\//i.test(p.paymentUrl)) {
+            buyBtn.setAttribute('href', p.paymentUrl);
+          }
+        }
+      });
+    }, err => {
+      console.warn('Live pricing sync error:', err);
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     6. Init
      -------------------------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', () => {
     injectStyles();
     createDrawerAndButton();
     attachBookmarkButtons();
+    syncLivePricing();
   });
 
   window.addEventListener('keydown', e => {
