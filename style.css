@@ -8478,208 +8478,7 @@ mark.search-highlight {
   font-size: 0.7rem;
 }
 
-/* =========================================================
-   4. 2x2 POSTER GRID (COMPACT BOXES)
-   ========================================================= */
-.poster-2x2-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px; /* Reduced gap */
-  margin-bottom: 8px; /* Reduced margin */
-  position: relative;
-  z-index: 1;
-}
 
-.poster-card {
-  background: rgba(11, 20, 38, 0.75);
-  border-radius: 14px;
-  padding: 8px 12px 10px 12px; /* Compact padding */
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-}
-
-.card-cyan {
-  border: 1.5px solid rgba(56, 189, 248, 0.55);
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.2), inset 0 0 12px rgba(56, 189, 248, 0.06);
-}
-
-.card-golden {
-  border: 1.5px solid #eab308;
-  background: radial-gradient(circle at 100% 0%, rgba(234, 179, 8, 0.12) 0%, rgba(11, 20, 38, 0.85) 60%);
-  box-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
-}
-
-/* Card Badges */
-.poster-card-badge {
-  background: linear-gradient(135deg, #1d4ed8, #0284c7);
-  color: #ffffff;
-  border-radius: 20px;
-  padding: 2px 12px;
-  font-family: 'Exo 2', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 800;
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
-  gap: 6px;
-  margin-bottom: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.badge-long {
-  font-size: 0.74rem;
-  padding: 2px 10px;
-}
-
-.badge-practical {
-  background: linear-gradient(135deg, #0284c7, #2563eb);
-}
-
-/* Golden Crown Tag */
-.golden-crown-tag {
-  position: absolute;
-  top: -9px;
-  right: 12px;
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: #0f172a;
-  border: 1px solid #fde68a;
-  padding: 2px 7px;
-  border-radius: 6px;
-  font-size: 0.58rem;
-  font-weight: 900;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.golden-crown-tag i {
-  color: #ffffff;
-}
-
-/* Card Body & Rows */
-.poster-card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 6px; /* Tight gap */
-  flex-grow: 1;
-}
-
-.poster-item-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  background: rgba(22, 35, 62, 0.55);
-  border: 1px solid rgba(56, 189, 248, 0.18);
-  border-radius: 8px;
-  padding: 4px 10px; /* Reduced vertical padding */
-}
-
-.item-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.item-icon {
-  font-size: 0.95rem;
-  color: #38bdf8;
-}
-
-.item-title {
-  color: #ffffff;
-  font-size: 0.74rem;
-  font-weight: 700;
-  line-height: 1.15;
-}
-
-.item-divider {
-  width: 1px;
-  height: 18px;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-/* Price & Free Pills */
-.price-pill-cyan {
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-  color: #ffffff;
-  border: 1px solid #38bdf8;
-  font-family: 'Exo 2', sans-serif;
-  font-weight: 900;
-  font-size: 0.78rem;
-  padding: 2px 10px;
-  border-radius: 14px;
-  white-space: nowrap;
-}
-
-.free-pill-neon {
-  background: rgba(16, 185, 129, 0.18);
-  border: 1.2px solid #34d399;
-  color: #34d399;
-  font-family: 'Exo 2', sans-serif;
-  font-weight: 900;
-  font-size: 0.68rem;
-  padding: 2px 8px;
-  border-radius: 14px;
-  white-space: nowrap;
-}
-
-.free-ray {
-  color: #6ee7b7;
-  font-size: 0.75rem;
-}
-
-/* Practical Rows */
-.practical-row {
-  padding: 3px 10px;
-}
-
-.badge-mini {
-  width: 24px;
-  height: 24px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: 0.62rem;
-  color: #ffffff;
-  flex-shrink: 0;
-}
-
-.pdf-mini { background: #ef4444; }
-.docx-mini { background: #2563eb; font-size: 0.78rem; }
-
-.practical-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.practical-text strong {
-  color: #ffffff;
-  font-size: 0.72rem;
-  line-height: 1.1;
-}
-
-.practical-text small {
-  color: #94a3b8;
-  font-size: 0.58rem;
-}
-
-.practical-avail-strip {
-  background: rgba(16, 185, 129, 0.14);
-  border: 1px solid rgba(52, 211, 153, 0.35);
-  color: #34d399;
-  border-radius: 6px;
-  padding: 3px 8px;
-  font-size: 0.65rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
 
 /* =========================================================
    5. PREVIEW BANNER, TRUST ROW & CTA
@@ -8863,5 +8662,578 @@ mark.search-highlight {
   .poster-trust-row {
     flex-direction: column;
     gap: 4px;
+  }
+}
+
+
+
+/* ==========================================================================
+   FORSKO 6-CARD ACADEMIC RESOURCES POSTER MODAL (3x2 NEON GRID)
+   ========================================================================== */
+
+/* 1. Backdrop Blur Overlay */
+.forsko-pricing-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(4, 8, 18, 0.9);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999999;
+  padding: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.forsko-pricing-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 2. Main Modal Card (Wide Screen Fit) */
+.forsko-res-card {
+  position: relative;
+  width: 100%;
+  max-width: 980px; /* 3x2 Grid ke liye perfect width */
+  max-height: 96vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: radial-gradient(circle at 50% 0%, #0d1e3d 0%, #081124 50%, #040914 100%);
+  border: 1.8px solid rgba(56, 189, 248, 0.45);
+  border-radius: 24px;
+  padding: 16px 22px 14px 22px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.95), 0 0 45px rgba(56, 189, 248, 0.28);
+  transform: scale(0.95);
+  transition: transform 0.25s ease;
+}
+
+.forsko-pricing-overlay.active .forsko-res-card {
+  transform: scale(1);
+}
+
+.forsko-res-card::-webkit-scrollbar {
+  width: 4px;
+}
+.forsko-res-card::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.4);
+  border-radius: 6px;
+}
+
+.forsko-pricing-glow {
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 160px;
+  background: radial-gradient(ellipse, rgba(56, 189, 248, 0.35) 0%, transparent 70%);
+  filter: blur(45px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Close Button (×) */
+.forsko-pricing-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.forsko-pricing-close-btn:hover {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.6);
+  color: #ffffff;
+  transform: rotate(90deg) scale(1.05);
+}
+
+/* 3. Header Styling */
+.res-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 12px;
+  z-index: 1;
+}
+
+.forsko-pricing-logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.forsko-pricing-logo {
+  height: 100px !important;    /* 👈 48px se badha kar 65px kiya */
+  width: auto !important;
+  max-width: 280px !important; /* 👈 Max-width badhai taaki logo compress na ho */
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.85));
+}
+
+.res-main-title {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+}
+
+.wreath-icon {
+  color: #38bdf8;
+  font-size: 1.25rem;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8));
+}
+.wreath-flip {
+  transform: scaleX(-1);
+}
+
+.res-cyan-gradient {
+  background: linear-gradient(135deg, #38bdf8 0%, #00d2ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.res-sub-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.35) 0%, rgba(56, 189, 248, 0.18) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #e0f2fe;
+  padding: 3px 16px;
+  border-radius: 20px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+/* =========================================================
+   4. 3x2 NEON CARDS GRID
+   ========================================================= */
+.res-3x2-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.res-card-box {
+  background: rgba(11, 20, 38, 0.8);
+  border-radius: 18px;
+  padding: 12px 14px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 160px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.res-card-box:hover {
+  transform: translateY(-2px);
+}
+
+/* Number Badges (01 to 06) */
+.card-num-badge {
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+.num-01 { background: #3b82f6; box-shadow: 0 0 10px #3b82f6; }
+.num-02 { background: #d946ef; box-shadow: 0 0 10px #d946ef; }
+.num-03 { background: #f59e0b; box-shadow: 0 0 10px #f59e0b; color: #0f172a; }
+.num-04 { background: #10b981; box-shadow: 0 0 10px #10b981; }
+.num-05 { background: #f43f5e; box-shadow: 0 0 10px #f43f5e; }
+.num-06 { background: #0284c7; box-shadow: 0 0 10px #0284c7; }
+
+/* 6 Distinct Neon Glowing Borders */
+.card-box-01 {
+  border: 1.8px solid #00d2ff;
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.25), inset 0 0 12px rgba(0, 210, 255, 0.08);
+}
+.card-box-02 {
+  border: 1.8px solid #d946ef;
+  box-shadow: 0 0 20px rgba(217, 70, 239, 0.25), inset 0 0 12px rgba(217, 70, 239, 0.08);
+}
+.card-box-03 {
+  border: 1.8px solid #f59e0b;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.25), inset 0 0 12px rgba(245, 158, 11, 0.08);
+}
+.card-box-04 {
+  border: 1.8px solid #10b981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25), inset 0 0 12px rgba(16, 185, 129, 0.08);
+}
+.card-box-05 {
+  border: 1.8px solid #f43f5e;
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.25), inset 0 0 12px rgba(244, 63, 94, 0.08);
+}
+.card-box-06 {
+  border: 1.8px solid #0284c7;
+  box-shadow: 0 0 20px rgba(2, 132, 199, 0.25), inset 0 0 12px rgba(2, 132, 199, 0.08);
+}
+
+/* Card Header Line */
+.card-head-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.card-ico-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.cyan-ico   { background: rgba(0, 210, 255, 0.2); color: #00d2ff; }
+.purple-ico { background: rgba(217, 70, 239, 0.2); color: #d946ef; }
+.gold-ico   { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+.green-ico  { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+.pink-ico   { background: rgba(244, 63, 94, 0.2);  color: #f43f5e; }
+.sky-ico    { background: rgba(2, 132, 199, 0.2);  color: #38bdf8; }
+
+.card-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title-text {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.card-title-text.small-title {
+  font-size: 0.85rem;
+}
+
+.card-sub-text {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.card-mid-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 6px;
+}
+
+.card-spacer {
+  flex-grow: 1;
+}
+
+/* Semester Folder Pills in Card 01 */
+.sem-pills-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.sem-tag {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 6px;
+  padding: 3px 4px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.sem-tag i {
+  color: #38bdf8;
+  font-size: 0.6rem;
+}
+
+/* Card List Rows */
+.card-rows-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.card-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: rgba(22, 35, 62, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 5px 8px;
+}
+
+.list-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.list-left i {
+  font-size: 0.8rem;
+  color: #38bdf8;
+}
+
+.text-gold {
+  color: #f59e0b !important;
+}
+
+/* Price & Free Badges */
+.price-pill-green {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 900;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.price-pill-free {
+  background: rgba(16, 185, 129, 0.18);
+  border: 1.2px solid #34d399;
+  color: #34d399;
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 900;
+  font-size: 0.64rem;
+  padding: 2px 7px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.price-pill-cyan {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  border: 1px solid #38bdf8;
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 900;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.res-btn-banner-free {
+  background: #10b981;
+  color: #ffffff;
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 900;
+  font-size: 0.75rem;
+  padding: 4px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.45);
+}
+
+.badge-tag-pdf {
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.55rem;
+  font-weight: 900;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.badge-tag-docx {
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* =========================================================
+   5. 5 HORIZONTAL TRUST BADGES
+   ========================================================= */
+.res-trust-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 12px;
+  padding: 6px 12px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.trust-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.text-cyan {
+  color: #38bdf8;
+}
+
+.trust-div {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* =========================================================
+   6. FOOTER EXPLORE BUTTON & LEGEND
+   ========================================================= */
+.res-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.res-explore-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+  color: #ffffff !important;
+  text-decoration: none;
+  padding: 9px 18px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1.2px solid rgba(56, 189, 248, 0.5);
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.5), 0 0 20px rgba(56, 189, 248, 0.3);
+  transition: all 0.22s ease;
+  cursor: pointer;
+}
+
+.res-explore-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.7);
+}
+
+.pointer-icon {
+  color: #fde047;
+  font-size: 0.95rem;
+}
+
+.res-legend-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.legend-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+.legend-circ {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.58rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.green-circ { background: #10b981; }
+.gold-circ  { background: #f59e0b; color: #0f172a; }
+
+/* =========================================================
+   7. RESPONSIVE FOR TABLETS & MOBILES
+   ========================================================= */
+@media (max-width: 900px) {
+  .res-3x2-grid {
+    grid-template-columns: 1fr 1fr; /* 2 columns on tablet */
+  }
+}
+
+@media (max-width: 640px) {
+  .res-3x2-grid {
+    grid-template-columns: 1fr; /* 1 column on phone */
+  }
+  .res-trust-bar {
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+  }
+  .trust-div { display: none; }
+  .res-footer-bar {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .res-explore-btn {
+    width: 100%;
   }
 }
