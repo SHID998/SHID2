@@ -582,12 +582,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isAvailable && pdfUrl) {
       const cleanUrl = escapeHTML(safeUrl(pdfUrl));
       return `
-        <a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="paper-btn btn-preview">
-          <i class="fa-solid fa-eye"></i> Preview
-        </a>
+        
         <a href="${cleanUrl}" download class="paper-btn btn-download">
-          <i class="fa-solid fa-download"></i> Download
-        </a>
+                        <i class="fa-solid fa-file-pdf"></i> View PDF
+                      </a>
       `;
     }
     return `
