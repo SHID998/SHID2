@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Semester IV PYQs | Forsko</title>
+  <title>Semester IV Notes | Forsko</title>
 
   <!-- Google Fonts: Inter & Exo 2 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,9 +14,211 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="../css/pyqs-semester1.css">
+  <link rel="stylesheet" href="../css/notes-semester.css">
   <link rel="stylesheet" href="../css/universal-navbar.css">
 
+
+  <!-- Paid Notes & Full-Width Button Custom Styles -->
+  <style>
+    /* ==========================================
+       FORSKO PAID NOTES CARDS STYLING (GOLD VIP)
+       ========================================== */
+    .subject-card-paid {
+      position: relative;
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+
+    /* Gold VIP Card */
+    .card-paid-gold {
+      border: 1.8px solid rgba(245, 158, 11, 0.55) !important;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(245, 158, 11, 0.15) !important;
+    }
+    .card-paid-gold:hover {
+      border-color: #f59e0b !important;
+      box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 158, 11, 0.35) !important;
+      transform: translateY(-4px);
+    }
+    .status-gold {
+      background: rgba(245, 158, 11, 0.15) !important;
+      color: #fbbf24 !important;
+      border: 1px solid rgba(245, 158, 11, 0.4) !important;
+    }
+    .btn-buy-gold {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+      color: #0b1120 !important;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4) !important;
+    }
+    .btn-buy-gold:hover {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.6) !important;
+      color: #000000 !important;
+    }
+
+    /* Common Badges & Pricing */
+    .status-badge {
+      font-weight: 800 !important;
+      font-size: 0.72rem !important;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .solved-pill {
+      display: inline-block;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+    .paid-features-text {
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin: 10px 0;
+      text-align: left;
+    }
+    .paid-features-text i {
+      color: #10b981;
+      font-size: 0.8rem;
+      margin-right: 4px;
+    }
+    .card-pricing-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0 14px 0;
+      background: rgba(11, 17, 32, 0.6);
+      padding: 6px 12px;
+      border-radius: 10px;
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+    }
+    .strike-price {
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+    .final-price {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #ffffff;
+    }
+    .save-tag {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    /* Actions & Stacked Buttons */
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      width: 100%;
+    }
+
+    /* Gold Preview Button */
+    .btn-preview {
+      width: 100% !important;
+      font-weight: 700 !important;
+      font-size: 0.88rem !important;
+      padding: 9px 14px !important;
+      border-radius: 10px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      text-decoration: none !important;
+      background: rgba(255, 255, 255, 0.04) !important;
+      backdrop-filter: blur(6px);
+      transition: all 0.25s ease !important;
+    }
+    .btn-preview-gold {
+      border: 1.2px solid rgba(245, 158, 11, 0.45) !important;
+      color: #fbbf24 !important;
+    }
+    .btn-preview-gold:hover {
+      background: rgba(245, 158, 11, 0.15) !important;
+      border-color: #f59e0b !important;
+      color: #fde68a !important;
+      transform: translateY(-2px);
+    }
+
+    .btn-unlock-full {
+      width: 100% !important;
+      font-weight: 800 !important;
+      font-size: 0.95rem !important;
+      padding: 12px 16px !important;
+      border-radius: 10px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      text-decoration: none !important;
+      transition: all 0.25s ease !important;
+    }
+    .btn-unlock-full:hover {
+      transform: translateY(-2px) !important;
+    }
+    .upi-note {
+      display: block;
+      font-size: 0.68rem;
+      color: #94a3b8;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    /* Free Cards: Full-Width Bar View PDF Button */
+    .subject-card:not(.subject-card-paid) .card-actions {
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 8px !important;
+    }
+
+    .subject-card:not(.subject-card-paid) .card-actions .pdf-btn {
+      width: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 10px !important;
+      padding: 12px 20px !important;
+      border-radius: 10px !important;
+      font-size: 0.95rem !important;
+      font-weight: 700 !important;
+      box-sizing: border-box !important;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4) !important;
+      transition: all 0.25s ease !important;
+      text-decoration: none !important;
+    }
+
+    .subject-card:not(.subject-card-paid) .card-actions .pdf-btn:hover {
+      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%) !important;
+      box-shadow: 0 0 25px rgba(59, 130, 246, 0.6) !important;
+      transform: translateY(-2px) !important;
+    }
+
+    .subject-card:not(.subject-card-paid) .card-actions .download-btn {
+      display: none !important; /* Download button hatakar neat single full bar rakha gaya hai */
+    }
+  </style>
 </head>
 <body>
 
@@ -30,8 +232,8 @@
       <nav class="nav-menu" id="navMenu">
         <a href="../index.html" class="nav-link">Home</a>
         <a href="syllabus.html" class="nav-link">Syllabus</a>
-        <a href="notes.html" class="nav-link">Notes</a>
-        <a href="pyqs.html" class="nav-link active">PYQs</a>
+        <a href="notes.html" class="nav-link active">Notes</a>
+        <a href="pyqs.html" class="nav-link">PYQs</a>
         <a href="question-bank.html" class="nav-link">Question Banks</a>
         <a href="paper-patterns.html" class="nav-link">Sample Papers</a>
         <a href="contact.html" class="nav-link">Contact</a>
@@ -51,377 +253,586 @@
         <div class="breadcrumb">
           <a href="../index.html">Home</a>
           <i class="fa-solid fa-chevron-right separator"></i>
-          <a href="pyqs.html">PYQs</a>
+          <a href="notes.html">Notes</a>
           <i class="fa-solid fa-chevron-right separator"></i>
-          <a href="pyqs-first-year.html">Semesters</a>
+          <a href="notes-second-year.html">Second Year</a>
           <i class="fa-solid fa-chevron-right separator"></i>
           <span>Semester IV</span>
         </div>
         
-        <h1 class="hero-title">B.Sc. Computer Science <br> Semester IV - <span class="title-gradient">PYQs</span></h1>
-
+        <h1 class="hero-title">B.Sc. Computer Science <br> Semester IV - <span class="title-gradient">Notes</span></h1>
+        
         <div class="hero-institution">
           <p class="inst-college">Shri Shivaji College of Arts, Commerce and Science, Akola</p>
           <p class="inst-university">Sant Gadge Baba Amravati University (SGBAU)</p>
         </div>
+
+        <p class="hero-instruction">Choose a subject to open its notes, infographics and resources PDFs.</p>
       </div>
     </section>
 
-    <!-- Search Section -->
-    <section class="search-section">
-      <div class="search-container">
-        <div class="search-box">
-          <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input 
-            type="text" 
-            id="subjectSearch" 
-            placeholder="Search subject..." 
-            autocomplete="off"
-            aria-label="Search subject for PYQs"
-          >
-          <button type="button" class="search-clear-btn hidden" id="searchClearBtn" aria-label="Clear search">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-      </div>
-    </section>
+    <!-- Subjects Section -->
+    <section class="subjects-section">
+      <div class="subjects-container">
+        <div class="subjects-grid">
 
-    <!-- PYQs Accordion Section -->
-    <section class="pyq-section">
-      <div class="pyq-container">
-        <div class="subject-accordions-list" id="accordionsList">
-
-          <!-- Subject Accordion 1: OOP with C++ -->
-          <div class="subject-accordion-card" data-subject="major 1 object oriented programming with c++">
-            <div class="accordion-header">
-              <div class="subject-info">
-                <div class="subject-icon-box"><i class="fa-solid fa-laptop-code"></i></div>
-                <div class="subject-text">
-                  <div class="subject-meta">
-                    <h2 class="subject-title">Major 1 - Object Oriented Programming with C++</h2>
-                    <span class="papers-count-badge"><i class="fa-solid fa-file-lines"></i> 2 Papers</span>
-                  </div>
-                  <p class="subject-description">Introduction to object-oriented programming concepts and their implementation in C++.</p>
-                </div>
-              </div>
-              <button type="button" class="accordion-toggle-btn" aria-expanded="false">
-                <span class="btn-text">View Papers</span>
-                <i class="fa-solid fa-chevron-down toggle-icon"></i>
-              </button>
+          <!-- ================= Card 1: OOP with C++ Hand Written Notes (GOLD VIP PAID CARD) ================= -->
+          <div class="subject-card subject-card-paid card-paid-gold" data-card-id="notes-sem4-oop-handwritten">
+            <div class="card-glass-glow"></div>
+            
+            <div class="subject-card-header">
+              <div class="subject-icon" style="color: #f59e0b;"><i class="fa-solid fa-laptop-code"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Handwritten • Locked
+              </span>
             </div>
 
-            <div class="accordion-content">
-              <div class="accordion-inner">
-                <div class="papers-grid">
-                  
-                  <!-- OOP Paper 1: Summer 2026 -->
-                  <div class="paper-card" data-card-id="pyq-sem4-oop-cpp-s2026">
-                    <div class="paper-header">
-                      <span class="year-badge">2026</span>
-                      <span class="status-badge status-available"><i class="fa-solid fa-circle-check"></i> Available</span>
-                    </div>
-                    <h3 class="paper-title">Summer 2026 Examination</h3>
-                    <div class="paper-actions">
-                      <a href="https://zsjybiqjxacjvqfyxeoa.supabase.co/storage/v1/object/public/forsko-materials/forsko%20resources/pyqs/sem4/object-oriented-programming-with-cpp-summer-2026.pdf" download class="paper-btn btn-download">
-                        <i class="fa-solid fa-file-pdf"></i> View PDF
-                      </a>
-                    </div>
+            <h2 class="subject-title">
+              OOP with C++ <span class="solved-pill">HANDWRITTEN</span>
+            </h2>
 
-                    <!-- Feedback -->
-                    <div class="card-feedback">
-                      <div class="feedback-actions">
-                        <button class="action-btn like-btn" title="Like">
-                          <i class="fa-regular fa-heart"></i>
-                          <span class="like-count">200</span>
-                        </button>
-                        <button class="action-btn dislike-btn" title="Dislike">
-                          <i class="fa-solid fa-arrow-down"></i>
-                        </button>
-                        <button class="action-btn comment-toggle-btn" title="Comments">
-                          <i class="fa-regular fa-comment-dots"></i>
-                          <span class="comment-count-badge">0</span>
-                        </button>
-                        <button class="action-btn share-btn" title="Share on WhatsApp">
-                          <i class="fa-brands fa-whatsapp"></i>
-                        </button>
-                      </div>
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> Complete Unit-wise OOP with C++ Hand Written Notes<br>
+              <i class="fa-solid fa-circle-check"></i> Classes, Objects, Inheritance, Virtual Functions & Codes<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
 
-                      <div class="comments-dropdown">
-                        <div class="comments-list"></div>
-                        <form class="comment-form">
-                          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
-                          <div class="input-with-btn">
-                            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
-                            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹89</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹39</span>
+              <span class="save-tag">SAVE 56%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+              <a href="https://zsjybiqjxacjvqfyxeoa.supabase.co/storage/v1/object/public/forsko-materials/forsko%20resources/notes/sem4/sem4-oop%20sample.pdf" target="_blank" rel="noopener noreferrer" class="btn-preview btn-preview-gold">
+                <i class="fa-regular fa-eye"></i>
+                <span>Preview PDF (Sample)</span>
+              </a>
+
+              <!-- 🔴 Yahan Sem 4 OOP Notes ka Razorpay Link Dalein -->
+              <a href="https://rzp.io/rzp/sem4-notes-oop" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹39 & Download Notes</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">245</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
                   </div>
-
-                  <!-- OOP Paper 2: Winter 2026 -->
-                  <div class="paper-card" data-card-id="pyq-sem4-oop-cpp-w2026">
-                    <div class="paper-header">
-                      <span class="year-badge">2026</span>
-                      <span class="status-badge status-available"><i class="fa-solid fa-circle-check"></i> Available</span>
-                    </div>
-                    <h3 class="paper-title">Winter 2026 Examination</h3>
-                    <div class="paper-actions">
-                      <a href="https://zsjybiqjxacjvqfyxeoa.supabase.co/storage/v1/object/public/forsko-materials/forsko%20resources/pyqs/sem4/object-oriented-programming-with-cpp-winter-2026.pdf" download class="paper-btn btn-download">
-                        <i class="fa-solid fa-file-pdf"></i> View PDF
-                      </a>
-                    </div>
-
-                    <!-- Feedback -->
-                    <div class="card-feedback">
-                      <div class="feedback-actions">
-                        <button class="action-btn like-btn" title="Like">
-                          <i class="fa-regular fa-heart"></i>
-                          <span class="like-count">200</span>
-                        </button>
-                        <button class="action-btn dislike-btn" title="Dislike">
-                          <i class="fa-solid fa-arrow-down"></i>
-                        </button>
-                        <button class="action-btn comment-toggle-btn" title="Comments">
-                          <i class="fa-regular fa-comment-dots"></i>
-                          <span class="comment-count-badge">0</span>
-                        </button>
-                        <button class="action-btn share-btn" title="Share on WhatsApp">
-                          <i class="fa-brands fa-whatsapp"></i>
-                        </button>
-                      </div>
-
-                      <div class="comments-dropdown">
-                        <div class="comments-list"></div>
-                        <form class="comment-form">
-                          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
-                          <div class="input-with-btn">
-                            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
-                            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-
-                  
-
-                </div>
+                </form>
               </div>
             </div>
           </div>
 
-          <!-- Subject Accordion 2: Computer Networks -->
-          <div class="subject-accordion-card" data-subject="major 2 computer networks">
-            <div class="accordion-header">
-              <div class="subject-info">
-                <div class="subject-icon-box"><i class="fa-solid fa-network-wired"></i></div>
-                <div class="subject-text">
-                  <div class="subject-meta">
-                    <h2 class="subject-title">Major 2 - Computer Networks</h2>
-                    <span class="papers-count-badge"><i class="fa-solid fa-file-lines"></i> 2 Papers</span>
-                  </div>
-                  <p class="subject-description">Introduction to computer networks, protocols, and communication systems.</p>
-                </div>
-              </div>
-              <button type="button" class="accordion-toggle-btn" aria-expanded="false">
-                <span class="btn-text">View Papers</span>
-                <i class="fa-solid fa-chevron-down toggle-icon"></i>
-              </button>
+          <!-- ================= Card 2: OOP with C++ Infographics (FREE) ================= -->
+          <div class="subject-card" data-card-id="notes-sem4-oop-infographics">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-chart-column"></i></div>
+              <span class="subject-tag">Infographics</span>
+            </div>
+            <h2 class="subject-title">OOP with C++ Infographics</h2>
+            <p class="subject-description">Explore visual infographics covering key concepts, diagrams, flowcharts and quick revision topics for OOP with C++.</p>
+            
+            <div class="card-actions">
+              <a href="https://zsjybiqjxacjvqfyxeoa.supabase.co/storage/v1/object/public/forsko-materials/forsko%20resources/notes/sem4/sem4-oop-infographics.pdf" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
             </div>
 
-            <div class="accordion-content">
-              <div class="accordion-inner">
-                <div class="papers-grid">
-                  
-                  <!-- CN Paper 1: Summer 2026 -->
-                  <div class="paper-card" data-card-id="pyq-sem4-cn-s2026">
-                    <div class="paper-header">
-                      <span class="year-badge">2026</span>
-                      <span class="status-badge status-available"><i class="fa-solid fa-circle-check"></i> Available</span>
-                    </div>
-                    <h3 class="paper-title">Summer 2026 Examination</h3>
-                    <div class="paper-actions">
-                     <a href="https://zsjybiqjxacjvqfyxeoa.supabase.co/storage/v1/object/public/forsko-materials/forsko%20resources/pyqs/sem4/computer-networks-summer-2026.pdf" download class="paper-btn btn-download">
-                        <i class="fa-solid fa-file-pdf"></i> View PDF
-                      </a>
-                    </div>
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">135</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
 
-                    <!-- Feedback -->
-                    <div class="card-feedback">
-                      <div class="feedback-actions">
-                        <button class="action-btn like-btn" title="Like">
-                          <i class="fa-regular fa-heart"></i>
-                          <span class="like-count">200</span>
-                        </button>
-                        <button class="action-btn dislike-btn" title="Dislike">
-                          <i class="fa-solid fa-arrow-down"></i>
-                        </button>
-                        <button class="action-btn comment-toggle-btn" title="Comments">
-                          <i class="fa-regular fa-comment-dots"></i>
-                          <span class="comment-count-badge">0</span>
-                        </button>
-                        <button class="action-btn share-btn" title="Share on WhatsApp">
-                          <i class="fa-brands fa-whatsapp"></i>
-                        </button>
-                      </div>
-
-                      <div class="comments-dropdown">
-                        <div class="comments-list"></div>
-                        <form class="comment-form">
-                          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
-                          <div class="input-with-btn">
-                            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
-                            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
                   </div>
-
-                  <!-- CN Paper 2: Winter 2026 -->
-                  <div class="paper-card" data-card-id="pyq-sem4-cn-w2026">
-                    <div class="paper-header">
-                      <span class="year-badge">2026</span>
-                      <span class="status-badge status-available"><i class="fa-solid fa-circle-check"></i> Available</span>
-                    </div>
-                    <h3 class="paper-title">Winter 2026 Examination</h3>
-                    <div class="paper-actions">
-                      <a href="https://zsjybiqjxacjvqfyxeoa.supabase.co/storage/v1/object/public/forsko-materials/forsko%20resources/pyqs/sem4/computer-networks-winter-2026.pdf" download class="paper-btn btn-download">
-                        <i class="fa-solid fa-file-pdf"></i> View PDF
-                      </a>
-                    </div>
-
-                    <!-- Feedback -->
-                    <div class="card-feedback">
-                      <div class="feedback-actions">
-                        <button class="action-btn like-btn" title="Like">
-                          <i class="fa-regular fa-heart"></i>
-                          <span class="like-count">200</span>
-                        </button>
-                        <button class="action-btn dislike-btn" title="Dislike">
-                          <i class="fa-solid fa-arrow-down"></i>
-                        </button>
-                        <button class="action-btn comment-toggle-btn" title="Comments">
-                          <i class="fa-regular fa-comment-dots"></i>
-                          <span class="comment-count-badge">0</span>
-                        </button>
-                        <button class="action-btn share-btn" title="Share on WhatsApp">
-                          <i class="fa-brands fa-whatsapp"></i>
-                        </button>
-                      </div>
-
-                      <div class="comments-dropdown">
-                        <div class="comments-list"></div>
-                        <form class="comment-form">
-                          <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
-                          <div class="input-with-btn">
-                            <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
-                            <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-
-                
-
-                </div>
+                </form>
               </div>
             </div>
           </div>
 
-          <!-- Subject Accordion 3: Python Programming -->
-          <div class="subject-accordion-card" data-subject="major 3 python programming">
-            <div class="accordion-header">
-              <div class="subject-info">
-                <div class="subject-icon-box"><i class="fa-brands fa-python"></i></div>
-                <div class="subject-text">
-                  <div class="subject-meta">
-                    <h2 class="subject-title">Major 3 - Python Programming</h2>
-                    <span class="papers-count-badge"><i class="fa-solid fa-file-lines"></i> 0 Papers</span>
-                  </div>
-                  <p class="subject-description">Introduction to Python programming concepts and their implementation.</p>
-                </div>
-              </div>
-              <button type="button" class="accordion-toggle-btn" aria-expanded="false">
-                <span class="btn-text">View Papers</span>
-                <i class="fa-solid fa-chevron-down toggle-icon"></i>
-              </button>
+          <!-- ================= Card 3: Computer Networks Hand Written Notes (GOLD VIP PAID CARD) ================= -->
+          <div class="subject-card subject-card-paid card-paid-gold" data-card-id="notes-sem4-cn-handwritten">
+            <div class="card-glass-glow"></div>
+            
+            <div class="subject-card-header">
+              <div class="subject-icon" style="color: #f59e0b;"><i class="fa-solid fa-network-wired"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Handwritten • Locked
+              </span>
             </div>
 
-            <div class="accordion-content">
-              <div class="accordion-inner">
-                <div class="papers-grid">
-                  
-                  <!-- Coming Soon -->
-                  <div class="paper-card"  data-card-id="pyq-sem4-python-s2027">
-                    <div class="paper-header">
-                      <span class="year-badge">2027</span>
-                      <span class="status-badge status-coming-soon"><i class="fa-solid fa-clock"></i> Coming Soon</span>
-                    </div>
-                    <h3 class="paper-title">Summer 2027 Examination</h3>
-                    <div class="paper-actions">
-                      <button type="button" class="paper-btn btn-disabled" disabled>
-                        <i class="fa-solid fa-lock"></i> Coming Soon
-                      </button>
-                    </div>
-                  </div>
+            <h2 class="subject-title">
+              Computer Networks <span class="solved-pill">HANDWRITTEN</span>
+            </h2>
 
-                </div>
-              </div>
-            </div>
-          </div>
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> Complete Unit-wise Computer Networks Hand Written Notes<br>
+              <i class="fa-solid fa-circle-check"></i> OSI Layers, TCP/IP, Protocols, Topologies & Network Devices<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
 
-          <!-- Subject Accordion 4: Minor Theory -->
-          <div class="subject-accordion-card" data-subject="minor theory c++ and python programming">
-            <div class="accordion-header">
-              <div class="subject-info">
-                <div class="subject-icon-box"><i class="fa-solid fa-code"></i></div>
-                <div class="subject-text">
-                  <div class="subject-meta">
-                    <h2 class="subject-title">Minor Theory - C++ and Python Programming</h2>
-                    <span class="papers-count-badge"><i class="fa-solid fa-file-lines"></i> 0 Papers</span>
-                  </div>
-                  <p class="subject-description">Introduction to Python programming concepts and their implementation.</p>
-                </div>
-              </div>
-              <button type="button" class="accordion-toggle-btn" aria-expanded="false">
-                <span class="btn-text">View Papers</span>
-                <i class="fa-solid fa-chevron-down toggle-icon"></i>
-              </button>
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹89</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹39</span>
+              <span class="save-tag">SAVE 56%</span>
             </div>
 
-            <div class="accordion-content">
-              <div class="accordion-inner">
-                <div class="papers-grid">
-                  
-                  <!-- Coming Soon -->
-                  <div class="paper-card" data-card-id="pyq-sem4-mn-s2027">
-                    <div class="paper-header">
-                      <span class="year-badge">2027</span>
-                      <span class="status-badge status-coming-soon"><i class="fa-solid fa-clock"></i> Coming Soon</span>
-                    </div>
-                    <h3 class="paper-title">Summer 2027 Examination</h3>
-                    <div class="paper-actions">
-                      <button type="button" class="paper-btn btn-disabled" disabled>
-                        <i class="fa-solid fa-lock"></i> Coming Soon
-                      </button>
-                    </div>
-                  </div>
+            <!-- Action Buttons -->
+            <div class="card-actions">
+              <a href="#" target="_blank" rel="noopener noreferrer" class="btn-preview btn-preview-gold">
+                <i class="fa-regular fa-eye"></i>
+                <span>Preview PDF (Sample)</span>
+              </a>
 
-                </div>
+              <!-- 🔴 Yahan Sem 4 CN Notes ka Razorpay Link Dalein -->
+              <a href="https://rzp.io/rzp/sem4-notes-cn" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹39 & Download Notes</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">220</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
 
-        </div>
+          <!-- ================= Card 4: Computer Networks Infographics (FREE) ================= -->
+          <div class="subject-card" data-card-id="notes-sem4-cn-infographics">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-chart-column"></i></div>
+              <span class="subject-tag">Infographics</span>
+            </div>
+            <h2 class="subject-title">Computer Networks Infographics</h2>
+            <p class="subject-description">Explore visual infographics covering key concepts, diagrams, flowcharts and quick revision topics for Computer Networks.</p>
+            
+            <div class="card-actions">
+              <a href="https://zsjybiqjxacjvqfyxeoa.supabase.co/storage/v1/object/public/forsko-materials/forsko%20resources/notes/sem4/sem4-cn-infographics.pdf" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
 
-        <!-- Empty State for Search -->
-        <div class="no-results-state hidden" id="noResultsState">
-          <i class="fa-solid fa-magnifying-glass-slash"></i>
-          <h3>No Matching Subjects Found</h3>
-          <p>Try typing a different subject keyword like "Computer", "Office", or "GOEC".</p>
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">140</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Card 5: Python Programming (GOLD VIP PAID CARD) ================= -->
+          <div class="subject-card subject-card-paid card-paid-gold" data-card-id="notes-sem4-python-handwritten">
+            <div class="card-glass-glow"></div>
+            
+            <div class="subject-card-header">
+              <div class="subject-icon" style="color: #f59e0b;"><i class="fa-brands fa-python"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Handwritten • Locked
+              </span>
+            </div>
+
+            <h2 class="subject-title">
+              Python Programming <span class="solved-pill">HANDWRITTEN</span>
+            </h2>
+
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> Complete Unit-wise Python Hand Written Notes<br>
+              <i class="fa-solid fa-circle-check"></i> Core Syntax, Lists, Tuples, Dictionaries, OOP & File I/O<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
+
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹79</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹29</span>
+              <span class="save-tag">SAVE 63%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+              <a href="https://zsjybiqjxacjvqfyxeoa.supabase.co/storage/v1/object/public/forsko-materials/forsko%20resources/notes/sem4/sem4-python%20sample.pdf" target="_blank" rel="noopener noreferrer" class="btn-preview btn-preview-gold">
+                <i class="fa-regular fa-eye"></i>
+                <span>Preview PDF (Sample)</span>
+              </a>
+
+              <!-- 🔴 Yahan Sem 4 Python Notes ka Razorpay Link Dalein -->
+              <a href="https://rzp.io/rzp/sem4-notes-python" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹29 & Download Notes</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">260</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Card 6: Python Programming Infographics (FREE) ================= -->
+          <div class="subject-card" data-card-id="notes-sem4-python-infographics">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-chart-column"></i></div>
+              <span class="subject-tag">Infographics</span>
+            </div>
+            <h2 class="subject-title">Python Programming Infographics</h2>
+            <p class="subject-description">Explore visual infographics covering key concepts, diagrams, flowcharts and quick revision topics for Python Programming.</p>
+            
+            <div class="card-actions">
+              <a href="https://zsjybiqjxacjvqfyxeoa.supabase.co/storage/v1/object/public/forsko-materials/forsko%20resources/notes/sem4/sem4-python%20infographics.pdf" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">130</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Card 7: Minor - C++ and Python Hand Written (GOLD VIP PAID CARD) ================= -->
+          <div class="subject-card subject-card-paid card-paid-gold" data-card-id="notes-sem4-minor-cpp-python-handwritten">
+            <div class="card-glass-glow"></div>
+            
+            <div class="subject-card-header">
+              <div class="subject-icon" style="color: #f59e0b;"><i class="fa-solid fa-code"></i></div>
+              <span class="status-badge status-gold">
+                <i class="fa-solid fa-crown"></i> VIP Minor • Locked
+              </span>
+            </div>
+
+            <h2 class="subject-title">
+              Minor - C++ and Python <span class="solved-pill">HANDWRITTEN</span>
+            </h2>
+
+            <p class="paid-features-text">
+              <i class="fa-solid fa-circle-check"></i> Complete Unit-wise Minor Subject Hand Written Notes<br>
+              <i class="fa-solid fa-circle-check"></i> Combined C++ Object Oriented & Python Syntax Notes<br>
+              <i class="fa-solid fa-circle-check"></i> Instant Automatic Download after Payment
+            </p>
+
+            <!-- Price Row -->
+            <div class="card-pricing-row">
+              <span class="strike-price"><del>₹79</del></span>
+              <span class="final-price" style="color: #fbbf24;">₹29</span>
+              <span class="save-tag">SAVE 63%</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+              <a href="https://zsjybiqjxacjvqfyxeoa.supabase.co/storage/v1/object/public/forsko-materials/forsko%20resources/notes/sem4/Sem4%20Minor%20sample.pdf" target="_blank" rel="noopener noreferrer" class="btn-preview btn-preview-gold">
+                <i class="fa-regular fa-eye"></i>
+                <span>Preview PDF (Sample)</span>
+              </a>
+
+              <!-- 🔴 Yahan Sem 4 Minor Notes ka Razorpay Link Dalein -->
+              <a href="https://rzp.io/rzp/sem4-notes-minor" target="_blank" rel="noopener noreferrer" class="paper-btn btn-unlock-full btn-buy-gold">
+                <i class="fa-solid fa-lock-open"></i>
+                <span>Pay ₹29 & Download Notes</span>
+              </a>
+            </div>
+
+            <span class="upi-note">
+              <i class="fa-solid fa-shield-halved"></i> Instant PDF via Navi / PhonePe / Paytm / UPI
+            </span>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">190</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Card 8: Minor - C++ and Python Infographics (FREE) ================= -->
+          <div class="subject-card" data-card-id="notes-sem4-minor-cpp-python-infographics">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-chart-column"></i></div>
+              <span class="subject-tag">Minor - Infographics</span>
+            </div>
+            <h2 class="subject-title">Minor - C++ and Python Programming Infographics</h2>
+            <p class="subject-description">Explore visual infographics covering key concepts, diagrams, flowcharts and quick revision topics for C++ and Python Programming.</p>
+            
+            <div class="card-actions">
+              <a href="https://zsjybiqjxacjvqfyxeoa.supabase.co/storage/v1/object/public/forsko-materials/forsko%20resources/notes/sem4/Sem4%20Minor%20Infographics.pdf" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">115</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Card 9: Web Technologies (FREE) ================= -->
+          <div class="subject-card" data-card-id="notes-sem4-web-technologies">
+            <div class="card-glass-glow"></div>
+            <div class="subject-card-header">
+              <div class="subject-icon"><i class="fa-solid fa-earth-americas"></i></div>
+              <span class="subject-tag">GOEC</span>
+            </div>
+            <h2 class="subject-title">Web Technologies</h2>
+            <p class="subject-description">Easy-to-understand notes with key concepts, important topics and quick revision content.</p>
+            
+            <div class="card-actions">
+              <a href="https://zsjybiqjxacjvqfyxeoa.supabase.co/storage/v1/object/public/forsko-materials/forsko%20resources/notes/sem4/goec-web-technologies-notes.pdf" target="_blank" rel="noopener noreferrer" class="pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>View PDF</span>
+              </a>
+            </div>
+
+            <!-- Feedback & Comments -->
+            <div class="card-feedback">
+              <div class="feedback-actions">
+                <button class="action-btn like-btn" title="Like">
+                  <i class="fa-regular fa-heart"></i>
+                  <span class="like-count">120</span>
+                </button>
+                <button class="action-btn dislike-btn" title="Dislike">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button class="action-btn comment-toggle-btn" title="Comments">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <span class="comment-count-badge">0</span>
+                </button>
+                <button class="action-btn share-btn" title="Share on WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+              </div>
+
+              <div class="comments-dropdown">
+                <div class="comments-list"></div>
+                <form class="comment-form">
+                  <input type="text" class="comment-input user-name" placeholder="Your Name..." required>
+                  <div class="input-with-btn">
+                    <input type="text" class="comment-input user-text" placeholder="Write a Comment...." required>
+                    <button type="submit" class="comment-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -432,11 +843,11 @@
     <div class="footer-container">
       <div class="footer-col brand-col">
         <a href="../index.html" class="logo footer-logo">
-          <img src="../images/forsko-logo.png" alt="Forsko Logo" class="logo-image">
+          <img src="../images/FORSKO2.png" alt="Forsko Logo" class="logo-image">
           <span>Forsko</span>
         </a>
         <p>
-          Forsko is a dedicated learning portal developed for B.Sc. Computer Science students of Shri Shivaji College of Arts, Commerce and Science, Akola under SGBAU.
+          The ultimate central hub for Computer Science academic study materials, practical code labs, and semester exam prep.
         </p>
       </div>
 
@@ -453,7 +864,6 @@
         </ul>
       </div>
 
-      <!-- Contact Info -->
       <div class="footer-col">
         <h3>Contact Us</h3>
         <ul class="contact-list">
@@ -463,7 +873,6 @@
         </ul>
       </div>
 
-      <!-- GitHub & Social -->
       <div class="footer-col">
         <h3>Social & Community</h3>
         <a href="https://www.instagram.com/forsko_web/" target="_blank" rel="noopener" class="github-btn">
@@ -487,8 +896,9 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
   <!-- Custom JavaScript -->
-  <script src="../js/pyqs-semester1.js"></script>
-  <script src="../js/universal-navbar.js"></script>
+  <script src="../js/notes-semester1.js"></script>
+
   <script src="../js/study-bag.js"></script>
+  <script src="../js/universal-navbar.js"></script>
 </body>
 </html>
