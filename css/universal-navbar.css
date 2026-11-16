@@ -1,0 +1,267 @@
+/* ==========================================================================
+   FORSKO UNIVERSAL FLOATING LIQUID GLASS NAVBAR
+   ========================================================================== */
+
+html body .hero,
+html body .page-hero,
+html body .fors-nav-offset {
+  padding-top: 125px !important;
+}
+
+/* Floating Fixed Wrapper */
+header.navbar.fors-u-nav {
+  position: fixed !important;
+  top: 10px !important;
+  left: 12px !important;
+  right: 12px !important;
+  width: auto !important;
+  z-index: 10000 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  pointer-events: none;
+}
+
+header.navbar.fors-u-nav.scrolled {
+  box-shadow: none !important;
+}
+
+/* Full Left-to-Right Capsule (84px height) */
+header.navbar.fors-u-nav .nav-container {
+  pointer-events: auto;
+  position: relative !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: 84px !important;
+  margin: 0 !important;
+  padding: 0 34px !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* Layer 1: Transparent Liquid Glass Surface */
+.fors-u-nav .nav-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  z-index: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(56, 189, 248, 0.08) 38%,
+    rgba(15, 23, 42, 0.28) 72%,
+    rgba(59, 130, 246, 0.10) 100%
+  );
+  -webkit-backdrop-filter: blur(22px) saturate(195%) brightness(1.12);
+  backdrop-filter: blur(22px) saturate(195%) brightness(1.12);
+
+  border: 1px solid rgba(147, 197, 253, 0.34);
+
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.35),
+    0 0 24px rgba(59, 130, 246, 0.18),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.45),
+    inset 0 -2px 10px rgba(56, 189, 248, 0.22),
+    inset 0 0 20px rgba(255, 255, 255, 0.04);
+
+  transition: all 0.3s ease;
+}
+
+.fors-u-nav.scrolled .nav-container::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.10) 0%,
+    rgba(56, 189, 248, 0.10) 38%,
+    rgba(11, 17, 32, 0.45) 72%,
+    rgba(59, 130, 246, 0.13) 100%
+  );
+  border-color: rgba(96, 165, 250, 0.48);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.5),
+    0 0 32px rgba(59, 130, 246, 0.28),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 12px rgba(56, 189, 248, 0.28);
+}
+
+.fors-u-nav .nav-container:hover::before {
+  border-color: rgba(125, 211, 252, 0.55);
+}
+
+/* Layer 2: Flowing Glass Reflection Sweep */
+.fors-u-nav .nav-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 34%,
+    rgba(255, 255, 255, 0.16) 47%,
+    rgba(56, 189, 248, 0.18) 52%,
+    transparent 66%
+  );
+  background-size: 240% 100%;
+  background-position: 150% 0;
+  animation: forskoNavSweep 6.5s ease-in-out infinite;
+}
+
+@keyframes forskoNavSweep {
+  0%, 48% { background-position: 150% 0; }
+  100%    { background-position: -100% 0; }
+}
+
+.fors-u-nav .logo,
+.fors-u-nav .hamburger {
+  position: relative;
+  z-index: 2;
+}
+
+.fors-u-nav .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.fors-u-nav .logo-image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.fors-u-nav .hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Desktop Links */
+@media (min-width: 769px) {
+  .fors-u-nav .nav-menu {
+    position: relative;
+    z-index: 2;
+    display: flex !important;
+    align-items: center;
+    gap: 10px !important;
+  }
+
+  .fors-u-nav .nav-link {
+    font-size: 0.95rem !important;
+    font-weight: 500;
+    padding: 9px 15px !important;
+    border-radius: 999px !important;
+    color: #e2e8f0 !important;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.25s ease !important;
+  }
+
+  .fors-u-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 4px !important;
+    left: 50% !important;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 2px !important;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #38bdf8, #3b82f6) !important;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+    transition: width 0.25s ease;
+  }
+
+  .fors-u-nav .nav-link:hover::after,
+  .fors-u-nav .nav-link.active::after {
+    width: 48% !important;
+  }
+
+  .fors-u-nav .nav-link:hover,
+  .fors-u-nav .nav-link.active {
+    color: #ffffff !important;
+    background: rgba(56, 189, 248, 0.16);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      0 0 16px rgba(59, 130, 246, 0.24);
+  }
+}
+
+/* Mobile Responsive Capsule + Floating Glass Drawer */
+@media (max-width: 768px) {
+  html body .hero,
+  html body .page-hero,
+  html body .fors-nav-offset {
+    padding-top: 112px !important;
+  }
+
+  header.navbar.fors-u-nav {
+    top: 8px !important;
+    left: 8px !important;
+    right: 8px !important;
+  }
+
+  header.navbar.fors-u-nav .nav-container {
+    height: 80px !important;
+    padding: 0 18px !important;
+  }
+
+  .fors-u-nav .hamburger {
+    display: block !important;
+  }
+
+  .fors-u-nav .nav-menu {
+    position: fixed !important;
+    top: 96px !important;
+    left: -110% !important;
+    width: calc(100% - 16px) !important;
+    margin-left: 8px;
+    height: calc(100vh - 108px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 32px 24px !important;
+    gap: 16px !important;
+    border-radius: 24px !important;
+    background: rgba(11, 17, 32, 0.85) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(190%) !important;
+    backdrop-filter: blur(26px) saturate(190%) !important;
+    border: 1px solid rgba(96, 165, 250, 0.3) !important;
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.75) !important;
+    transition: left 0.32s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    z-index: 10001 !important;
+  }
+
+  .fors-u-nav .nav-menu.active {
+    left: 0 !important;
+  }
+
+  .fors-u-nav .nav-link {
+    font-size: 1.05rem !important;
+    padding: 10px 16px !important;
+    color: #e2e8f0 !important;
+    border-radius: 12px !important;
+  }
+
+  .fors-u-nav .nav-link.active {
+    background: rgba(56, 189, 248, 0.16);
+    color: #ffffff !important;
+  }
+}
